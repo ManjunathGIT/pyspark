@@ -22,7 +22,7 @@ def parse(line):
     else:
         return None
 
-rows = source.map(parse).filter(lambda row: not row and len(row) == 3)
+rows = source.map(parse).filter(lambda row: row and len(row) == 3)
 
 
 table = hc.inferSchema(rows)
