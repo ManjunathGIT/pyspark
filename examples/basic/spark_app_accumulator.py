@@ -28,7 +28,7 @@ def filter(columns):
 columns = source.map(lambda line: line.split(" ")).filter(filter)
 
 """
-rows = columns.map(
+rows = columns.map(pu
     lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
 
 table = hc.inferSchema(rows)
@@ -46,4 +46,4 @@ if datas:
         print data
 """
 
-print "errorLines: " + errorLines
+print "errorLines: " + errorLines.value
