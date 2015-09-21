@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext, Row
+from pyspark.sql import HiveContext, Row, StructType, StructField, StringType
 
 conf = SparkConf().setAppName("spark_app_accumulator")
 
@@ -32,11 +32,14 @@ columns = source.map(lambda line: line.split(" ")).filter(lineFilter)
 rows = columns.map(
     lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
 
-table = hc.inferSchema(rows)
+schema = StructType([StructField("col1", StringType()), StructField(
+    "col2", StringType()), StructField("col3", StringType())])
+
+table = hc.applySchema(rows, schema)
 
 table.registerAsTable("temp_mytable")
 
-datas = hc.sql("select count(1) from temp_mytable").collect()
+datas = hc.sql("select * from temp_mytable").collect()
 
 sc.stop()
 
