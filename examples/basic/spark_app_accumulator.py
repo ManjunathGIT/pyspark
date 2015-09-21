@@ -38,8 +38,6 @@ table.registerAsTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
 
-sc.stop()
-
 if datas:
     for data in datas:
         print data
@@ -47,3 +45,5 @@ if datas:
 print "allLines:", allLines.value
 print "successLines:", successLines.value
 print "errorLines: ", errorLines.value
+
+sc.stop()
