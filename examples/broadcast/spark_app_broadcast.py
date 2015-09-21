@@ -12,7 +12,7 @@ brMaps = sc.broadcast(maps)
 
 keys = sc.parallelize(["key1", "key2", "key3"])
 
-vals = source.map(lambda e: brMaps[e]).collect()
+vals = keys.map(lambda e: brMaps[e]).collect()
 
 sc.stop()
 
