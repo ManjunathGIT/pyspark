@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """
 Spark SQL使用Accumulator时存在误差，因为需要抽取一定数目（10）的“行”校验数据模式
 """
