@@ -30,7 +30,7 @@ def lineFilter(columns):
 columns = source.map(lambda line: line.split(" ")).filter(lineFilter)
 
 rows = columns.map(
-    lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
+    lambda columns: (columns[0], columns[1], columns[2]))
 
 schema = StructType([StructField("col1", StringType()), StructField(
     "col2", StringType()), StructField("col3", StringType())])
