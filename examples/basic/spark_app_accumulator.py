@@ -22,7 +22,7 @@ def filter(columns):
 		successLines.add(1)
 
 		return True
-    else:
+	else:
     	errorLines.add(1)
 
     	return False
