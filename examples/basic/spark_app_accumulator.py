@@ -18,11 +18,11 @@ def filter(columns):
 	allLines.add(1)
 
 	if columns and len(columns) == 3:
-        return True
+		return True
     else:
-        errorLines.add(1)
+    	errorLines.add(1)
 
-        return False
+    	return False
 
 columns = source.map(lambda line: line.split(" ")).filter(filter)
 
