@@ -1,3 +1,7 @@
+"""
+Spark SQL使用Accumulator时存在误差，因为需要抽取一定数目（10）的“行”校验数据模式
+"""
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext, Row, StructType, StructField, StringType
 
@@ -11,8 +15,17 @@ allLines = sc.accumulator(0)
 successLines = sc.accumulator(0)
 errorLines = sc.accumulator(0)
 
-source = sc.parallelize(["row1_col1row1_col2 row1_col3",
-                         "row2_col1 row2_col2row3_col3", "row3_col1 row3_col2 row3_col3"])
+datas = []
+
+"""50行正确的数据"""
+for index in range(50):
+    datas.append("col1 col2 col3")
+
+"""50行错误的数据"""
+for index in range(50):
+    datas.append("col1col2col3")
+
+source = sc.parallelize(datas)
 
 
 def lineFilter(columns):
