@@ -1,5 +1,6 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext, Row
+import re
 
 conf = SparkConf().setAppName("spark_sql_regex")
 
@@ -10,11 +11,19 @@ hc = HiveContext(sc)
 source = sc.parallelize(["row1_col1 row1_col2 row1_col3",
                          "row2_col1 row2_col2 row3_col3", "row3_col1 row3_col2 row3_col3"])
 
-columns = source.map(lambda line: line.split(" ")).filter(
-    lambda column: not column and len(column) == 3)
+pattern = re.compile("(.*) (.*) (.*)")
 
-rows = columns.map(
-    lambda column: Row(col1=column[0], col2=column[1], col3=column[2]))
+
+def parse(line):
+    matcher = pattern.match(line)
+
+    if matcher:
+        return Row(matcher.group(1), matcher.group(2), matcher.group(3))
+    else:
+        return None
+
+rows = source.map(parse).filter(lambda row: not row and len(row) == 3)
+
 
 table = hc.inferSchema(rows)
 
