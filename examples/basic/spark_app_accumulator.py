@@ -15,16 +15,15 @@ source = sc.parallelize(["row1_col1row1_col2 row1_col3",
 
 def filter(columns):
     if columns and len(columns) == 3:
-            return True
+        return True
     else:
-            errorLines.add(1)
+        errorLines.add(1)
 
-            return False
+        return False
 
-columns = source.map(lambda line: line.split(" ")).filter(filter).collect()
+columns = source.map(lambda line: line.split(" ")).filter(filter)
 
-"""
-rows = columns.map(pu
+rows = columns.map(
     lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
 
 table = hc.inferSchema(rows)
@@ -32,14 +31,11 @@ table = hc.inferSchema(rows)
 table.registerAsTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
-"""
 
 sc.stop()
 
-"""
 if datas:
     for data in datas:
         print data
-"""
 
 print "errorLines: ", errorLines.value
