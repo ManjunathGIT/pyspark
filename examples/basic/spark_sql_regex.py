@@ -18,11 +18,15 @@ def parse(line):
     matcher = pattern.match(line)
 
     if matcher:
-        return Row(col1=matcher.group(1), col2=matcher.group(2), col3=matcher.group(3))
+        return matcher.groups()
     else:
         return None
 
-rows = source.map(parse).filter(lambda row: row and len(row) == 3)
+columns = source.map(parse).filter(
+    lambda columns: columns and len(columns) == 3)
+
+rows = columns.map(
+    lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
 
 
 table = hc.inferSchema(rows)

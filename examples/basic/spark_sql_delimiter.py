@@ -11,10 +11,10 @@ source = sc.parallelize(["row1_col1 row1_col2 row1_col3",
                          "row2_col1 row2_col2 row3_col3", "row3_col1 row3_col2 row3_col3"])
 
 columns = source.map(lambda line: line.split(" ")).filter(
-    lambda column: column and len(column) == 3)
+    lambda columns: columns and len(columns) == 3)
 
 rows = columns.map(
-    lambda column: Row(col1=column[0], col2=column[1], col3=column[2]))
+    lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
 
 table = hc.inferSchema(rows)
 
