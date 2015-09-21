@@ -14,17 +14,12 @@ source = sc.parallelize(["row1_col1row1_col2 row1_col3",
 
 
 def filter(columns):
-    """
     if columns and len(columns) == 3:
             return True
     else:
             errorLines.add(1)
 
             return False
-    """
-    errorLines.add(1)
-
-    return True
 
 columns = source.map(lambda line: line.split(" ")).filter(filter).collect()
 
