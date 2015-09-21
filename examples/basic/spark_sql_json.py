@@ -2,7 +2,7 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext, Row
 import re
 
-conf = SparkConf().setAppName("spark_sql_regex")
+conf = SparkConf().setAppName("spark_sql_json")
 
 sc = SparkContext(conf=conf)
 

@@ -1,14 +1,24 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext, Row
 
-conf = SparkConf().setAppName("spark_sql_delimiter")
+conf = SparkConf().setAppName("spark_app_accumulator")
 
 sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-source = sc.parallelize(["row1_col1 row1_col2 row1_col3",
-                         "row2_col1 row2_col2 row3_col3", "row3_col1 row3_col2 row3_col3"])
+errorLines = sc.accumulator(0)
+
+source = sc.parallelize(["row1_col1row1_col2 row1_col3",
+                         "row2_col1 row2_col2row3_col3", "row3_col1 row3_col2 row3_col3"])
+
+def filter(columns):
+	if columns and len(columns) == 3:
+		return True
+	else:
+		errorLines.add(1)
+
+		return False
 
 columns = source.map(lambda line: line.split(" ")).filter(
     lambda columns: columns and len(columns) == 3)
@@ -27,3 +37,5 @@ sc.stop()
 if datas:
     for data in datas:
         print data
+
+print "errorLines:", errorLines.value
