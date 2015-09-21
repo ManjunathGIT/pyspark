@@ -18,9 +18,9 @@ rows = columns.map(
 
 table = hc.inferSchema(rows)
 
-table.registerAsTable("mytable")
+table.registerAsTable("temp_mytable")
 
-datas = hc.sql("select * from mytable").collect()
+datas = hc.sql("select * from temp_mytable").collect()
 
 sc.stop()
 
