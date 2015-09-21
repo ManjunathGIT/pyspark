@@ -16,16 +16,16 @@ source = sc.parallelize(["row1_col1row1_col2 row1_col3",
 
 
 def filter(columns):
-	allLines.add(1)
+    allLines.add(1)
 
-	if columns and len(columns) == 3:
-		successLines.add(1)
+    if columns and len(columns) == 3:
+        successLines.add(1)
 
-		return True
-	else:
-    	errorLines.add(1)
+        return True
+    else:
+        errorLines.add(1)
 
-    	return False
+        return False
 
 columns = source.map(lambda line: line.split(" ")).filter(filter)
 
