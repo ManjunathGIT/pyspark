@@ -26,7 +26,7 @@ def filter(columns):
 
     return True
 
-columns = source.map(lambda line: line.split(" ")).filter(filter)
+columns = source.map(lambda line: line.split(" ")).filter(filter).collect()
 
 """
 rows = columns.map(pu
