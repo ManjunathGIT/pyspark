@@ -20,8 +20,7 @@ def filter(columns):
 
 		return False
 
-columns = source.map(lambda line: line.split(" ")).filter(
-    lambda columns: columns and len(columns) == 3)
+columns = source.map(lambda line: line.split(" ")).filter(filter)
 
 rows = columns.map(
     lambda columns: Row(col1=columns[0], col2=columns[1], col3=columns[2]))
