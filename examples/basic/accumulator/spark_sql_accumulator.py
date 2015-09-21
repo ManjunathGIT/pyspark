@@ -1,7 +1,11 @@
 # coding: utf-8
 
 """
-Spark SQL使用Accumulator时存在误差，因为需要抽取一定数目（10）的“行”校验数据模式
+Spark SQL使用Accumulator时存在误差，因为需要抽取一定数目（10）的“行”校验数据模式，以下代码的输出结果：
+
+allLines: 110
+successLines: 60
+errorLines:  50
 """
 
 from pyspark import SparkConf, SparkContext
