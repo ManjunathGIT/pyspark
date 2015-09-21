@@ -36,7 +36,7 @@ table = hc.inferSchema(rows)
 
 table.registerAsTable("temp_mytable")
 
-datas = hc.sql("select * from temp_mytable").collect()
+datas = hc.sql("select count(1) from temp_mytable").collect()
 
 sc.stop()
 
