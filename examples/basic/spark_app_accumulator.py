@@ -17,7 +17,7 @@ source = sc.parallelize(["row1_col1row1_col2 row1_col3",
 def filter(columns):
 	allLines.add(1)
 
-    if columns and len(columns) == 3:
+	if columns and len(columns) == 3:
         return True
     else:
         errorLines.add(1)
