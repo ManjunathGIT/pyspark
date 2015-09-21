@@ -31,10 +31,12 @@ table.registerAsTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
 
+errors = errorLines.value
+
 sc.stop()
 
 if datas:
     for data in datas:
         print data
 
-print "errorLines:", errorLines.value
+print "errors:", errors
