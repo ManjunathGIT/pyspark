@@ -207,7 +207,11 @@ select
 	) as init_timetag,
 	cal_buffer_num(buffer_duration_list) as cal_buffer_num
 from temp_table3 where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] > '5.3'
-""").take(10)
+""")
+
+result.registerTempTable("temp_table4")
+
+
 
 sc.stop()
 
