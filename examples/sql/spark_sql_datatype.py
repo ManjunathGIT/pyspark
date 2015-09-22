@@ -21,7 +21,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select byte, short, int, long, float, double, decimal, string, boolean, timestamp, date, array[0] from temp_table").collect()
+    "select byte, short, int, long, float, double, decimal, string, boolean, timestamp, date, array[0], array[1], array[2] from temp_table").collect()
 
 sc.stop()
 
