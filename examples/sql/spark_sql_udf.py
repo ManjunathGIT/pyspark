@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import *
+from pyspark.sql import HiveContext, StructType, StructField, StringType
 import json
 
 conf = SparkConf().setAppName("spark_sql_udf")
@@ -7,6 +7,14 @@ conf = SparkConf().setAppName("spark_sql_udf")
 sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
+
+source = sc.parallelize([("value",)])
+
+schema = StructType([StructField("col", StringType(), False)])
+
+table = hc.applySchema(source, schema)
+
+table.registerTempTable("temp_table")
 
 
 def func_array():
@@ -40,21 +48,21 @@ hc.registerFunction(
 sql_array = """
 select item[0], item[1], item[2]
 from (
-	select temp_func_array() as item from yurun.tablep
+	select temp_func_array() as item from temp_table
 ) t
 """
 
 sql_struct = """
 select item.a, item.b, item.c
 from (
-	select temp_func_struct() as item from yurun.tablep
+	select temp_func_struct() as item from temp_table
 ) t
 """
 
 sql_map = """
 select item["a"], item["b"], item["c"]
 from (
-	select temp_func_map() as item from yurun.tablep
+	select temp_func_map() as item from temp_table
 ) t
 """
 
