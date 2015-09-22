@@ -92,22 +92,22 @@ result = hc.sql(
 result.registerTempTable("temp_table")
 
 result = hc.sql("""
-	select
-		get_json_object(item,"$.__date")  as  cdate,
-		get_json_object(item,"$.video_mediaid")  as video_mediaid,
-		get_json_object(item,"$.video_url") as video_url,
-		get_json_object(item,"$.ua") as ua,
-		get_json_object(item,"$.video_cdn") as video_cdn,
-		get_json_object(item,"$.video_network") as video_network,
-		get_json_object(item,"$.ip") as ip,
-		get_json_object(item,"$.video_play_type") as video_play_type ,
-		get_json_object(item,"$.video_play_type_duration") as video_play_type_duration,
-		get_json_object(item,"$.video_error_code") as video_error_code,
-		get_json_object(item,"$.video_error_msg") as video_error_msg,
-		get_json_object(item,"$.buffer_duration_list") as buffer_duration_list,
-		get_json_object(item,"$.video_duration") as video_duration,
-		get_json_object(item,"$.video_play_duration") as video_play_duration
-	from temp_table
+select
+	get_json_object(item,"$.__date")  as  cdate,
+	get_json_object(item,"$.video_mediaid")  as video_mediaid,
+	get_json_object(item,"$.video_url") as video_url,
+	get_json_object(item,"$.ua") as ua,
+	get_json_object(item,"$.video_cdn") as video_cdn,
+	get_json_object(item,"$.video_network") as video_network,
+	get_json_object(item,"$.ip") as ip,
+	get_json_object(item,"$.video_play_type") as video_play_type ,
+	get_json_object(item,"$.video_play_type_duration") as video_play_type_duration,
+	get_json_object(item,"$.video_error_code") as video_error_code,
+	get_json_object(item,"$.video_error_msg") as video_error_msg,
+	get_json_object(item,"$.buffer_duration_list") as buffer_duration_list,
+	get_json_object(item,"$.video_duration") as video_duration,
+	get_json_object(item,"$.video_play_duration") as video_play_duration
+from temp_table
 """).take(10)
 
 sc.stop()
