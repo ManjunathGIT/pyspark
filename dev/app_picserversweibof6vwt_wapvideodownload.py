@@ -81,7 +81,7 @@ def json_transform(data):
 
         return json.dumps(data)
     except Exception, e:
-        pass
+        raise
 
 hc.registerFunction("json_transform", json_transform)
 
