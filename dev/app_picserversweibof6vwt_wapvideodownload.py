@@ -89,12 +89,12 @@ hc.registerFunction("json_transform", json_transform)
 result = hc.sql(
     "select json_transform(videodownload_info) as item from temp_table")
 
-result.registerTempTable("temp_table")
+result.registerTempTable("temp_table2")
 
 result = hc.sql("""
 select 
 	*
-from temp_table
+from temp_table2
 """).take(10)
 
 sc.stop()
