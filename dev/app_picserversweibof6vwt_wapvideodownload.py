@@ -114,6 +114,45 @@ from temp_table2
 
 result.registerTempTable("temp_table3")
 
+
+def str_to_list(str):
+    list = []
+
+    str = str[1:(len(str) - 1)]
+
+    temp = str.split(",")
+
+    for v in temp:
+        list.append(v.strip())
+
+    return list
+
+
+def cal_buffer_num(set):
+    buffer_count = 0
+    buffer_t_sum = 0
+    buffer_smaller_500ms_count = 0
+    buffer_bigger_2min_count = 0
+
+    if set == None:
+        pass
+    else:
+        list = str_to_list(set)
+
+        for s in list:
+            if s >= 500 and s <= 120000:
+                buffer_count = buffer_count + 1
+                buffer_t_sum = buffer_t_sum + s
+            elif s < 500:
+                buffer_smaller_500ms_count = buffer_smaller_500ms_count + 1
+            elif s > 120000:
+                buffer_bigger_2min_count = buffer_bigger_2min_count + 1
+
+    return (buffer_count, buffer_t_sum, buffer_smaller_500ms_count, buffer_bigger_2min_count)
+
+hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("buffer_count", IntegerType()), StructField(
+    "buffer_t_sum", IntegerType()), StructField("buffer_smaller_500ms_count", IntegerType()), StructField("buffer_bigger_2min_count", IntegerType())]))
+
 result = hc.sql("""
 select 
 	from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
