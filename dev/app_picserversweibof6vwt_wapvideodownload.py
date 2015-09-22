@@ -86,9 +86,9 @@ def json_transform(data):
 hc.registerFunction("json_transform", json_transform)
 
 result = hc.sql(
-    "select * from temp_table").take(10)
+    "select json_transform(videodownload_info) as item from temp_table").take(100)
 
 sc.stop()
 
 for row in result:
-	print row
+    print row
