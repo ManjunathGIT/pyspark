@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext, StructType, StructField, StringType, ArrayType, StructType, MapType
+from pyspark.sql import HiveContext, StructType, StructField, IntegerType, LongType, FloatType, StringType, ArrayType, StructType, MapType
 import json
 
 conf = SparkConf().setAppName("spark_sql_udf")
