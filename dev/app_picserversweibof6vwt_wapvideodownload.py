@@ -2,6 +2,7 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import re
 from pyspark.sql import StructType, StructField, StringType
+import json
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
 
