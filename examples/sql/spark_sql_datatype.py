@@ -1,3 +1,24 @@
+# coding: utf-8
+
+"""Spark SQL DataType
+
+ByteType: int
+ShortType: int
+IntegerType: int
+LongType: long
+FloatType: float
+DoubleType: float
+Decimal: Decimal
+StringType: ""
+BinaryType: ignore
+BooleanType: bool
+TimestampType: datetime
+DateType: date
+ArrayType: list
+MapType: dictionary
+StructType: tuple
+"""
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 from decimal import Decimal
