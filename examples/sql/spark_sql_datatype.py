@@ -20,7 +20,8 @@ table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
-rows = hc.sql("select * from temp_table").collect()
+rows = hc.sql(
+    "select byte,short,int,long,float,double,decimal,string,boolean,timestamp,date,array,map.key,struct.first,struct.second,struct.third from temp_table").collect()
 
 sc.stop()
 
