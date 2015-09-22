@@ -215,8 +215,7 @@ result = hc.sql("""
 select 
 	date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,
 	init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
-	play_process_group,
-	sum(video_init_duration) as sum_video_init_duration
+	play_process_group
 from temp_table4
 """).take(10)
 
