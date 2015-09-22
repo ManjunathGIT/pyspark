@@ -1,7 +1,7 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext, Row
 
-conf = SparkConf().setAppName("spark_sql_delimiter")
+conf = SparkConf().setAppName("spark_sql_delimiter_infer_schema")
 
 sc = SparkContext(conf=conf)
 
