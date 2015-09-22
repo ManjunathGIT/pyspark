@@ -108,7 +108,42 @@ select
     get_json_object(item,"$.video_duration") as video_duration,
     get_json_object(item,"$.video_play_duration") as video_play_duration
 from temp_table2
-""").take(10)
+""")
+
+result.registerTempTable("temp_table3")
+
+result = hc.sql("""
+select 
+        from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
+        (case when func.ipToLocationBySina(ip)[0]='中国' then func.ipToLocationBySina(ip)[1]
+              when func.ipToLocationBySina(ip)[0]!='中国' then func.ipToLocationBySina(ip)[0]
+              end) as province,
+        func.ipToLocationBySina(ip)[4] as isp,
+        (case when video_cdn like 'f=cnct%' then 'cnct'
+              when video_cdn like 'f=alicdn%' then 'ali'
+              when video_cdn like 'f=edge%' then 'edge'
+              else 'else' END) as cdn,
+        split(split(video_cdn,'s=')[1],',')[0] as idc,
+        (CASE WHEN upper(ua) LIKE '%IPHONE%' THEN 'IPHONE'
+              WHEN upper(ua) LIKE '%ANDROID%' THEN 'ANDROID'
+              ELSE '-' END) AS ua,
+        split(ua, '__')[2] as version,
+        video_network,
+        video_error_code,
+        video_error_msg,
+        video_play_duration,
+        video_duration,
+        (case
+        when video_play_duration>0 and video_duration>0 then cast(round(video_play_duration/video_duration,1) as VARCHAR(5))
+        when video_play_duration='' or video_play_duration=0 then 'NoPlay'
+        else '-' END) as play_process_group,
+        video_play_duration/video_duration as play_process,
+        (case when video_play_duration>0   then video_play_type_duration
+              else '' end) as video_init_duration,
+        (case when video_play_duration>0 and video_play_type_duration <=2000 then '<=2000ms'
+              when video_play_duration>0 and video_play_type_duration>2000 then '>2000ms' else '-' end )as init_timetag,
+        cal_buffer_num(buffer_duration_list) as cal_buffer_num from ( '''+sql_part2+''')a where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] > '5.3'
+""")
 
 sc.stop()
 
