@@ -16,9 +16,9 @@ source = sc.parallelize([(int("127"), int("32767"), int("2147483647"), long(
 schema = StructType([StructField("byte", ByteType(), False), StructField("short", ShortType(), False), StructField(
     "int", IntegerType(), False), StructField("long", LongType(), False), StructField("float", FloatType(), False), StructField("double", DoubleType(), False), StructField("decimal", DecimalType(), False), StructField("string", StringType(), False), StructField("boolean", BooleanType(), False), StructField("timestamp", TimestampType(), False), StructField("date", DateType(), False)])
 
-hc.applySchema(source, schema)
+table = hc.applySchema(source, schema)
 
-hc.registerRDDAsTable(source, "temp_table")
+table.registerAsTable("temp_table")
 
 rows = hc.sql("select * from temp_table").collect()
 
