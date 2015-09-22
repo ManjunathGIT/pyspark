@@ -11,17 +11,17 @@ sc = SparkContext(conf=conf)
 hc = HiveContext(sc)
 
 source = sc.parallelize([(int("127"), int("32767"), int("2147483647"), long(
-    "9223372036854775807"), float("1.1"), float("2.2"), Decimal("3.3"), "str", bool(0), datetime(2015, 9, 22, 9, 39, 45), date(2015, 9, 22), [1, 2, 3], {"key": "value"}, [1, 2.0, "3.0"])])
+    "9223372036854775807"), float("1.1"), float("2.2"), Decimal("3.3"), "str", bool(0), datetime(2015, 9, 22, 9, 39, 45), date(2015, 9, 22), [1, 2, 3])])
 
 schema = StructType([StructField("byte", ByteType(), False), StructField("short", ShortType(), False), StructField(
-    "int", IntegerType(), False), StructField("long", LongType(), False), StructField("float", FloatType(), False), StructField("double", DoubleType(), False), StructField("decimal", DecimalType(), False), StructField("string", StringType(), False), StructField("boolean", BooleanType(), False), StructField("timestamp", TimestampType(), False), StructField("date", DateType(), False), StructField("array", ArrayType(IntegerType()), False), StructField("map", MapType(StringType(), StringType(), False)), StructField("struct", StructType([StructField("first", IntegerType(), False), StructField("second", FloatType(), False), StructField("third", StringType(), False)]), False)])
+    "int", IntegerType(), False), StructField("long", LongType(), False), StructField("float", FloatType(), False), StructField("double", DoubleType(), False), StructField("decimal", DecimalType(), False), StructField("string", StringType(), False), StructField("boolean", BooleanType(), False), StructField("timestamp", TimestampType(), False), StructField("date", DateType(), False), StructField("array", ArrayType(IntegerType(), fal), False)])
 
 table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select byte, short, int, long, float, double, decimal, string, boolean, timestamp, date, array, struct.first,struct.second,struct.third from (select *  from temp_table) t").collect()
+    "select byte, short, int, long, float, double, decimal, string, boolean, timestamp, date, array from temp_table").collect()
 
 sc.stop()
 
