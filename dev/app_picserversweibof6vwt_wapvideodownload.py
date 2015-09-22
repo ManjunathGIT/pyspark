@@ -82,12 +82,12 @@ def json_transform(data):
 
         return json.dumps(data)
     except Exception, e:
-        raise
+        pass
 
 hc.registerFunction("json_transform", json_transform)
 
 result = hc.sql(
-    "select json_transform(videodownload_info) as item from temp_table").take(100)
+    "select json_transform(videodownload_info) as item from temp_table").take(10)
 
 sc.stop()
 
