@@ -58,7 +58,7 @@ from (
 ) t
 """
 
-rows = hc.sql(sql_array).collect()
+rows = hc.sql(sql_struct).collect()
 
 sc.stop()
 
