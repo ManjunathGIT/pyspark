@@ -196,7 +196,7 @@ select
 	(
 		case
 			when video_play_duration>0 then video_play_type_duration
-			else 0
+			else '0'
 		end
 	) as video_init_duration,
 	(
