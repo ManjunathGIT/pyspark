@@ -211,7 +211,11 @@ from temp_table3 where (video_url like '%%us.sina%' or video_mediaid like '1034:
 
 result.registerTempTable("temp_table4")
 
-
+result = hc.sql("""
+select 
+	*
+from temp_table4
+""").take(10)
 
 sc.stop()
 
