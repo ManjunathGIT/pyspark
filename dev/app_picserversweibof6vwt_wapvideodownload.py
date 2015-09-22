@@ -92,7 +92,7 @@ result = hc.sql(
 result.registerTempTable("temp_table")
 
 result = hc.sql("""
-select
+select 
 	get_json_object(item,"$.__date")  as  cdate,
 	get_json_object(item,"$.video_mediaid")  as video_mediaid,
 	get_json_object(item,"$.video_url") as video_url,
