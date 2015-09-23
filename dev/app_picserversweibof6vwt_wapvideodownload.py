@@ -3,7 +3,7 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import re
-from pyspark.sql import StructType, StructField, StringType, IntegerType
+from pyspark.sql import StructType, StructField, StringType, IntegerType, ArrayType
 import json
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
@@ -39,7 +39,7 @@ def lineParse(line):
 
         version = ua.split("__")[2]
 
-        if version == "5.4.0" or version == "5.4.5" or version == "5.4.5_beta":
+        if version >= "5.4.0":
             __date = str(jsonObj["__date"]) if "__date" in jsonObj else ""
             video_mediaid = str(jsonObj[
                 "video_mediaid"]) if "video_mediaid" in jsonObj else ""
@@ -58,12 +58,67 @@ def lineParse(line):
                 "video_error_code"]) if "video_error_code" in jsonObj else ""
             video_error_msg = str(jsonObj[
                 "video_error_msg"]) if "video_error_msg" in jsonObj else ""
-            buffer_duration_list = str(jsonObj[
-                "buffer_duration_list"]) if "buffer_duration_list" in jsonObj else ""
+            buffer_duration_list = jsonObj[
+                "buffer_duration_list"] if "buffer_duration_list" in jsonObj else []
             video_duration = str(jsonObj[
                 "video_duration"]) if "video_duration" in jsonObj else ""
             video_play_duration = str(jsonObj[
                 "video_play_duration"]) if "video_play_duration" else ""
+
+            if version == "5.4.0":
+                __date = __date[0:10]
+
+                if "video_buffer_type" not in jsonObj:
+                    video_play_type = ""
+                else:
+                    if jsonObj["video_buffer_type"] != "1":
+                        video_play_type = jsonObj["video_buffer_type"]
+
+                if "video_buffer_type" not in jsonObj or "video_buffer_duration" not in jsonObj:
+                    video_play_type_duration = ""
+                else:
+                    if jsonObj["video_buffer_type"] != "1":
+                        video_play_type_duration = jsonObj[
+                            "video_buffer_duration"]
+
+                if "video_buffer_type" in jsonObj and jsonObj["video_buffer_type"] == 1 and "video_buffer_duration" in jsonObj:
+                    buffer_duration_list = [
+                        round(float(jsonObj["video_buffer_duration"]))]
+            else:
+                __date = jsonObj[
+                    "video_log_time"] if "video_log_time" in jsonObj else ""
+
+                __date = __date[0:10]
+
+                if "video_time_duration" not in jsonObj:
+                    video_play_type = ""
+                else:
+                    for v in jsonObj["video_time_duration"]:
+                        if "type" in v and v["type"] != "1":
+                            video_play_type = v["type"]
+
+                            break
+
+                if "video_time_duration" in jsonObj:
+                    for v in jsonObj["video_time_duration"]:
+                        if "type" in v and "type" != "1" and "duration" in v:
+                            video_play_type_duration = v["duration"]
+
+                            break
+
+                if "video_error_info" in jsonObj and "error_code" in jsonObj["video_error_info"]:
+                    video_error_code = jsonObj[
+                        "video_error_info"]["error_code"]
+
+                if "video_error_info" in jsonObj and "error_msg" in jsonObj["video_error_info"]:
+                    video_error_msg = jsonObj[
+                        "video_error_info"]["error_msg"]
+
+                if "video_time_duration" in jsonObj:
+                    for v in jsonObj["video_time_duration"]:
+                        if "type" in v and v["type"] == "1" and "duration" in v:
+                            buffer_duration_list.append(
+                                round(float(v["duration"])))
 
         return (__date, video_mediaid, video_url, ua, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
     except Exception, e:
@@ -74,7 +129,7 @@ def lineParse(line):
 rows = source.map(lineParse).filter(lambda columns: columns)
 
 schema = StructType([StructField("__date", StringType(), False), StructField(
-    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", StringType(), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
+    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", ArrayType(StringType(), True), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
 
 table = hc.applySchema(rows, schema)
 
