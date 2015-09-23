@@ -190,7 +190,7 @@ hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("b
 
 result = hc.sql("""
 select 
-        from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
+        from_unixtime(cast(round(__date,0) as bigint),'yyyy-MM-dd') as date from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
 """).collect()
 
 sc.stop()
