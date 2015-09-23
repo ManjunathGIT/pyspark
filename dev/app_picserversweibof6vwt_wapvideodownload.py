@@ -70,8 +70,8 @@ def lineParse(line):
             video_error_code = str(jsonObj[
                 "video_error_code"]) if "video_error_code" in jsonObj else ""
 
-            video_error_msg = str(jsonObj[
-                "video_error_msg"]) if "video_error_msg" in jsonObj else ""
+            video_error_msg = str(
+                jsonObj["video_error_msg"]) if "video_error_msg" in jsonObj else ""
 
             buffer_duration_list = []
 
