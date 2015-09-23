@@ -162,6 +162,9 @@ try:
     table.registerTempTable("temp_table")
 
     def parseCDN(video_cdn):
+        if not video_cdn:
+            return ""
+            
         words = video_cdn.split("s=")
 
         if len(words) >= 2:
