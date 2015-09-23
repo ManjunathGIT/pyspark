@@ -52,11 +52,9 @@ def lineParse(line):
             video_mediaid = jsonObj[
                 "video_mediaid"] if "video_mediaid" in jsonObj else ""
 
-            video_url =
-                jsonObj["video_url"] if "video_url" in jsonObj else ""
+            video_url = jsonObj["video_url"] if "video_url" in jsonObj else ""
 
-            video_cdn =
-                jsonObj["video_cdn"] if "video_cdn" in jsonObj else ""
+            video_cdn = jsonObj["video_cdn"] if "video_cdn" in jsonObj else ""
 
             video_network = jsonObj[
                 "video_network"] if "video_network" in jsonObj else ""
