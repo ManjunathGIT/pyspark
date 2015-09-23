@@ -280,6 +280,6 @@ hive_partition = time.strftime(
     "%Y%m%d", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '000000'
 props = {"db": hive_dip, "table": hive_table,
          "partition": hive_partition, "overwrite": True}
-sc.saveRDDToHive(rows, props)
+sc.saveRDDToHive(result, props)
 
 sc.stop()
