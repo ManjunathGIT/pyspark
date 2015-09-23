@@ -39,7 +39,7 @@ def lineParse(line):
         if "ua" not in jsonObj:
             return None
 
-        ua = str(jsonObj["ua"])
+        ua = jsonObj["ua"]
 
         if len(ua.split("__")) < 3:
             return None
@@ -49,19 +49,19 @@ def lineParse(line):
         if version >= "5.4.0":
             __date = str(jsonObj["__date"]) if "__date" in jsonObj else ""
 
-            video_mediaid = str(jsonObj[
-                "video_mediaid"]) if "video_mediaid" in jsonObj else ""
+            video_mediaid = jsonObj[
+                "video_mediaid"] if "video_mediaid" in jsonObj else ""
 
-            video_url = str(
-                jsonObj["video_url"]) if "video_url" in jsonObj else ""
+            video_url =
+                jsonObj["video_url"] if "video_url" in jsonObj else ""
 
-            video_cdn = str(
-                jsonObj["video_cdn"]) if "video_cdn" in jsonObj else ""
+            video_cdn =
+                jsonObj["video_cdn"] if "video_cdn" in jsonObj else ""
 
-            video_network = str(jsonObj[
-                "video_network"]) if "video_network" in jsonObj else ""
+            video_network = jsonObj[
+                "video_network"] if "video_network" in jsonObj else ""
 
-            ip = str(jsonObj["ip"]) if "ip" in jsonObj else ""
+            ip = jsonObj["ip"] if "ip" in jsonObj else ""
 
             video_play_type = str(jsonObj[
                 "video_play_type"]) if "video_play_type" in jsonObj else ""
