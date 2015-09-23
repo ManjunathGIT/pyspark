@@ -227,8 +227,7 @@ select
 result.registerTempTable("temp_table2")
 
 result = hc.sql("""
-select '' as job_date,
-        date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
+select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
         play_process_group
         from temp_table2
