@@ -7,7 +7,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-source = sc.parallelize(["  "])
+source = sc.parallelize(["1.23  "])
 
 columns = source.map(lambda line: line.split(" ")).filter(
     lambda columns: columns and len(columns) == 3)
@@ -22,7 +22,7 @@ table = hc.applySchema(rows, schema)
 
 table.registerAsTable("temp_mytable")
 
-datas = hc.sql("select sum(1.23) from temp_mytable").collect()
+datas = hc.sql("select sum(col1) from temp_mytable").collect()
 
 sc.stop()
 
