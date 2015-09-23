@@ -134,7 +134,7 @@ def lineParse(line):
         else:
             return None
 
-        if not error_msg:
+        if not video_error_msg:
             return None
 
         return (__date, video_mediaid, video_url, ua, video_cdn, video_network, ip, video_play_type,
