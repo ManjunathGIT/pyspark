@@ -227,8 +227,11 @@ select
 result.registerTempTable("temp_table2")
 
 result = hc.sql("""
-select 
-        play_process_group
+select '' as job_date,
+        date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
+        init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
+        play_process_group,
+        sum(video_play_type_duration) as sum_video_play_type_duration,sum(cal_buffer_num.buffer_t_sum) as sum_buffer_t_sum
         
         from temp_table2
         group by play_process_group
