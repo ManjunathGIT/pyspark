@@ -1,10 +1,14 @@
 # coding: utf-8
 
-from pyspark import SparkConf, SparkContext
+from pyspark import SparkConf
+from dip.spark import SparkContext
 from pyspark.sql import HiveContext
+from dip.util import timetool
+improt sys
 import re
 from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatType, ArrayType
 import json
+from dip.pyspark im
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
 
@@ -13,7 +17,7 @@ sc = SparkContext(conf=conf)
 hc = HiveContext(sc)
 
 source = sc.textFile(
-    "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/2015_09_21/00")
+    "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreDayDir(sys.argv[1]))
 
 pattern = re.compile("^([^`]*)`([^`]*)")
 

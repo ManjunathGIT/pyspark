@@ -1,1 +1,1 @@
-print "".split("s=")[0]
+print isinstance(str(None),str)
