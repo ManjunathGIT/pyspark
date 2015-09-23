@@ -32,5 +32,5 @@ rows = source.map(lineParse).filter(lambda columns: columns).collect()
 
 sc.stop()
 
-for row in result:
+for row in rows:
     print row
