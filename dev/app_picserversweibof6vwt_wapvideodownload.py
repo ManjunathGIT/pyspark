@@ -120,7 +120,7 @@ def lineParse(line):
                             buffer_duration_list.append(
                                 round(float(v["duration"])))
         else:
-            reutrn None
+            return None
 
         return (__date, video_mediaid, video_url, ua, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
     except Exception, e:
