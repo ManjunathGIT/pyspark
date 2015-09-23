@@ -63,7 +63,7 @@ def lineParse(line):
             video_play_duration = jsonObj[
                 "video_play_duration"] if "video_play_duration" else ""
 
-        return (__date, video_mediaid, video_url, version, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
+        return (__date, video_mediaid, video_url, ua, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
     except Exception, e:
         pass
 
@@ -72,7 +72,7 @@ def lineParse(line):
 rows = source.map(lineParse).filter(lambda columns: columns)
 
 schema = StructType([StructField("__date", StringType(), False), StructField(
-    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", StringType(), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
+    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", StringType(), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
 
 table = hc.applySchema(rows, schema)
 
