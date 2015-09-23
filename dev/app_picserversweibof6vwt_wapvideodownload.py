@@ -40,28 +40,30 @@ def lineParse(line):
         version = ua.split("__")[2]
 
         if version == "5.4.0" or version == "5.4.5" or version == "5.4.5_beta":
-            __date = jsonObj["__date"] if "__date" in jsonObj else ""
-            video_mediaid = jsonObj[
-                "video_mediaid"] if "video_mediaid" in jsonObj else ""
-            video_url = jsonObj["video_url"] if "video_url" in jsonObj else ""
-            video_cdn = jsonObj["video_cdh"] if "video_cdh" in jsonObj else ""
-            video_network = jsonObj[
-                "video_network"] if "video_network" in jsonObj else ""
-            ip = jsonObj["ip"] if "ip" in jsonObj else ""
-            video_play_type = jsonObj[
-                "video_play_type"] if "video_play_type" in jsonObj else ""
-            video_play_type_duration = jsonObj[
-                "video_play_type_duration"] if "video_play_type_duration" in jsonObj else ""
-            video_error_code = jsonObj[
-                "video_error_code"] if "video_error_code" in jsonObj else ""
-            video_error_msg = jsonObj[
-                "video_error_msg"] if "video_error_msg" in jsonObj else ""
-            buffer_duration_list = jsonObj[
-                "buffer_duration_list"] if "buffer_duration_list" in jsonObj else ""
-            video_duration = jsonObj[
-                "video_duration"] if "video_duration" in jsonObj else ""
-            video_play_duration = jsonObj[
-                "video_play_duration"] if "video_play_duration" else ""
+            __date = str(jsonObj["__date"]) if "__date" in jsonObj else ""
+            video_mediaid = str(jsonObj[
+                "video_mediaid"]) if "video_mediaid" in jsonObj else ""
+            video_url = str(
+                jsonObj["video_url"]) if "video_url" in jsonObj else ""
+            video_cdn = str(
+                jsonObj["video_cdh"]) if "video_cdh" in jsonObj else ""
+            video_network = str(jsonObj[
+                "video_network"]) if "video_network" in jsonObj else ""
+            ip = str(jsonObj["ip"]) if "ip" in jsonObj else ""
+            video_play_type = str(jsonObj[
+                "video_play_type"]) if "video_play_type" in jsonObj else ""
+            video_play_type_duration = str(jsonObj[
+                "video_play_type_duration"]) if "video_play_type_duration" in jsonObj else ""
+            video_error_code = str(jsonObj[
+                "video_error_code"]) if "video_error_code" in jsonObj else ""
+            video_error_msg = str(jsonObj[
+                "video_error_msg"]) if "video_error_msg" in jsonObj else ""
+            buffer_duration_list = str(jsonObj[
+                "buffer_duration_list"]) if "buffer_duration_list" in jsonObj else ""
+            video_duration = str(jsonObj[
+                "video_duration"]) if "video_duration" in jsonObj else ""
+            video_play_duration = str(jsonObj[
+                "video_play_duration"]) if "video_play_duration" else ""
 
         return (__date, video_mediaid, video_url, ua, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
     except Exception, e:
