@@ -3,7 +3,7 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import re
-from pyspark.sql import StructType, StructField, StringType, FloatType, ArrayType
+from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatType, ArrayType
 import json
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
@@ -182,7 +182,8 @@ def cal_buffer_num(set):
                 buffer_bigger_2min_count = buffer_bigger_2min_count + 1
     return (buffer_count, buffer_t_sum, buffer_smaller_500ms_count, buffer_bigger_2min_count)
 
-hc.registerFunction("cal_buffer_num", cal_buffer_num)
+hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("buffer_count", IntegerType()), StructField(
+    "buffer_t_sum", IntegerType()), StructField("buffer_smaller_500ms_count", IntegerType()), StructField("buffer_bigger_2min_count", IntegerType())]))
 
 result = hc.sql("""
 select 
