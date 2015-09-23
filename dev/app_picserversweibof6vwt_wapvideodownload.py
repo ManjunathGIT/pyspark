@@ -5,6 +5,10 @@ from dip.spark import SparkContext
 from pyspark.sql import HiveContext
 from dip.util import timetool
 import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 import re
 from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatType, ArrayType
 import json
