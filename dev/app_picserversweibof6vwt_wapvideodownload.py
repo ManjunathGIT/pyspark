@@ -66,10 +66,7 @@ def lineParse(line):
             video_duration = jsonObj["video_duration"]
             video_play_duration = jsonObj["video_play_duration"]
 
-            if version == "5.4.0":
-                pass
-            else:
-                pass
+            
         else:
             pass
 
