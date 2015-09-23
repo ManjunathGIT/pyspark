@@ -144,7 +144,7 @@ def lineParse(line):
 
 rows = source.map(lineParse).filter(lambda columns: columns)
 
-schema = StructType([StructField("__date", StringType(), False), StructField(
+schema = StructType([StructField("cdate", StringType(), False), StructField(
     "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdn", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", ArrayType(FloatType(), False), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
 
 table = hc.applySchema(rows, schema)
@@ -190,7 +190,7 @@ hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("b
 
 result = hc.sql("""
 select 
-        from_unixtime(cast(round(__date,0) as bigint),'yyyy-MM-dd') as date from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
+        from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
 """).collect()
 
 sc.stop()
