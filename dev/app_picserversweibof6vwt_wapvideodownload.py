@@ -282,7 +282,9 @@ try:
         "%Y%m%d", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '000000'
     props = {"db": hive_dip, "table": hive_table,
              "partition": hive_partition, "overwrite": True}
-    sc.saveRDDToHive(result, props)
+    # sc.saveRDDToHive(result, props)
+
+    print result.count()
 except Exception, e:
     raise
 finally:
