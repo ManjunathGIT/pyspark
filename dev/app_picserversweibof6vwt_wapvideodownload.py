@@ -26,7 +26,17 @@ def lineParse(line):
 
     videodownload_info = matcher.group(1)
 
-    return videodownload_info
+    try:
+        jsonObj = json.loads(videodownload_info)
+
+        if "__date" not in jsonObj or "video_mediaid" not in jsonObj or "video_url" not in jsonObj or "ua" not in jsonObj or "video_cdn" not in jsonObj or "video_network" not in jsonObj or "ip" not in jsonObj or "video_play_type" not in jsonObj or "video_play_type_duration" not in jsonObj or "video_error_code" not in jsonObj or "video_error_msg" not in jsonObj or "buffer_duration_list" not in jsonObj or "video_duration" not in jsonObj or "video_play_duration" not in jsonObj:
+            pass
+
+        return videodownload_info
+    except Exception, e:
+        pass
+
+    return None
 
 rows = source.map(lineParse).filter(lambda columns: columns).collect()
 
