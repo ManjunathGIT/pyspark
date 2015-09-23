@@ -164,7 +164,7 @@ try:
     def parseCDN(video_cdn):
         if not video_cdn:
             return ""
-            
+
         words = video_cdn.split("s=")
 
         if len(words) >= 2:
@@ -284,6 +284,6 @@ try:
              "partition": hive_partition, "overwrite": True}
     sc.saveRDDToHive(result, props)
 except Exception, e:
-    pass
+    raise
 finally:
     sc.stop()
