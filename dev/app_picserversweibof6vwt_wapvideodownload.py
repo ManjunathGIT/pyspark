@@ -277,7 +277,7 @@ result = hc.sql("select '" + job_date + "' as job_date," + """date,province,isp,
 hive_dip = 'datacubic'
 hive_table = 'app_picserversweibof6vwt_wapvideodownload'
 hive_partition = time.strftime(
-    "%Y%m%d%H", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '0000'
+    "%Y%m%d", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '000000'
 props = {"db": hive_dip, "table": hive_table,
          "partition": hive_partition, "overwrite": True}
 sc.saveRDDToHive(rows, props)
