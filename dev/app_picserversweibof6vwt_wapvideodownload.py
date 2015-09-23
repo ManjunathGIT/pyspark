@@ -72,7 +72,7 @@ def lineParse(line):
 rows = source.map(lineParse).filter(lambda columns: columns).collect()
 
 schema = StructType([StructField("__date", StringType(), False), StructField(
-    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", StringType(), False), StructField("video_duration", StringType(), False), StructType("video_play_duration", StringType(), False)])
+    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", StringType(), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
 
 table = hc.applySchema(rows, schema)
 
