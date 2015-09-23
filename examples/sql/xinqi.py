@@ -13,7 +13,7 @@ columns = source.map(lambda line: line.split(" ")).filter(
     lambda columns: columns and len(columns) == 3)
 
 rows = columns.map(
-    lambda columns: (float(columns[0]), float(columns[1]), float(columns[2]))
+    lambda columns: (float(columns[0]), float(columns[1]), float(columns[2])))
 
 schema=StructType([StructField("col1", DoubleType(), False), StructField(
     "col2", DoubleType(), False), StructField("col3", DoubleType(), False)])
