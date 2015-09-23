@@ -227,19 +227,11 @@ select
 result.registerTempTable("temp_table2")
 
 result = hc.sql("""
-select 'job_date' as job_date,
-        date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
-        init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
-        play_process_group,
-        sum(video_play_type_duration) as sum_video_play_type_duration,sum(cal_buffer_num.buffer_t_sum) as sum_buffer_t_sum,
-        sum(video_play_duration) as sum_video_play_duration,sum(video_duration) as sum_video_duration,
-        sum(play_process) as sum_play_process,
-        count(1)as num,
-        '' as temp_20,'' as temp_21,'' as temp_22,'' as temp_23,'' as temp_24,'' as temp_25
-        from temp_table2
-        group by date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
-        init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
+select 
         play_process_group
+        
+        from temp_table2
+        group by play_process_group
 """).collect()
 
 sc.stop()
