@@ -1,3 +1,3 @@
-strs = ""
+v = 123
 
-print strs[0:3]
+print str(v)[0:1]

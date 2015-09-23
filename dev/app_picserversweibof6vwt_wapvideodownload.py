@@ -72,21 +72,21 @@ def lineParse(line):
                     video_play_type = ""
                 else:
                     if jsonObj["video_buffer_type"] != "1":
-                        video_play_type = jsonObj["video_buffer_type"]
+                        video_play_type = str(jsonObj["video_buffer_type"])
 
                 if "video_buffer_type" not in jsonObj or "video_buffer_duration" not in jsonObj:
                     video_play_type_duration = ""
                 else:
                     if jsonObj["video_buffer_type"] != "1":
-                        video_play_type_duration = jsonObj[
-                            "video_buffer_duration"]
+                        video_play_type_duration = str(jsonObj[
+                            "video_buffer_duration"])
 
                 if "video_buffer_type" in jsonObj and jsonObj["video_buffer_type"] == 1 and "video_buffer_duration" in jsonObj:
                     buffer_duration_list = [
                         round(float(jsonObj["video_buffer_duration"]))]
             else:
-                __date = jsonObj[
-                    "video_log_time"] if "video_log_time" in jsonObj else ""
+                __date = str(jsonObj[
+                    "video_log_time"]) if "video_log_time" in jsonObj else ""
 
                 __date = __date[0:10]
 
@@ -95,24 +95,24 @@ def lineParse(line):
                 else:
                     for v in jsonObj["video_time_duration"]:
                         if "type" in v and v["type"] != "1":
-                            video_play_type = v["type"]
+                            video_play_type = str(v["type"])
 
                             break
 
                 if "video_time_duration" in jsonObj:
                     for v in jsonObj["video_time_duration"]:
                         if "type" in v and "type" != "1" and "duration" in v:
-                            video_play_type_duration = v["duration"]
+                            video_play_type_duration = str(v["duration"])
 
                             break
 
                 if "video_error_info" in jsonObj and "error_code" in jsonObj["video_error_info"]:
-                    video_error_code = jsonObj[
-                        "video_error_info"]["error_code"]
+                    video_error_code = str(jsonObj[
+                        "video_error_info"]["error_code"])
 
                 if "video_error_info" in jsonObj and "error_msg" in jsonObj["video_error_info"]:
-                    video_error_msg = jsonObj[
-                        "video_error_info"]["error_msg"]
+                    video_error_msg = str(jsonObj[
+                        "video_error_info"]["error_msg"])
 
                 if "video_time_duration" in jsonObj:
                     for v in jsonObj["video_time_duration"]:
