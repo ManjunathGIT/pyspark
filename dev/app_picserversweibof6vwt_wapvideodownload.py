@@ -49,10 +49,9 @@ def lineParse(line):
 
         ua = jsonObj["ua"]
 
-        """
-        if len(split(ua, "__")) < 3:
+        if len(ua.split("__")) < 3:
             pass
-
+        """
         version = ua.split("__")[2]
 
         if version == "5.4.0" or version == "5.4.5" or version == "5.4.5_beta":
