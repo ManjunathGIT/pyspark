@@ -3,7 +3,7 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import re
-from pyspark.sql import StructType, StructField, StringType, IntegerType, ArrayType
+from pyspark.sql import StructType, StructField, StringType, FloatType, ArrayType
 import json
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
@@ -41,31 +41,39 @@ def lineParse(line):
 
         if version >= "5.4.0":
             __date = str(jsonObj["__date"]) if "__date" in jsonObj else ""
+
             video_mediaid = str(jsonObj[
                 "video_mediaid"]) if "video_mediaid" in jsonObj else ""
+
             video_url = str(
                 jsonObj["video_url"]) if "video_url" in jsonObj else ""
+
             video_cdn = str(
                 jsonObj["video_cdh"]) if "video_cdh" in jsonObj else ""
+
             video_network = str(jsonObj[
                 "video_network"]) if "video_network" in jsonObj else ""
+
             ip = str(jsonObj["ip"]) if "ip" in jsonObj else ""
+
             video_play_type = str(jsonObj[
                 "video_play_type"]) if "video_play_type" in jsonObj else ""
+
             video_play_type_duration = str(jsonObj[
                 "video_play_type_duration"]) if "video_play_type_duration" in jsonObj else ""
+
             video_error_code = str(jsonObj[
                 "video_error_code"]) if "video_error_code" in jsonObj else ""
+
             video_error_msg = str(jsonObj[
                 "video_error_msg"]) if "video_error_msg" in jsonObj else ""
-            buffer_duration_list = []
 
-            if "buffer_duration_list" in jsonObj:
-                for v in jsonObj["buffer_duration_list"]:
-                    buffer_duration_list.append(round(v))
+            buffer_duration_list = jsonObj[
+                "buffer_duration_list"] if "buffer_duration_list" in jsonObj else []
 
             video_duration = str(jsonObj[
                 "video_duration"]) if "video_duration" in jsonObj else ""
+
             video_play_duration = str(jsonObj[
                 "video_play_duration"]) if "video_play_duration" in jsonObj else ""
 
@@ -138,7 +146,7 @@ def lineParse(line):
 rows = source.map(lineParse).filter(lambda columns: columns)
 
 schema = StructType([StructField("__date", StringType(), False), StructField(
-    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", ArrayType(StringType(), True), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
+    "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdh", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", ArrayType(FloatType(), True), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
 
 table = hc.applySchema(rows, schema)
 

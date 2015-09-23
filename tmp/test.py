@@ -1,3 +1,3 @@
 v = 123
 
-print str(v)[0:1]
+print round(1.234)
