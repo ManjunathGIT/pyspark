@@ -8,7 +8,6 @@ import sys
 import re
 from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatType, ArrayType
 import json
-from dip.pyspark im
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
 
