@@ -49,7 +49,7 @@ def lineParse(line):
                 jsonObj["video_url"]) if "video_url" in jsonObj else ""
 
             video_cdn = str(
-                jsonObj["video_cdh"]) if "video_cdh" in jsonObj else ""
+                jsonObj["video_cdn"]) if "video_cdn" in jsonObj else ""
 
             video_network = str(jsonObj[
                 "video_network"]) if "video_network" in jsonObj else ""
