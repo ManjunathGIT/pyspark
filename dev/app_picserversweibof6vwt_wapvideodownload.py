@@ -233,6 +233,26 @@ select
 
 result.registerTempTable("temp_table2")
 
+def convertNoneToZero(columns):
+    convert = list(columns)
+
+    if not convert[14]:
+        convert[14] = 0
+
+    if not convert[15]:
+        convert[15] = 0
+
+    if not convert[16]:
+        convert[16] = 0
+
+    if not convert[17]:
+        convert[17] = 0
+
+    if not convert[18]:
+        convert[18] = 0
+
+    return tuple(convert)
+
 result = hc.sql("""
 select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
@@ -246,7 +266,7 @@ select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,vide
         group by date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
         play_process_group
-""").collect()
+""").map(convertNoneToZero).collect()
 
 sc.stop()
 
