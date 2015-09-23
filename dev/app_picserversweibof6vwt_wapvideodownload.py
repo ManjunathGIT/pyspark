@@ -68,8 +68,11 @@ def lineParse(line):
             video_error_msg = str(jsonObj[
                 "video_error_msg"]) if "video_error_msg" in jsonObj else ""
 
-            buffer_duration_list = jsonObj[
-                "buffer_duration_list"] if "buffer_duration_list" in jsonObj else []
+            buffer_duration_list = []
+
+            if "buffer_duration_list" in jsonObj:
+                for v in jsonObj["buffer_duration_list"]:
+                    buffer_duration_list.append(int(v))
 
             video_duration = str(jsonObj[
                 "video_duration"]) if "video_duration" in jsonObj else ""
@@ -129,8 +132,7 @@ def lineParse(line):
                 if "video_time_duration" in jsonObj:
                     for v in jsonObj["video_time_duration"]:
                         if "type" in v and v["type"] == "1" and "duration" in v:
-                            buffer_duration_list.append(
-                                round(float(v["duration"])))
+                            buffer_duration_list.append(int(v["duration"]))
         else:
             return None
 
@@ -183,7 +185,7 @@ def cal_buffer_num(set):
             elif s > 120000:
                 buffer_bigger_2min_count = buffer_bigger_2min_count + 1
 
-    return (buffer_count, int(buffer_t_sum), buffer_smaller_500ms_count, buffer_bigger_2min_count)
+    return (buffer_count, buffer_t_sum, buffer_smaller_500ms_count, buffer_bigger_2min_count)
 
 hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("buffer_count", IntegerType()), StructField(
     "buffer_t_sum", IntegerType()), StructField("buffer_smaller_500ms_count", IntegerType()), StructField("buffer_bigger_2min_count", IntegerType())]))
@@ -229,8 +231,12 @@ result.registerTempTable("temp_table2")
 result = hc.sql("""
 select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
-        play_process_group,sum(video_play_type_duration) as sum_video_play_type_duration,
-        sum(cal_buffer_num.buffer_t_sum) as sum_buffer_t_sum
+        play_process_group,
+        sum(video_play_type_duration) as sum_video_play_type_duration,sum(cal_buffer_num.buffer_t_sum) as sum_buffer_t_sum,
+        sum(video_play_duration) as sum_video_play_duration,sum(video_duration) as sum_video_duration,
+        sum(play_process) as sum_play_process,
+        count(1)as num,
+        '' as temp_20,'' as temp_21,'' as temp_22,'' as temp_23,'' as temp_24,'' as temp_25
         from temp_table2
         group by date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
