@@ -54,7 +54,7 @@ def lineParse(line):
 
         version = ua.split("__")[2]
 
-        if version == "5.4.0" or version == "5.4.5" or version = "5.4.5_beta":
+        if version == "5.4.0" or version == "5.4.5" or version == "5.4.5_beta":
             __date = jsonObj["__date"]
             video_mediaid = jsonObj["video_mediaid"]
             video_url = jsonObj["video_url"]
