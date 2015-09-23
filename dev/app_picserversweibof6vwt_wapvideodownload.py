@@ -29,7 +29,18 @@ def lineParse(line):
     try:
         jsonObj = json.loads(videodownload_info)
 
-        return videodownload_info
+        if "ua" not in jsonObj:
+            return None
+
+        ua = jsonObj["ua"]
+
+        if len(ua.split("__")) < 3:
+            return None
+
+        version = ua.split("__")[2]
+
+        if version == "5.4.0" or version == "5.4.5" or version == "5.4.5_beta":
+            return videodownload_info
 
         if "__date" not in jsonObj or "video_mediaid" not in jsonObj or "video_url" not in jsonObj or "ua" not in jsonObj or "video_cdn" not in jsonObj or "video_network" not in jsonObj or "ip" not in jsonObj or "video_play_type" not in jsonObj or "video_play_type_duration" not in jsonObj or "video_error_code" not in jsonObj or "video_error_msg" not in jsonObj or "buffer_duration_list" not in jsonObj or "video_duration" not in jsonObj or "video_play_duration" not in jsonObj:
             return None
