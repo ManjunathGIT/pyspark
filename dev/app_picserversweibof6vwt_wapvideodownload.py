@@ -103,7 +103,7 @@ def lineParse(line):
 
                 if "video_buffer_type" in jsonObj and jsonObj["video_buffer_type"] == 1 and "video_buffer_duration" in jsonObj:
                     buffer_duration_list = [
-                        round(float(jsonObj["video_buffer_duration"]))]
+                        int(jsonObj["video_buffer_duration"])]
             else:
                 __date = str(jsonObj[
                     "video_log_time"]) if "video_log_time" in jsonObj else ""
@@ -196,7 +196,7 @@ hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("b
     "buffer_t_sum", IntegerType()), StructField("buffer_smaller_500ms_count", IntegerType()), StructField("buffer_bigger_2min_count", IntegerType())]))
 
 result = hc.sql("""
-select 
+select
         from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
         (case when func.ipToLocationBySina(ip)[0]='中国' then func.ipToLocationBySina(ip)[1]
               when func.ipToLocationBySina(ip)[0]!='中国' then func.ipToLocationBySina(ip)[0]
@@ -232,6 +232,7 @@ select
 """)
 
 result.registerTempTable("temp_table2")
+
 
 def convertNoneToZero(columns):
     convert = list(columns)
