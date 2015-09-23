@@ -47,9 +47,9 @@ def lineParse(line):
         video_duration = None
         video_play_duration = None
 
-        """
         ua = jsonObj["ua"]
 
+        """
         if len(split(ua, "__")) < 3:
             pass
 
