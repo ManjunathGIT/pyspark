@@ -63,7 +63,7 @@ def lineParse(line):
             video_duration = str(jsonObj[
                 "video_duration"]) if "video_duration" in jsonObj else ""
             video_play_duration = str(jsonObj[
-                "video_play_duration"]) if "video_play_duration" else ""
+                "video_play_duration"]) if "video_play_duration" in jsonObj else ""
 
             if version == "5.4.0":
                 __date = __date[0:10]
