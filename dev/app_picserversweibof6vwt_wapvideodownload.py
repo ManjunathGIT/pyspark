@@ -162,6 +162,26 @@ def parseCDN(video_cdn):
 
 hc.registerFunction("parseCDN", parseCDN)
 
+
+def cal_buffer_num(set):
+    buffer_count = 0
+    buffer_t_sum = 0
+    buffer_smaller_500ms_count = 0
+    buffer_bigger_2min_count = 0
+    if set == None:
+        pass
+    else:
+        list = set
+        for s in list:
+            if s >= 500 and s <= 120000:
+                buffer_count = buffer_count + 1
+                buffer_t_sum = buffer_t_sum + s
+            elif s < 500:
+                buffer_smaller_500ms_count = buffer_smaller_500ms_count + 1
+            elif s > 120000:
+                buffer_bigger_2min_count = buffer_bigger_2min_count + 1
+    return (buffer_count, buffer_t_sum, buffer_smaller_500ms_count, buffer_bigger_2min_count)
+
 result = hc.sql("""
 select 
         from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
