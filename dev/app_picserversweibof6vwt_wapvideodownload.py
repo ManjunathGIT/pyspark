@@ -32,7 +32,7 @@ def lineParse(line):
         if "ua" not in jsonObj:
             return None
 
-        ua = jsonObj["ua"]
+        ua = str(jsonObj["ua"])
 
         if len(ua.split("__")) < 3:
             return None
@@ -58,8 +58,12 @@ def lineParse(line):
                 "video_error_code"]) if "video_error_code" in jsonObj else ""
             video_error_msg = str(jsonObj[
                 "video_error_msg"]) if "video_error_msg" in jsonObj else ""
-            buffer_duration_list = jsonObj[
-                "buffer_duration_list"] if "buffer_duration_list" in jsonObj else []
+            buffer_duration_list = []
+
+            if "buffer_duration_list" in jsonObj:
+                for v in jsonObj["buffer_duration_list"]:
+                    buffer_duration_list.append(round(v))
+
             video_duration = str(jsonObj[
                 "video_duration"]) if "video_duration" in jsonObj else ""
             video_play_duration = str(jsonObj[
