@@ -23,7 +23,7 @@ table=hc.applySchema(rows, schema)
 table.registerAsTable("temp_mytable")
 
 datas=hc.sql(
-    "select sum(col2) from temp_mytable").collect()
+    "select cast(col2 as varchar(5)) from temp_mytable").collect()
 
 sc.stop()
 
