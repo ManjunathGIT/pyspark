@@ -229,7 +229,7 @@ select
         (case when video_play_type_duration <=2000 then '<=2000ms'
               when video_play_type_duration>2000 then '>2000ms' else '-' end )as init_timetag,
         cal_buffer_num(buffer_duration_list) as cal_buffer_num from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
-""")
+""").collect()
 
 result.registerTempTable("temp_table2")
 
@@ -253,6 +253,7 @@ def convertNoneToZero(columns):
 
     return tuple(convert)
 
+"""
 result = hc.sql("""
 select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
@@ -267,6 +268,7 @@ select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,vide
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
         play_process_group
 """).map(convertNoneToZero).collect()
+"""
 
 sc.stop()
 
