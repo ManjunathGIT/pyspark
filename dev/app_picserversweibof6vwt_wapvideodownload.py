@@ -148,7 +148,7 @@ try:
                     video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
 
         except Exception, e:
-            raise
+            pass
 
         return None
 
