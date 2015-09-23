@@ -190,37 +190,7 @@ hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("b
 
 result = hc.sql("""
 select 
-        from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
-        (case when func.ipToLocationBySina(ip)[0]='中国' then func.ipToLocationBySina(ip)[1]
-              when func.ipToLocationBySina(ip)[0]!='中国' then func.ipToLocationBySina(ip)[0]
-              end) as province,
-        func.ipToLocationBySina(ip)[4] as isp,
-        (case when video_cdn like 'f=cnct%' then 'cnct'
-              when video_cdn like 'f=alicdn%' then 'ali'
-              when video_cdn like 'f=edge%' then 'edge'
-              else 'else' END) as cdn,
-        parseCDN(video_cdn) as idc,
-        (CASE WHEN upper(ua) LIKE '%IPHONE%' THEN 'IPHONE'
-              WHEN upper(ua) LIKE '%ANDROID%' THEN 'ANDROID'
-              ELSE '-' END) AS ua,
-        split(ua, '__')[2] as version,
-        video_network,
-        video_error_code,
-        video_error_msg,
-        video_play_type,
-        video_play_duration,
-        video_duration,
-        (case
-        when video_play_duration>0 and video_duration>0 then cast(round(video_play_duration/video_duration,1) as VARCHAR(5))
-        when video_play_duration='' or video_play_duration=0 or video_play_duration='None' then 'NoPlay'
-        else '-' END) as play_process_group,
-        (case
-        when video_duration>0 then video_play_duration/video_duration
-        else 0
-        END)  as play_process,
-        video_play_type_duration,
-        (case when video_play_type_duration <=2000 then '<=2000ms'
-              when video_play_type_duration>2000 then '>2000ms' else '-' end )as init_timetag from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
+        from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
 """).collect()
 
 sc.stop()
