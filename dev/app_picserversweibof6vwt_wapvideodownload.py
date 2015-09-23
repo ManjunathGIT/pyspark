@@ -51,9 +51,10 @@ def lineParse(line):
 
         if len(ua.split("__")) < 3:
             pass
-        """
+
         version = ua.split("__")[2]
 
+        """
         if version == "5.4.0" or version == "5.4.5" or version == "5.4.5_beta":
             __date = jsonObj["__date"]
             video_mediaid = jsonObj["video_mediaid"]
@@ -65,13 +66,11 @@ def lineParse(line):
             video_error_msg = jsonObj["video_error_msg"]
             video_duration = jsonObj["video_duration"]
             video_play_duration = jsonObj["video_play_duration"]
-
-            
         else:
             pass
         """
 
-        return (__date, video_mediaid, video_url, ua, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
+        return (__date, video_mediaid, video_url, version, video_cdn, video_network, ip, video_play_type, video_play_type_duration, video_error_code, video_error_msg, buffer_duration_list, video_duration, video_play_duration)
     except Exception, e:
         pass
 
