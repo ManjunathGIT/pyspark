@@ -254,8 +254,12 @@ def convertNoneToZero(columns):
 
     return tuple(convert)
 
-result = hc.sql("""
-select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
+preDay = 1
+preDate = time.localtime(
+    time.mktime(time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) - preDay * 24 * 60 * 60)
+job_date = time.strftime("%Y-%m-%d", preDate)
+
+result = hc.sql("select '" + job_date + "' as job_date," + """date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
         play_process_group,
         sum(video_play_type_duration) as sum_video_play_type_duration,sum(cal_buffer_num.buffer_t_sum) as sum_buffer_t_sum,
@@ -267,9 +271,14 @@ select date,province,isp,cdn,idc,ua,version,video_network, video_error_code,vide
         group by date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
         init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
         play_process_group
-""").map(convertNoneToZero).collect()
+""").map(convertNoneToZero)
+
+hive_dip = 'datacubic'
+hive_table = 'app_picserversweibof6vwt_wapvideodownload'
+hive_partition = time.strftime(
+    "%Y%m%d%H", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '0000'
+props = {"db": hive_dip, "table": hive_table,
+         "partition": hive_partition, "overwrite": True}
+sc.saveRDDToHive(rows, props)
 
 sc.stop()
-
-for row in result:
-    print row
