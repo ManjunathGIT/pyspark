@@ -182,6 +182,8 @@ def cal_buffer_num(set):
                 buffer_bigger_2min_count = buffer_bigger_2min_count + 1
     return (buffer_count, buffer_t_sum, buffer_smaller_500ms_count, buffer_bigger_2min_count)
 
+hc.registerFunction("cal_buffer_num", cal_buffer_num)
+
 result = hc.sql("""
 select 
         from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
