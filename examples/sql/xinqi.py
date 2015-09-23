@@ -15,14 +15,17 @@ columns = source.map(lambda line: line.split(" ")).filter(
 rows = columns.map(
     lambda columns: (float(columns[0]), float(columns[1]), float(columns[2])))
 
-schema=StructType([StructField("col1", DoubleType(), False), StructField(
+schema = StructType([StructField("col1", DoubleType(), False), StructField(
     "col2", DoubleType(), False), StructField("col3", DoubleType(), False)])
 
-table=hc.applySchema(rows, schema)
+table = hc.applySchema(rows, schema)
 
 table.registerAsTable("temp_mytable")
 
-datas=hc.sql(
+datas = hc.sql(
+    "select cast(col2 as varchar(5)) from temp_mytable").collect()
+
+datas = hc.sql(
     "select cast(col2 as varchar(5)) from temp_mytable").collect()
 
 sc.stop()
