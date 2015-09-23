@@ -22,7 +22,7 @@ table = hc.applySchema(rows, schema)
 
 table.registerAsTable("temp_mytable")
 
-datas = hc.sql("select sum(col1, None) from temp_mytable").collect()
+datas = hc.sql("select sum(col1, None), sum(None) from temp_mytable").collect()
 
 sc.stop()
 
