@@ -168,10 +168,12 @@ def cal_buffer_num(set):
     buffer_t_sum = 0
     buffer_smaller_500ms_count = 0
     buffer_bigger_2min_count = 0
+
     if set == None:
         pass
     else:
         list = set
+
         for s in list:
             if s >= 500 and s <= 120000:
                 buffer_count = buffer_count + 1
@@ -180,6 +182,7 @@ def cal_buffer_num(set):
                 buffer_smaller_500ms_count = buffer_smaller_500ms_count + 1
             elif s > 120000:
                 buffer_bigger_2min_count = buffer_bigger_2min_count + 1
+
     return (buffer_count, buffer_t_sum, buffer_smaller_500ms_count, buffer_bigger_2min_count)
 
 hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("buffer_count", IntegerType()), StructField(
@@ -217,8 +220,7 @@ select
         END)  as play_process,
         video_play_type_duration,
         (case when video_play_type_duration <=2000 then '<=2000ms'
-              when video_play_type_duration>2000 then '>2000ms' else '-' end )as init_timetag,
-        cal_buffer_num(buffer_duration_list) as cal_buffer_num from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
+              when video_play_type_duration>2000 then '>2000ms' else '-' end )as init_timetag from temp_table where (video_url like '%%us.sina%' or video_mediaid like '1034:%') and split(ua, '__')[2] >='5.4'
 """).collect()
 
 sc.stop()
