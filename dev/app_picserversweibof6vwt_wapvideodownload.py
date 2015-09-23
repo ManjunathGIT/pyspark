@@ -222,8 +222,8 @@ select
         when video_play_duration='' or video_play_duration=0 or video_play_duration='None' then 'NoPlay'
         else '-' END) as play_process_group,
         (case
-        when video_duration>0 then video_play_duration/video_duration
-        else 0
+        when video_duration>0 then round(video_play_duration/video_duration, 2)
+        else 0.00
         END)  as play_process,
         video_play_type_duration,
         (case when video_play_type_duration <=2000 then '<=2000ms'
