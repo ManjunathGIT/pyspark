@@ -12,6 +12,7 @@ sys.setdefaultencoding("utf-8")
 import re
 from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatType, ArrayType
 import json
+import time
 
 conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
 
