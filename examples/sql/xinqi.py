@@ -13,16 +13,16 @@ columns = source.map(lambda line: line.split(" ")).filter(
     lambda columns: columns and len(columns) == 3)
 
 rows = columns.map(
-    lambda columns: (columns[0], columns[1], columns[2]))
+    lambda columns: (float(columns[0]), float(columns[1]), float(columns[2]))
 
-schema = StructType([StructField("col1", DoubleType(), False), StructField(
+schema=StructType([StructField("col1", DoubleType(), False), StructField(
     "col2", DoubleType(), False), StructField("col3", DoubleType(), False)])
 
-table = hc.applySchema(rows, schema)
+table=hc.applySchema(rows, schema)
 
 table.registerAsTable("temp_mytable")
 
-datas = hc.sql(
+datas=hc.sql(
     "select cast(col1 as VARCHAR(5)),sum(col2) from temp_mytable").collect()
 
 sc.stop()
