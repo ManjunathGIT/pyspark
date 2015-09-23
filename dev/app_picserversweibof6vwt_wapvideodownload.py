@@ -26,7 +26,7 @@ def lineParse(line):
 
     videodownload_info = matcher.group(1)
 
-    return None
+    return videodownload_info
 
 rows = source.map(lineParse).filter(lambda columns: columns).collect()
 
