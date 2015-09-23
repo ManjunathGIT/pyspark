@@ -196,7 +196,7 @@ hc.registerFunction("cal_buffer_num", cal_buffer_num, StructType([StructField("b
     "buffer_t_sum", IntegerType()), StructField("buffer_smaller_500ms_count", IntegerType()), StructField("buffer_bigger_2min_count", IntegerType())]))
 
 result = hc.sql("""
-select
+select 
         from_unixtime(cast(round(cdate,0) as bigint),'yyyy-MM-dd') as date,
         (case when func.ipToLocationBySina(ip)[0]='中国' then func.ipToLocationBySina(ip)[1]
               when func.ipToLocationBySina(ip)[0]!='中国' then func.ipToLocationBySina(ip)[0]
