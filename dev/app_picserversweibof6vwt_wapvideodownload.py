@@ -4,7 +4,7 @@ from pyspark import SparkConf
 from dip.spark import SparkContext
 from pyspark.sql import HiveContext
 from dip.util import timetool
-improt sys
+import sys
 import re
 from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatType, ArrayType
 import json
