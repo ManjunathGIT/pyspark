@@ -158,7 +158,7 @@ def parseCDN(video_cdn):
     words = video_cdn.split("s=")
 
     if len(words) >= 2:
-        words[1].split(",")[0]
+        return words[1].split(",")[0]
 
     return ""
 
