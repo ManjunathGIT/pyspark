@@ -26,7 +26,10 @@ datas = hc.sql(
     "select cast(col2 as varchar(5)) from temp_mytable").collect()
 
 datas = hc.sql(
-    "select cast(col2 as varchar(5)) from temp_mytable").collect()
+    "select count(*) from datacubic.app_picserversweibof6vwt_wapvideodownload").collect()
+
+datas = hc.sql(
+    "select count(*) from datacubic.app_picserversweibof6vwt_wapvideodownload").collect()
 
 sc.stop()
 
