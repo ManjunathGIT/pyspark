@@ -14,7 +14,7 @@ from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatT
 import json
 import time
 
-conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload")
+conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload_to_hdfs")
 
 sc = SparkContext(conf=conf)
 
