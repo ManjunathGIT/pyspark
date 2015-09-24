@@ -284,7 +284,10 @@ try:
              "partition": hive_partition, "overwrite": True}
     # sc.saveRDDToHive(result, props)
 
-    print result.count()
+    datas = result.take(10)
+
+    for data in datas:
+        print data
 except Exception, e:
     raise
 finally:
