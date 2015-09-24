@@ -284,10 +284,7 @@ try:
              "partition": hive_partition, "overwrite": True}
     # sc.saveRDDToHive(result, props)
 
-    datas = result.take(10)
-
-    for data in datas:
-        print data
+    result.saveAsTextFile("/user/yurun/tmp/1")
 except Exception, e:
     raise
 finally:
