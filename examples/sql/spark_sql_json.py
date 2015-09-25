@@ -22,4 +22,4 @@ sc.stop()
 
 if datas:
     for data in datas:
-        print data
+        print data.col1, data.col2, data.col3
