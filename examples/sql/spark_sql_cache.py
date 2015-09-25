@@ -4,7 +4,7 @@ from pyspark.sql import HiveContext
 
 conf = SparkConf().setAppName("spark_sql_cache")
 
-sc = SparkContext(conf = conf)
+sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
@@ -22,7 +22,9 @@ datas = hc.sql("select * from temp_mytable").collect()
 
 datas = hc.sql("select col1 from temp_mytable").collect()
 
+hc.uncacheTable("temp_mytable")
+
 sc.stop()
 
 for data in datas:
-	print data
+    print data
