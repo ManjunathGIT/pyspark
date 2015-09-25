@@ -15,7 +15,7 @@ import json
 import time
 
 conf = SparkConf().setAppName(
-    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 10)
+    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 20)
 
 sc = SparkContext(conf=conf)
 
@@ -23,7 +23,7 @@ hc = HiveContext(sc)
 
 try:
     source = sc.textFile(
-        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreDayDir(sys.argv[1])).coalesce(100)
+        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreDayDir(sys.argv[1]))
 
     pattern = re.compile("^([^`]*)`([^`]*)")
 
