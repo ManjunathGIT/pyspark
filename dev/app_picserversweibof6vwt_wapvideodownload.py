@@ -14,7 +14,8 @@ from pyspark.sql import StructType, StructField, StringType, IntegerType, FloatT
 import json
 import time
 
-conf = SparkConf().setAppName("app_picserversweibof6vwt_wapvideodownload_to_hdfs")
+conf = SparkConf().setAppName(
+    "app_picserversweibof6vwt_wapvideodownload_to_hdfs")
 
 sc = SparkContext(conf=conf)
 
@@ -155,7 +156,7 @@ try:
     rows = source.map(lineParse).filter(lambda columns: columns)
 
     schema = StructType([StructField("cdate", StringType(), False), StructField(
-        "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdn", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", ArrayType(FloatType(), False), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
+        "video_mediaid", StringType(), False), StructField("video_url", StringType(), False), StructField("ua", StringType(), False), StructField("video_cdn", StringType(), False), StructField("video_network", StringType(), False), StructField("ip", StringType(), False), StructField("video_play_type", StringType(), False), StructField("video_play_type_duration", StringType(), False), StructField("video_error_code", StringType(), False), StructField("video_error_msg", StringType(), False), StructField("buffer_duration_list", ArrayType(IntegerType(), False), False), StructField("video_duration", StringType(), False), StructField("video_play_duration", StringType(), False)])
 
     table = hc.applySchema(rows, schema)
 
