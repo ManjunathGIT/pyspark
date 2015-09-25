@@ -9,6 +9,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
+"""
 source = sc.parallelize(['{"key1" : 1, "key2" : "2"}'])
 
 jsonRDD = hc.jsonRDD(source)
@@ -16,6 +17,15 @@ jsonRDD = hc.jsonRDD(source)
 jsonRDD.registerTempTable("temp_table")
 
 values = hc.sql("select key1, key2 from temp_table").collect()
+"""
+
+source = sc.parallelize(['{"key" : {"key1" : 1, "key2" : "2"}}'])
+
+jsonRDD = hc.jsonRDD(source)
+
+jsonRDD.registerTempTable("temp_table")
+
+values = hc.sql("select key.key1, key.key2 from temp_table").collect()
 
 sc.stop()
 
