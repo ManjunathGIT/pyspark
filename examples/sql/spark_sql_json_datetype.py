@@ -48,16 +48,16 @@ jsonRDD.registerTempTable("temp_table")
 
 values = hc.sql("select key[0], key[1], key[2] from temp_table").collect()
 
-# values的输出结果：Row(_c0=u'1', _c1=u'2', _c2=u'3.0')，数据类型被全部推断为“int”
+# values的输出结果：Row(_c0=u'1', _c1=u'2', _c2=u'3.0')，数据类型被全部推断为“int”，也就是说数组的数据类型一定要一致，否则可以引发异常
 """
 
-source = sc.parallelize(['{"key" : [1, "2" , 3.0]}'])
+source = sc.parallelize(['{"key" : [1, 2 , 3.0]}'])
 
 jsonRDD = hc.jsonRDD(source)
 
 jsonRDD.registerTempTable("temp_table")
 
-values = hc.sql("select key from temp_table").collect()
+values = hc.sql("select key[0], key[1], key[2] from temp_table").collect()
 
 sc.stop()
 
