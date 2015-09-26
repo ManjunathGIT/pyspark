@@ -306,10 +306,12 @@ try:
 
     kvRDD = strRDD.map(lambda row: (random.randint(1, 10), row))
 
+    partition = kvRDD.coalesce(5)
+
     hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
                   "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
 
-    kvRDD.saveAsHadoopDataset(conf=hadoopConf)
+    partition.saveAsHadoopDataset(conf=hadoopConf)
 except Exception, e:
     raise
 finally:
