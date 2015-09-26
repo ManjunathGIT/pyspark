@@ -23,7 +23,7 @@ hc = HiveContext(sc)
 
 try:
     source = sc.textFile(
-        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreDayDir(sys.argv[1])).coalesce(30)
+        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreHourDir(sys.argv[1])).coalesce(30)
 
     pattern = re.compile("^([^`]*)`([^`]*)")
 
