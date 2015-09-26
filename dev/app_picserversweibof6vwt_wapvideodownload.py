@@ -15,7 +15,7 @@ import json
 import time
 
 conf = SparkConf().setAppName(
-    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 20)
+    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 15)
 
 sc = SparkContext(conf=conf)
 
@@ -283,7 +283,12 @@ try:
         "%Y%m%d", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '000000'
     props = {"db": hive_dip, "table": hive_table,
              "partition": hive_partition, "overwrite": True}
-    sc.saveRDDToHive(result, props)
+    #sc.saveRDDToHive(result, props)
+
+    hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
+                  "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
+
+    result.saveAsHadoopDataset(conf=hadoopConf)
 except Exception, e:
     raise
 finally:
