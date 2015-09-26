@@ -303,7 +303,7 @@ try:
 
     strRDD = filterRDD.map(tupleToStrs)
 
-    kvRDD = strRDD.map(lambda row: (len(row), row))
+    kvRDD = strRDD.map(lambda row: (hash(row), row))
 
     hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
                   "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
