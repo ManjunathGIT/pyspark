@@ -24,7 +24,7 @@ hc = HiveContext(sc)
 
 try:
     source = sc.textFile(
-        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreDayDir(sys.argv[1]))
+        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreHourDir(sys.argv[1]))
 
     pattern = re.compile("^([^`]*)`([^`]*)")
 
@@ -276,7 +276,7 @@ try:
             group by date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
             init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
             play_process_group
-    """).map(convertNoneToZero)
+    """).coalesce(4).map(convertNoneToZero)
 
     hive_dip = 'datacubic'
     hive_table = 'app_picserversweibof6vwt_wapvideodownload_yurun_test'
