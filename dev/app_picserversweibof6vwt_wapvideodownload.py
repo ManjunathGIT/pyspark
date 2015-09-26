@@ -16,7 +16,7 @@ import json
 import time
 
 conf = SparkConf().setAppName(
-    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 15)
+    "app_picserversweibof6vwt_wapvideodownload_to_hdfs")
 
 sc = SparkContext(conf=conf)
 
@@ -306,7 +306,7 @@ try:
 
     kvRDD = strRDD.map(lambda row: (random.randint(1, 10), row))
 
-    partition = kvRDD.coalesce(5)
+    partition = kvRDD.coalesce(15)
 
     hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
                   "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
