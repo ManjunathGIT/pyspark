@@ -16,7 +16,7 @@ import json
 import time
 
 conf = SparkConf().setAppName(
-    "app_picserversweibof6vwt_wapvideodownload_to_hdfs")
+    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 15)
 
 sc = SparkContext(conf=conf)
 
