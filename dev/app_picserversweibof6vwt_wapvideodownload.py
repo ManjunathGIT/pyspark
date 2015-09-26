@@ -286,7 +286,7 @@ try:
     #sc.saveRDDToHive(result, props)
 
     filterRDD = result.filter(
-        lambda row: isinstance(row, tuple) and len(row) == columns)
+        lambda row: isinstance(row, tuple))
 
     def tupleToStrs(tuple):
         strs = []
