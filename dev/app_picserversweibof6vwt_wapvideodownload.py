@@ -5,6 +5,7 @@ from dip.spark import SparkContext
 from pyspark.sql import HiveContext
 from dip.util import timetool
 import sys
+import random
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -303,7 +304,7 @@ try:
 
     strRDD = filterRDD.map(tupleToStrs)
 
-    kvRDD = strRDD.map(lambda row: (hash(row), row))
+    kvRDD = strRDD.map(lambda row: (random.randint(1, 10), row))
 
     hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
                   "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
