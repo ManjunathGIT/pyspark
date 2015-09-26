@@ -285,10 +285,30 @@ try:
              "partition": hive_partition, "overwrite": True}
     #sc.saveRDDToHive(result, props)
 
+    filterRDD = rdd.filter(
+        lambda row: isinstance(row, tuple) and len(row) == columns)
+
+    def tupleToStrs(tuple):
+        strs = []
+
+        for e in tuple:
+            if isinstance(e, str):
+                strs.append(e)
+            elif isinstance(e, unicode):
+                strs.append(e)
+            else:
+                strs.append(str(e))
+
+        return "\t".join(strs)
+
+    strRDD = filterRDD.map(tupleToStrs)
+
+    kvRDD = strRDD.map(lambda row: (len(row), row))
+
     hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
                   "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
 
-    result.saveAsHadoopDataset(conf=hadoopConf)
+    kvRDD.saveAsHadoopDataset(conf=hadoopConf)
 except Exception, e:
     raise
 finally:
