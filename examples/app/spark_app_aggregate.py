@@ -14,4 +14,5 @@ datas = sc.parallelize([1, 2, 3, 4]).collect()
 
 sc.stop()
 
-print datas
+for data in datas:
+    print data[0], data[1]
