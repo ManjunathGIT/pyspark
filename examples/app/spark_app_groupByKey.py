@@ -9,4 +9,5 @@ datas = sc.parallelize(
 
 sc.stop()
 
+# [('a', [1]), ('c', [1, 2, 3]), ('b', [1, 2])]
 print[(x, list(y)) for x, y in datas]
