@@ -12,4 +12,5 @@ datas = rdd1.join(rdd2).collect()
 
 sc.stop()
 
+# [('a', (1, 2)), ('a', (1, 3))]
 print datas
