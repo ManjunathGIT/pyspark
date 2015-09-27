@@ -16,4 +16,6 @@ datas = sc.parallelize(
 
 sc.stop()
 
+# datas: [('key1', 'A'), ('key1', 'B'), ('key1', 'C'), ('key2', 'D'),
+# ('key2', 'E'), ('key2', 'F')]
 print "datas:", datas
