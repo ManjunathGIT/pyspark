@@ -1,7 +1,7 @@
 from pyspark import SparkConf, SparkContext
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 
 conf = SparkConf().setAppName("spark_app_foreach")
 
