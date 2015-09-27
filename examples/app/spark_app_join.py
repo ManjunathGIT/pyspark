@@ -6,7 +6,7 @@ sc = SparkContext(conf=conf)
 
 rdd1 = sc.parallelize([("a", 1), ("b", 1)])
 
-rdd2 = sc.parallelize([("a", 2), ("a", 3)])
+rdd2 = sc.parallelize([("a", 2), ("a", 3), ("c", 1)])
 
 datas = rdd1.join(rdd2).collect()
 
