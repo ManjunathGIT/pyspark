@@ -4,7 +4,7 @@ conf = SparkConf().setAppName("spark_app_fullOuterJoin")
 
 sc = SparkContext(conf=conf)
 
-rdd1 = sc.parallelize([("a", 1), ("b", 1)])
+rdd1 = sc.parallelize([("a", 1), ("b", 1), ("a", 3)])
 
 rdd2 = sc.parallelize([("a", 2), ("c", 1)])
 
