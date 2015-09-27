@@ -12,4 +12,5 @@ datas = rdd1.groupWith(rdd2, rdd3).collect()
 
 sc.stop()
 
+# [('b', ([1], [2], [])), ('d', ([], [], [1])), ('a', ([1, 2], [3], [])), ('c', ([], [1], [2]))]
 print[(x, (list(y[0]), list(y[1]), list(y[2]))) for x, y in datas]
