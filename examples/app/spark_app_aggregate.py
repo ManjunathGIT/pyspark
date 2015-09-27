@@ -4,11 +4,11 @@ conf = SparkConf().setAppName("spark_app_aggregate")
 
 sc = SparkContext(conf=conf)
 
-seqOp = (lambda x, y: (x[0] + y, x[1] + 1))
+seqOp = (lambda x, y: x + y)
 
-combOp = (lambda x, y: (x[0] + y[0], x[1] + y[1]))
+combOp = (lambda x, y: x + y)
 
-data = sc.parallelize([1, 2, 3, 4]).aggregate((0, 0), seqOp, combOp)
+data = sc.parallelize([1, 2, 3, 4]).aggregate(0, seqOp, combOp)
 
 sc.stop()
 
