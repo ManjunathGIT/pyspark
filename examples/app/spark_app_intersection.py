@@ -12,4 +12,5 @@ datas = rdd1.intersection(rdd2).collect()
 
 sc.stop()
 
+# [2, 4, 6]
 print datas
