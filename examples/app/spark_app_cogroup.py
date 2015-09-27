@@ -13,4 +13,4 @@ datas = rdd1.cogroup(rdd2).collect()
 sc.stop()
 
 for data in datas:
-    print data[0], list(data[1])
+    print data[0], list(data[1][0], data[1][1])
