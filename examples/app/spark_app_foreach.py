@@ -4,8 +4,9 @@ conf = SparkConf().setAppName("spark_app_foreach")
 
 sc = SparkContext(conf=conf)
 
-rdd = sc.parallelize(["a", "b", "c"]).foreach(
-    lambda val: val.upper())
+rdd = sc.parallelize(["a", "b", "c"])
+
+rdd.foreach(lambda val: val.upper())
 
 datas = rdd.collect()
 
