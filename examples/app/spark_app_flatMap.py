@@ -12,6 +12,8 @@ datas2 = rdd.flatMap(lambda val: [[val], [val + 1], [val + 2]]).collect()
 
 sc.stop()
 
+# datas: [1, 2, 3, 2, 3, 4, 3, 4, 5]
 print "datas:", datas
 
+# datas2: [[1], [2], [3], [2], [3], [4], [3], [4], [5]]
 print "datas2:", datas2
