@@ -9,7 +9,7 @@ sc = SparkContext(conf=conf)
 
 
 def log(val):
-    logging.info("val: " + val)
+    print "val:", val
 
 sc.parallelize(["a", "b", "c"]).foreach(log)
 
