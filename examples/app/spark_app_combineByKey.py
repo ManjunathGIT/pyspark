@@ -12,9 +12,13 @@ def createCombiner(val):
 def mergeValue(l, val):
     l.append(val)
 
+    return l
+
 
 def mergeCombiners(l, r):
     l.extend(r)
+
+    return l
 
 datas = sc.parallelize([("a", 1), ("a", 2), ("b", 1)]).combineByKey(
     createCombiner, mergeValue, mergeCombiners).collect()
