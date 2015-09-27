@@ -7,9 +7,10 @@ sc = SparkContext(conf=conf)
 seqFunc = lambda a, b: a + b
 combFunc = seqFunc
 
-data = sc.parallelize(
+datas = sc.parallelize(
     [("a", 1), ("b", 1), ("b", 2), ("c", 1), ("c", 2), ("c", 3)]).aggregateByKey(0, seqFunc, combFunc).collect()
 
 sc.stop()
 
-print data
+for data in datas:
+    print "key:", data[0], ", value:", data[1]
