@@ -4,9 +4,9 @@ conf = SparkConf().setAppName("spark_app_cogroup")
 
 sc = SparkContext(conf=conf)
 
-rdd1 = sc.parallelize([("a", 1), ("b", 1), ("a", 3)])
+rdd1 = sc.parallelize([("a", 1), ("a", 2), ("b", 1)])
 
-rdd2 = sc.parallelize([("a", 2), ("b", 2), ("c", 2)])
+rdd2 = sc.parallelize([("a", 2), ("b", 2), , ("b", 3), ("c", 2)])
 
 datas = rdd1.cogroup(rdd2).collect()
 
