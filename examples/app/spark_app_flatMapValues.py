@@ -12,7 +12,7 @@ def toUpper(l):
     return l
 
 datas = sc.parallelize(
-    [("key1", ["a", "b", "c"]), ("key2", ["d", "e", "f"])]).flatMapValues(toUpper()).collect()
+    [("key1", ["a", "b", "c"]), ("key2", ["d", "e", "f"])]).flatMapValues(toUpper).collect()
 
 sc.stop()
 
