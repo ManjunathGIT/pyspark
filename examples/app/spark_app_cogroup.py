@@ -12,5 +12,10 @@ datas = rdd1.cogroup(rdd2).collect()
 
 sc.stop()
 
+"""
+a ([1, 2], [2])
+c ([], [2])
+b ([1], [2, 3])
+"""
 for data in datas:
     print data[0], (list(data[1][0]), list(data[1][1]))
