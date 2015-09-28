@@ -8,5 +8,5 @@ data = sc.parallelize([1, 2, 3]).mean()
 
 sc.stop()
 
-# 2
+# 2.0
 print data
