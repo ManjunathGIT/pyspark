@@ -12,5 +12,5 @@ level = datas.getStorageLevel()
 
 sc.stop()
 
-# [[2, 4], [1, 3, 5]]
+# Disk Memory Deserialized 1x Replicated
 print level
