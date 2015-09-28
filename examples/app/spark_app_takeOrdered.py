@@ -12,4 +12,5 @@ data = sc.parallelize([("c", 3), ("b", 2), ("a", 1)]).takeOrdered(
 
 sc.stop()
 
+# [('a', 1), ('b', 2)]
 print data

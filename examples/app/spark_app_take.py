@@ -17,8 +17,11 @@ data3 = rdd.take(4)
 
 sc.stop()
 
+# []
 print data
 
+# [1, 2]
 print data2
 
+# [1, 2, 3]
 print data3
