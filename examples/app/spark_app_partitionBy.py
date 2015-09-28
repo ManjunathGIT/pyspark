@@ -4,8 +4,10 @@ conf = SparkConf().setAppName("spark_app_sum")
 
 sc = SparkContext(conf=conf)
 
-datas = sc.parallelize([(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]).partitionBy(
-    2, lambda val: val[0]).glom().collect()
+# only key is passed to paritionFunc
+datas = sc.parallelize([1, 2, 3, 4, 5]).map(lambda val: (val, val)).partitionBy(
+    2, lambda val: val).map(lambda val: val[0]).glom().collect()
+
 sc.stop()
 
 #
