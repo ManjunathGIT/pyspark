@@ -8,4 +8,5 @@ datas = sc.parallelize(["a", "b", "c"]).map(lambda val: val.upper()).collect()
 
 sc.stop()
 
+# ['A', 'B', 'C']
 print datas
