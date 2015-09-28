@@ -4,7 +4,13 @@ conf = SparkConf().setAppName("spark_app_take")
 
 sc = SparkContext(conf=conf)
 
-data = sc.parallelize([1, 2, 3]).take(2)
+rdd = sc.parallelize([1, 2, 3])
+
+data = sc.parallelize([]).take(1)
+
+data = rdd.take(2)
+
+data2 = rdd.take(4)
 
 # ValueError: RDD is empty
 #data2 = sc.parallelize([]).first()
@@ -12,3 +18,5 @@ data = sc.parallelize([1, 2, 3]).take(2)
 sc.stop()
 
 print data
+
+print data2
