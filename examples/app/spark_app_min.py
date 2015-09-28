@@ -4,11 +4,11 @@ conf = SparkConf().setAppName("spark_app_max")
 
 sc = SparkContext(conf=conf)
 
-data = sc.parallelize([1, 2, 3]).max()
+data = sc.parallelize([1, 2, 3]).min()
 
-data2 = sc.parallelize([("a", 1), ("b", 2), ("c", 3)]).max(lambda val: val[1])
+data2 = sc.parallelize([("a", 1), ("b", 2), ("c", 3)]).min(lambda val: val[1])
 
 sc.stop()
 
-# 3 ('c', 3)
+# 1 ('a', 3)
 print data, data2
