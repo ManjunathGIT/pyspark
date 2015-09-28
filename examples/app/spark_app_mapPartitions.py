@@ -4,7 +4,11 @@ conf = SparkConf().setAppName("spark_app_mapPartitions")
 
 sc = SparkContext(conf=conf)
 
-datas = sc.parallelize([1, 2, 3, 4, 5], 3).mapPartitions(lambda vals: yield sum(vals)).collect()
+
+def f(vals):
+    yield sum(vals)
+
+datas = sc.parallelize([1, 2, 3, 4, 5], 3).mapPartitions(f).collect()
 
 sc.stop()
 
