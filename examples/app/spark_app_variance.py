@@ -8,5 +8,5 @@ data = sc.parallelize([1, 2, 3]).variance()
 
 sc.stop()
 
-# 1.0
+# 0.666666666667
 print data
