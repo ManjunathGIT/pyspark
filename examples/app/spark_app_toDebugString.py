@@ -23,7 +23,7 @@ table = hc.applySchema(rows, schema)
 
 table.registerAsTable("temp_mytable")
 
-rdd = hc.sql("select count(*) rom temp_mytable group by col2 where col1 = ''")
+rdd = hc.sql("select count(*) from temp_mytable where col1 = '' group by col2")
 
 print rdd.toDebugString()
 
