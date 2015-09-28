@@ -5,7 +5,7 @@ conf = SparkConf().setAppName("spark_app_repartitionAndSortWithinPartitions")
 sc = SparkContext(conf=conf)
 
 datas = sc.parallelize([(1, "a"), (2, "b"), (3, "c"), (4, "d"), (5, "e")]).repartitionAndSortWithinPartitions(
-    numPartitions=2, partitionFunc=lambda val: val, ascending=False).glom().collect()
+    numPartitions=2, partitionFunc=lambda val: val, ascending=False, keyfunc=lambda val: val).glom().collect()
 
 sc.stop()
 
