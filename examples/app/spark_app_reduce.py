@@ -1,7 +1,7 @@
 from pyspark import SparkConf, SparkContext
 from operator import add
 
-conf = SparkConf().setAppName("spark_app_sum")
+conf = SparkConf().setAppName("spark_app_reduce")
 
 sc = SparkContext(conf=conf)
 
