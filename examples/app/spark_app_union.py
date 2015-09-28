@@ -12,5 +12,5 @@ datas = rdd1.union(rdd2).collect()
 
 sc.stop()
 
-# [5]
+# [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
 print datas
