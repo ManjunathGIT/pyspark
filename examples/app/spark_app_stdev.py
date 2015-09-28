@@ -8,5 +8,5 @@ data = sc.parallelize([1, 2, 3]).stdev()
 
 sc.stop()
 
-# 1.0
+# 0.816496580928
 print data
