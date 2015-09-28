@@ -6,7 +6,7 @@ sc = SparkContext(conf=conf)
 
 
 def f(vals):
-    return sum(vals)
+    yield sum(vals)
 
 datas = sc.parallelize([1, 2, 3, 4, 5, 6], 3).mapPartitions(f).collect()
 
