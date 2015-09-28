@@ -9,4 +9,5 @@ datas = sc.parallelize(
 
 sc.stop()
 
+# [('a', 2), ('a', 1), ('b', 1), ('c', 1)]
 print datas
