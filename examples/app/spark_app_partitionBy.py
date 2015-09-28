@@ -5,7 +5,7 @@ conf = SparkConf().setAppName("spark_app_sum")
 sc = SparkContext(conf=conf)
 
 datas = sc.parallelize([1, 2, 3, 4, 5]).partitionBy(
-    2, lambda val: hash(val)).glom().collect()
+    2, lambda val: val).glom().collect()
 
 sc.stop()
 
