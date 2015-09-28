@@ -4,7 +4,8 @@ conf = SparkConf().setAppName("spark_app_pipe")
 
 sc = SparkContext(conf=conf)
 
-datas = sc.parallelize(["1", "2", "3", "4", "5"]).pipe("cat").collect()
+datas = sc.parallelize(
+    ["/tmp/1", "/tmp/2", "/tmp/3", "/tmp/4", "/tmp/5"]).pipe("mkdir").collect()
 
 sc.stop()
 
