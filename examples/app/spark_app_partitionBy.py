@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 
-conf = SparkConf().setAppName("spark_app_sum")
+conf = SparkConf().setAppName("spark_app_partitionBy")
 
 sc = SparkContext(conf=conf)
 
@@ -10,5 +10,5 @@ datas = sc.parallelize([1, 2, 3, 4, 5]).map(lambda val: (val, val)).partitionBy(
 
 sc.stop()
 
-#
+# [[2, 4], [1, 3, 5]]
 print datas
