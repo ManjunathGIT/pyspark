@@ -9,4 +9,4 @@ data = sc.parallelize([1, 2, 3]).stats()
 sc.stop()
 
 # 6
-print data.count
+print type(data)
