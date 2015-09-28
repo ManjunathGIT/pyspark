@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 
-conf = SparkConf().setAppName("spark_app_mapPartitionsWithSplit")
+conf = SparkConf().setAppName("spark_app_mapPartitionsWithIndex")
 
 sc = SparkContext(conf=conf)
 

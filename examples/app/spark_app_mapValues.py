@@ -9,4 +9,5 @@ datas = sc.parallelize([("key1", ["a", "b", "c"]), ("key2", ["d"])]).mapValues(
 
 sc.stop()
 
+# [('key1', ['A', 'B', 'C']), ('key2', ['D'])]
 print datas
