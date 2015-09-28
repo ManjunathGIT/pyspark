@@ -12,4 +12,5 @@ datas = sc.parallelize([1, 2, 3, 4, 5], 3).mapPartitionsWithIndex(f).collect()
 
 sc.stop()
 
+# [0, 1, 2]
 print datas
