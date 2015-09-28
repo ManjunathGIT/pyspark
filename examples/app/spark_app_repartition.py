@@ -12,5 +12,8 @@ datas2 = rdd.repartition(5).glom().collect()
 
 sc.stop()
 
+# datas: [[1], [2], [3]]
 print "datas:", datas
+
+# datas2: [[], [1, 2], [], [], [3]]
 print "datas2:", datas2
