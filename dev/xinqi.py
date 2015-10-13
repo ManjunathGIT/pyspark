@@ -17,14 +17,11 @@ where version>='5.4.5' and log_dir>='20151012000000' and log_dir<='2015101223000
 
 
 def noneFilter(row):
-    if not isinstance(row, tuple):
-        return False
-
     for column in row:
         if column == None:
-            return False
+            return True
 
-    return True
+    return False
 
 rows = hc.sql(spark_sql).filter(noneFilter).count()
 
