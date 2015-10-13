@@ -20,7 +20,7 @@ spark_sql = '''select job_date,cdn,province,isp,ua,idc,play_process_group,versio
              )a
              group by job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count'''
 
-spark_sql = """
+spark_sql2 = """
 select job_date,cdn,province,isp,ua,play_process_group,version,
 	init_timetag,buffer_count,sum_play_process,sum_video_init_duration,
 	sum_buffer_t_sum,num,idc 
