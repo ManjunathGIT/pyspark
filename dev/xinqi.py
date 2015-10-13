@@ -35,7 +35,7 @@ def noneFilter(row):
 
     return False
 
-rows = hc.sql(spark_sql).count()
+rows = hc.sql(spark_sql).filter(noneFilter).count()
 
 sc.stop()
 
