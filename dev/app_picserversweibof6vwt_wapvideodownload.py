@@ -16,7 +16,7 @@ import json
 import time
 
 conf = SparkConf().setAppName(
-    "app_picserversweibof6vwt_wapvideodownload_to_hdfs").set("spark.default.parallelism", 15)
+    "app_picserversweibof6vwt_wapvideodownload_to_hdfs")
 
 sc = SparkContext(conf=conf)
 
@@ -24,7 +24,7 @@ hc = HiveContext(sc)
 
 try:
     source = sc.textFile(
-        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/" + timetool.getHDFSPreHourDir(sys.argv[1]))
+        "/user/hdfs/rawlog/app_picserversweibof6vwt_wapvideodownload/2015_10_13")
 
     pattern = re.compile("^([^`]*)`([^`]*)")
 
@@ -276,7 +276,7 @@ try:
             group by date,province,isp,cdn,idc,ua,version,video_network, video_error_code,video_error_msg,video_play_type,
             init_timetag,cal_buffer_num.buffer_count,cal_buffer_num.buffer_smaller_500ms_count,cal_buffer_num.buffer_bigger_2min_count,
             play_process_group
-    """).coalesce(4).map(convertNoneToZero)
+    """).map(convertNoneToZero)
 
     hive_dip = 'datacubic'
     hive_table = 'app_picserversweibof6vwt_wapvideodownload_yurun_test'
@@ -306,12 +306,10 @@ try:
 
     kvRDD = strRDD.map(lambda row: (random.randint(1, 10), row))
 
-    partition = kvRDD.coalesce(15)
-
     hadoopConf = {"mapreduce.output.fileoutputformat.outputdir": "/user/yurun/tmp/1/", "mapred.output.format.class": "org.apache.hadoop.mapred.TextOutputFormat",
                   "mapred.output.key.class": "org.apache.hadoop.io.LongWritable", "mapred.output.value.class": "org.apache.hadoop.io.Text"}
 
-    partition.saveAsHadoopDataset(conf=hadoopConf)
+    kvRDD.saveAsHadoopDataset(conf=hadoopConf)
 except Exception, e:
     raise
 finally:
