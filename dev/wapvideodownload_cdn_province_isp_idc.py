@@ -90,7 +90,7 @@ hc.registerFunction("temp_split_idc", split_idc)
 table = hc.sql("""select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
              idc
              from datacubic.app_picserversweibof6vwt_wapvideodownload
-             where log_dir= '20151012110000' and version>='5.4.5' limit 10""")
+             where log_dir= '20151012110000' and version>='5.4.5'""")
 
 table.registerTempTable("temp_mytable")
 
