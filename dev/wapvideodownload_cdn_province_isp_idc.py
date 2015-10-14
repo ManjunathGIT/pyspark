@@ -37,12 +37,13 @@ spark_sql = '''select '1' as job_date,cdn,province,isp,ua,idc,play_process_group
              where log_dir= '20151012110000' and version>='5.4.5' limit 10
              )a
              group by cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count'''
-result = hc.sql(spark_sql).collect()
-result_rdd = sc.parallelize(result)
 
-rows_rdd = hc.inferSchema(result_rdd)
+rows_rdd = hc.sql(spark_sql)
+
+rows_rdd.cache()
 rows_rdd.registerTempTable("temp_rdd")
-hc.cacheTable("temp_rdd")
+
+#hc.cacheTable("temp_rdd")
 #--------------------------2.1 播放总请求量-----------------------
 spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
              from temp_rdd
