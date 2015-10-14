@@ -278,15 +278,17 @@ try:
             play_process_group
     """).map(convertNoneToZero)
 
+    """
     hive_dip = 'datacubic'
     hive_table = 'app_picserversweibof6vwt_wapvideodownload_yurun_test'
     hive_partition = time.strftime(
         "%Y%m%d", time.strptime(sys.argv[1], "%Y%m%d%H%M%S")) + '000000'
     props = {"db": hive_dip, "table": hive_table,
              "partition": hive_partition, "overwrite": True}
-    #sc.saveRDDToHive(result, props)
+    sc.saveRDDToHive(result, props)
 
-        lambda row: isinstance(row, tuple))
+    lambda row: isinstance(row, tuple))
+    """
 
     def tupleToStrs(tuple):
         strs = []
