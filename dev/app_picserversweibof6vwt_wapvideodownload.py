@@ -286,7 +286,6 @@ try:
              "partition": hive_partition, "overwrite": True}
     #sc.saveRDDToHive(result, props)
 
-    filterRDD = result.filter(
         lambda row: isinstance(row, tuple))
 
     def tupleToStrs(tuple):

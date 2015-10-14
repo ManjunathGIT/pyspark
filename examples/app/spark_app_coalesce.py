@@ -1,5 +1,6 @@
 from pyspark import SparkConf, SparkContext
 
+# Return a new RDD that is reduced into numPartitions partitions.
 conf = SparkConf().setAppName("spark_app_coalesce")
 
 sc = SparkContext(conf=conf)
