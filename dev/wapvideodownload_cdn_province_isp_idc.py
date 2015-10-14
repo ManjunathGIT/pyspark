@@ -49,10 +49,6 @@ spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
 rows = hc.sql(spark_sql).collect()
 #rows =hc.sql(spark_sql)
 # print rows.toDebugString()
-rows = DataFrame(rows, columns=[
-                 'job_date', 'cdn', 'province', 'isp', 'idc', 'total_num']).fillna(0)
-rows_final[['job_date', 'cdn', 'province', 'isp', 'idc', 'total_num']] = rows[
-    ['job_date', 'cdn', 'province', 'isp', 'idc', 'total_num']]
 print 11111111111111111111
 del rows
 del spark_sql
