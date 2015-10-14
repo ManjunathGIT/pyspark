@@ -303,7 +303,7 @@ try:
 
         return "\t".join(strs)
 
-    strRDD = filterRDD.map(tupleToStrs)
+    strRDD = result.map(tupleToStrs)
 
     kvRDD = strRDD.map(lambda row: (random.randint(1, 10), row))
 
