@@ -25,7 +25,7 @@ def split_idc(idc):
 hc.registerFunction("temp_split_idc", split_idc)
 
 #--------------------------2.0 RDD-----------------------
-spark_sql = '''select '%s' as job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count,
+spark_sql = '''select '1' as job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count,
              sum(sum_play_process) as sum_play_process,
              sum(sum_video_init_duration) as sum_video_init_duration,
              sum(sum_buffer_t_sum) as sum_buffer_t_sum,
@@ -44,8 +44,8 @@ hc.cacheTable("temp_rdd")
 #--------------------------2.1 播放总请求量-----------------------
 spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
              from temp_rdd
-             where job_date= '%s' and version>='5.4.5'
-             group by job_date,cdn,province,isp,idc''' % (report_date)
+             where job_date= '1' and version>='5.4.5'
+             group by job_date,cdn,province,isp,idc'''
 rows = hc.sql(spark_sql).collect()
 #rows =hc.sql(spark_sql)
 # print rows.toDebugString()
@@ -60,8 +60,8 @@ del spark_sql
 # video_play_duration >0 and error_code=' '即play_process_group为数字时的sum(num)
 spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
                from temp_rdd
-               where job_date= '%s' and play_process_group!='NoPlay' and play_process_group!='-' and version>='5.4.5'
-               group by job_date,cdn,province,isp,idc''' % (report_date)
+               where job_date= '1' and play_process_group!='NoPlay' and play_process_group!='-' and version>='5.4.5'
+               group by job_date,cdn,province,isp,idc'''
 rows = hc.sql(spark_sql).collect()
 rows = DataFrame(rows, columns=[
                  'job_date', 'cdn', 'province', 'isp', 'idc', 'play_succ_num']).fillna(0)
