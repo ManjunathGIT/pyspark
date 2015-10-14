@@ -1,7 +1,12 @@
-from pyspark.sql import Row
+mydict = {"key1": "value1", "key2": "value2"}
 
-mydict = {"key1": "value1"}
 
-row = Row(mydict)
+def test(**kwargs):
+    names = sorted(kwargs.keys())
+    values = tuple(kwargs[n] for n in names)
 
-print row.__FIELDS__
+    print names
+    print values
+
+
+test(**mydict)

@@ -23,7 +23,7 @@ def convert(row):
 
     mydict["col1"] = mydict["col1"].upper()
 
-    return Row(mydict)
+    return Row(**mydict)
 
 convertRDD = hc.sql(
     "select col1, col2, col3 from temp_source").map(convert)
