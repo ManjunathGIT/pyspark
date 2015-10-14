@@ -32,7 +32,7 @@ mytable = hc.inferSchema(convertRDD)
 
 mytable.registerTempTable("temp_mytable")
 
-# hc.cacheTable("temp_mytable")
+hc.cacheTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
 
