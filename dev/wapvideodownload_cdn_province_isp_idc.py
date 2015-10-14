@@ -59,10 +59,6 @@ spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
                where job_date= '1' and play_process_group!='NoPlay' and play_process_group!='-' and version>='5.4.5'
                group by job_date,cdn,province,isp,idc'''
 rows = hc.sql(spark_sql).collect()
-rows = DataFrame(rows, columns=[
-                 'job_date', 'cdn', 'province', 'isp', 'idc', 'play_succ_num']).fillna(0)
-rows_final = merge(rows_final, rows, on=[
-                   'job_date', 'cdn', 'province', 'isp', 'idc'], how='outer').fillna(0)
 print 222222222222222222222
 del rows
 del spark_sql
