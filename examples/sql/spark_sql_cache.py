@@ -24,13 +24,13 @@ def myupper(value):
 hc.registerFunction("temp_myupper", myupper)
 
 mytable = hc.sql(
-    "select upper(col1) as col1, col2, col3 from temp_source")
+    "select temp_myupper(col1) as col1, col2, col3 from temp_source")
 
 mytable.cache()
 
 mytable.registerTempTable("temp_mytable")
 
-#hc.cacheTable("temp_mytable")
+# hc.cacheTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
 
