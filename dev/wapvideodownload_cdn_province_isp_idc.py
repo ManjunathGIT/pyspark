@@ -74,7 +74,10 @@ rows = hc.sql(spark_sql).collect()
 print 222222222222222222222
 """
 
-source = hc.sql("select * from datacubic.app_picserversweibof6vwt_wapvideodownload limit 1")
+source = hc.sql("""select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
+             temp_split_idc(idc) as idc
+             from datacubic.app_picserversweibof6vwt_wapvideodownload
+             where log_dir= '20151012110000' and version>='5.4.5' limit 10""")
 
 table = hc.jsonRDD(source)
 
@@ -82,7 +85,7 @@ table.registerTempTable("temp_mytable")
 
 hc.cacheTable("temp_mytable")
 
-datas = hc.sql("select * from temp_mytable").collect()
+datas = hc.sql("select * from temp_mytable limit 10").collect()
 
 datas = hc.sql("select count(*) from temp_mytable").collect()
 
