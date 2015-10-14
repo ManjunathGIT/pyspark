@@ -74,10 +74,18 @@ rows = hc.sql(spark_sql).collect()
 print 222222222222222222222
 """
 
-source = hc.sql("""select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
+source = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count,
+             sum(sum_play_process) as sum_play_process,
+             sum(sum_video_init_duration) as sum_video_init_duration,
+             sum(sum_buffer_t_sum) as sum_buffer_t_sum,
+             sum(num) as num
+             from(
+             select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
              idc
              from datacubic.app_picserversweibof6vwt_wapvideodownload
-             where log_dir= '20151012110000' and version>='5.4.5' limit 10""")
+             where log_dir= '20151012110000' and version>='5.4.5' limit 10
+             )a
+             group by cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count""")
 
 table = hc.jsonRDD(source)
 
