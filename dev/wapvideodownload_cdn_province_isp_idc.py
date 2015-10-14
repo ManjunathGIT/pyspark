@@ -102,9 +102,11 @@ table = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_gr
              from temp_source_table
              group by cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count""")
 
+table.cache()
+
 table.registerTempTable("temp_mytable")
 
-hc.cacheTable("temp_mytable")
+# hc.cacheTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable limit 10").collect()
 
