@@ -74,6 +74,19 @@ rows = hc.sql(spark_sql).collect()
 print 222222222222222222222
 """
 
+
+def split_idc(idc):
+    if idc == None or idc == '' or (not isinstance(idc, basestring)):
+        return ''
+    else:
+        words = idc.split('.')
+        if len(words) >= 2:
+            return words[0] + '.' + words[1]
+        else:
+            return ''
+
+hc.registerFunction("temp_split_idc", split_idc)
+
 source = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count,
              sum(sum_play_process) as sum_play_process,
              sum(sum_video_init_duration) as sum_video_init_duration,
@@ -81,7 +94,7 @@ source = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_g
              sum(num) as num
              from(
              select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
-             idc
+             temp_split_idc(idc) as idc
              from datacubic.app_picserversweibof6vwt_wapvideodownload
              where log_dir= '20151012110000' and version>='5.4.5' limit 10
              )a
