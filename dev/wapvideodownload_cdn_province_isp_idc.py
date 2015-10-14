@@ -75,7 +75,7 @@ print 222222222222222222222
 """
 
 source = hc.sql("""select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
-             temp_split_idc(idc) as idc
+             idc
              from datacubic.app_picserversweibof6vwt_wapvideodownload
              where log_dir= '20151012110000' and version>='5.4.5' limit 10""")
 
