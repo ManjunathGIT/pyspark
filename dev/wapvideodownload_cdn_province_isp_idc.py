@@ -11,6 +11,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
+"""
 source = sc.parallelize(
     ['{"col1": "row1_col1","col2":"row1_col2","col3":"row1_col3"}', '{"col1": "row2_col1","col2":"row2_col2","col3":"row2_col3"}', '{"col1": "row3_col1","col2":"row3_col2","col3":"row3_col3"}'])
 
@@ -71,5 +72,18 @@ spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
                group by job_date,cdn,province,isp,idc'''
 rows = hc.sql(spark_sql).collect()
 print 222222222222222222222
+"""
+
+source = hc.sql("select * from datacubic.app_picserversweibof6vwt_wapvideodownload limit 1")
+
+table = hc.jsonRDD(source)
+
+table.registerTempTable("temp_mytable")
+
+hc.cacheTable("temp_mytable")
+
+datas = hc.sql("select * from temp_mytable").collect()
+
+datas = hc.sql("select count(*) from temp_mytable").collect()
 
 sc.stop()
