@@ -25,8 +25,10 @@ def convert(row):
 
     return Row(mydict)
 
-mytable = hc.sql(
+convertRDD = hc.sql(
     "select col1, col2, col3 from temp_source").map(convert)
+
+mytable = hc.inferSchema(convertRDD)
 
 mytable.registerTempTable("temp_mytable")
 
