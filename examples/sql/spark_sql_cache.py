@@ -24,7 +24,7 @@ def myupper(value):
 hc.registerFunction("temp_myupper", myupper)
 
 mytable = hc.sql(
-    "select temp_myupper(col1) as col1, col2, col3 from temp_source")
+    "select upper(col1) as col1, col2, col3 from temp_source")
 
 mytable.registerTempTable("temp_mytable")
 
