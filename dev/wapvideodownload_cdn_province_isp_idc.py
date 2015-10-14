@@ -88,7 +88,7 @@ def split_idc(idc):
 hc.registerFunction("temp_split_idc", split_idc)
 
 source = hc.sql("""select cdn,province,isp,ua,play_process_group,version,init_timetag,buffer_count,sum_play_process,sum_video_init_duration,sum_buffer_t_sum,num,
-             split_idc(idc) as idc
+             temp_split_idc(idc) as idc
              from datacubic.app_picserversweibof6vwt_wapvideodownload
              where log_dir= '20151012110000' and version>='5.4.5'""")
 
