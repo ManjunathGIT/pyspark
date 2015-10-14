@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from pyspark import SparkConf, SparkContext
 
 from pyspark.sql import HiveContext
@@ -16,6 +18,10 @@ table = hc.jsonRDD(source)
 
 table.registerTempTable("temp_mytable")
 
+"""
+如果SQL语句中使用了自定义的UDF，则无法实现表的Cache；
+需要将该表关联的RDD collect之后，通过parallize创建一个新的RDD，再将此RDD注册为一张表并缓存
+"""
 hc.cacheTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
