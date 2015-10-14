@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyspark import SparkConf, SparkContext
-
 from pyspark.sql import HiveContext
 
 conf = SparkConf().setAppName("spark_sql_cache")
@@ -14,14 +13,20 @@ source = sc.parallelize(
     ['{"col1": "row1_col1","col2":"row1_col2","col3":"row1_col3"}', '{"col1": "row2_col1","col2":"row2_col2","col3":"row2_col3"}', '{"col1": "row3_col1","col2":"row3_col2","col3":"row3_col3"}'])
 
 
-table = hc.jsonRDD(source)
+sourceRDD = hc.jsonRDD(source)
 
-table.registerTempTable("temp_mytable")
+sourceRDD.registerTempTable("temp_source")
 
-"""
-如果SQL语句中使用了自定义的UDF，则无法实现表的Cache；
-需要将该表关联的RDD collect之后，通过parallize创建一个新的RDD，再将此RDD注册为一张表并缓存
-"""
+
+def myupper(value):
+    value.upper()
+
+hc.registerFunction("temp_myupper", myupper)
+
+mytable = hc.sql("select temp_myupper(col1), col2, col3 from temp_source")
+
+mytable.registerTempTable("temp_mytable")
+
 hc.cacheTable("temp_mytable")
 
 datas = hc.sql("select * from temp_mytable").collect()
