@@ -18,15 +18,15 @@ sourceRDD = hc.jsonRDD(source)
 sourceRDD.registerTempTable("temp_source")
 
 
-def myupper(value):
-    value.upper()
+def convert(row):
+    mydict = row.asDict()
 
-hc.registerFunction("temp_myupper", myupper)
+    mydict["col1"] = mydict["col1"].upper()
+
+    return Row(mydict)
 
 mytable = hc.sql(
-    "select temp_myupper(col1) as col1, col2, col3 from temp_source")
-
-mytable.cache()
+    "select col1, col2, col3 from temp_source").map(convert)
 
 mytable.registerTempTable("temp_mytable")
 
@@ -42,3 +42,6 @@ sc.stop()
 
 for data in datas:
     print data
+
+
+tuple()
