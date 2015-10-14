@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext
+from pyspark.sql import HiveContext, Row
 
 conf = SparkConf().setAppName("spark_sql_cache")
 
