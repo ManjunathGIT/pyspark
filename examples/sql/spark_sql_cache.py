@@ -22,7 +22,7 @@ datas = hc.sql("select * from temp_mytable").collect()
 
 datas = hc.sql("select col1 from temp_mytable").collect()
 
-hc.uncacheTable("temp_mytable")
+# hc.uncacheTable("temp_mytable")
 
 sc.stop()
 
