@@ -53,7 +53,6 @@ spark_sql = '''select '1' as job_date,cdn,province,isp,ua,idc,play_process_group
              group by cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count'''
 rows_rdd = hc.sql(spark_sql)
 rows_rdd.registerTempTable("temp_rdd")
-del spark_sql
 hc.cacheTable("temp_rdd")
 #--------------------------2.1 播放总请求量-----------------------
 spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
@@ -64,8 +63,6 @@ rows = hc.sql(spark_sql).collect()
 #rows =hc.sql(spark_sql)
 # print rows.toDebugString()
 print 11111111111111111111
-del rows
-del spark_sql
 #--------------------------2.2 成功播放量-----------------------
 # video_play_duration >0 and error_code=' '即play_process_group为数字时的sum(num)
 spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
@@ -74,6 +71,5 @@ spark_sql = '''select job_date,cdn,province,isp,idc,sum(num) as num
                group by job_date,cdn,province,isp,idc'''
 rows = hc.sql(spark_sql).collect()
 print 222222222222222222222
-del rows
-del spark_sql
+
 sc.stop()
