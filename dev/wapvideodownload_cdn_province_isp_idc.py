@@ -87,7 +87,7 @@ def split_idc(idc):
 
 hc.registerFunction("temp_split_idc", split_idc)
 
-source = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count,
+table = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count,
              sum(sum_play_process) as sum_play_process,
              sum(sum_video_init_duration) as sum_video_init_duration,
              sum(sum_buffer_t_sum) as sum_buffer_t_sum,
@@ -99,8 +99,6 @@ source = hc.sql("""select '1' as job_date,cdn,province,isp,ua,idc,play_process_g
              where log_dir= '20151012110000' and version>='5.4.5'
              )a
              group by cdn,province,isp,ua,idc,play_process_group,version,init_timetag,buffer_count""")
-
-table = hc.jsonRDD(source)
 
 table.registerTempTable("temp_mytable")
 
