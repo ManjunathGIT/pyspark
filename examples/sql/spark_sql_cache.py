@@ -14,7 +14,7 @@ source = sc.parallelize(
 
 table = hc.jsonRDD(source)
 
-table.registerAsTable("temp_mytable")
+table.registerTempTable("temp_mytable")
 
 hc.cacheTable("temp_mytable")
 
