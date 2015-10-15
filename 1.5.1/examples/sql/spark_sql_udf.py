@@ -13,6 +13,8 @@ people = lines.map(lambda value: Row(name=value))
 
 peopleSchema = sqlCtx.createDataFrame(people)
 
+peopleSchema.registerTempTable("people")
+
 rows = sqlCtx.sql("select name from people")
 
 sc.stop()
