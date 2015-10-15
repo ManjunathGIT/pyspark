@@ -15,7 +15,7 @@ peopleSchema = sqlCtx.createDataFrame(people)
 
 peopleSchema.registerTempTable("people")
 
-rows = sqlCtx.sql("select name from people")
+rows = sqlCtx.sql("select name from people").collect()
 
 sc.stop()
 
