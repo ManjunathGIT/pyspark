@@ -14,6 +14,8 @@ people = lines.map(lambda line: line.split(",")).map(
 
 schemaPeople = sqlCtx.createDataFrame(people)
 
-schemaPeople.where("name = b").where(schemaPeople["age"] > 1).show()
+schemaPeople.where("name = 'b'").where(schemaPeople["age"] > 1).show()
+
+schemaPeople.where("age > 1").where(schemaPeople["name"]="b").show()
 
 sc.stop()
