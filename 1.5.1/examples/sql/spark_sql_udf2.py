@@ -62,7 +62,7 @@ from (
 sql_map = """
 select item["a"], item["b"], item["c"]
 from (
-	select temp_func_map() as item from temp_table
+	select temp_func_map() as item, col from temp_table
 ) t
 """
 
