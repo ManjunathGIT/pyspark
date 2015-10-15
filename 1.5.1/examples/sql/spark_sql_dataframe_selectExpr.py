@@ -1,7 +1,7 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SQLContext, Row
 
-conf = SparkConf().setAppName("spark_sql_dataframe_show")
+conf = SparkConf().setAppName("spark_sql_dataframe_selectExpr")
 
 sc = SparkContext(conf=conf)
 
