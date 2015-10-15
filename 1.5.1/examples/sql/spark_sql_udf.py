@@ -21,7 +21,7 @@ def myfunc(value):
     return value.upper()
 
 
-def func_map():
+def func_map(value):
     # dictionary
     map = {}
 
@@ -35,7 +35,7 @@ sqlCtx.registerFunction("myfunc", myfunc, StringType())
 sqlCtx.registerFunction(
     "func_map", func_map, MapType(StringType(), IntegerType()))
 
-rows = sqlCtx.sql("select func_map() from people").collect()
+rows = sqlCtx.sql("select func_map(name) from people").collect()
 
 sc.stop()
 
