@@ -18,4 +18,6 @@ schemaPeople.where("name = 'b'").where(schemaPeople["age"] > 1).show()
 
 schemaPeople.where("age > 1").where(schemaPeople["name"] == "b").show()
 
+schemaPeople.where("name = 'b' and age > 1").show()
+
 sc.stop()
