@@ -1,5 +1,6 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import SQLContext, Row, StringType
+from pyspark.sql import SQLContext, Row
+from pyspark.sql.types import StringType
 
 conf = SparkConf().setAppName("spark_sql_udf")
 
