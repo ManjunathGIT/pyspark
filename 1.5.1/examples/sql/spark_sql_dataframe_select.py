@@ -7,7 +7,7 @@ sc = SparkContext(conf=conf)
 
 sqlCtx = SQLContext(sc)
 
-lines = sc.parallelize(["a,1", "b,2", "3,c"])
+lines = sc.parallelize(["a,1", "b,2", "c,3"])
 
 people = lines.map(lambda line: line.split(",")).map(
     lambda words: Row(name=words[0], age=words[1]))
