@@ -20,4 +20,6 @@ schemaPeople.select("name", "age").show()
 
 schemaPeople.select("name", schemaPeople["age"]).show()
 
+schemaPeople.select("name", "age * 2").show()
+
 sc.stop()
