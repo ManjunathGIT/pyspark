@@ -18,8 +18,13 @@ schemaPeople.select("*").show()
 
 schemaPeople.select("name", "age").show()
 
-schemaPeople.select("name", schemaPeople2["age"]).show()
+schemaPeople.select("name", schemaPeople["age"]).show()
+
+# error schemaPeople.select("name", schemaPeople2["age"]).show()
 
 # error schemaPeople.select("name", "age * 2").show()
+
+schemaPeople.select(schemaPeople["name"].alias(
+    "name2"), schemaPeople.age.cast("int").alias("age2"))
 
 sc.stop()
