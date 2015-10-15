@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import SQLContext, Row
+from pyspark.sql import SQLContext, Row, StringType
 
 conf = SparkConf().setAppName("spark_sql_udf")
 
@@ -15,7 +15,13 @@ peopleSchema = sqlCtx.createDataFrame(people)
 
 peopleSchema.registerTempTable("people")
 
-rows = sqlCtx.sql("select name from people").collect()
+
+def myfunc(value):
+    return value.upper()
+
+sqlCtx.registerFunction("myfunc", myfunc, StringType())
+
+rows = sqlCtx.sql("select myfunc(name) from people").collect()
 
 sc.stop()
 
