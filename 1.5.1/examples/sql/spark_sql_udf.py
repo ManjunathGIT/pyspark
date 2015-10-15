@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SQLContext, Row
-from pyspark.sql.types import StringType, MapType, IntegerType
+from pyspark.sql.types import StringType
 
 conf = SparkConf().setAppName("spark_sql_udf")
 
@@ -20,22 +20,9 @@ peopleSchema.registerTempTable("people")
 def myfunc(value):
     return value.upper()
 
-
-def func_map(value):
-    # dictionary
-    map = {}
-
-    map["a"] = 1
-    map["b"] = 2
-    map["c"] = 3
-
-    return map
-
 sqlCtx.registerFunction("myfunc", myfunc, StringType())
-sqlCtx.registerFunction(
-    "func_map", func_map, MapType(StringType(), IntegerType()))
 
-rows = sqlCtx.sql("select func_map(name) from people").collect()
+rows = sqlCtx.sql("select myfunc(name) from people").collect()
 
 sc.stop()
 
