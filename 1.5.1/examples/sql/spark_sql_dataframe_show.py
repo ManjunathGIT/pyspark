@@ -1,7 +1,7 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SQLContext, Row
 
-conf = SparkConf().setAppName("spark_sql_infer_schema")
+conf = SparkConf().setAppName("spark_sql_dataframe_show")
 
 sc = SparkContext(conf=conf)
 
@@ -14,11 +14,8 @@ people = lines.map(lambda line: line.split(",")).map(
 
 schemaPeople = sqlCtx.createDataFrame(people)
 
-schemaPeople.registerTempTable("people")
+schemaPeople.show(1)
 
-rows = sqlCtx.sql("select * from people where name = 'a'").collect()
+schemaPeople.show(3)
 
 sc.stop()
-
-for row in rows:
-    print row.name, row.age
