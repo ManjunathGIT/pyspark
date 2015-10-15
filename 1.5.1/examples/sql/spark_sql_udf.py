@@ -66,7 +66,7 @@ from (
 ) t
 """
 
-rows = hc.sql(sql_map).collect()
+rows = sqlCtx.sql(sql_map).collect()
 
 sc.stop()
 
