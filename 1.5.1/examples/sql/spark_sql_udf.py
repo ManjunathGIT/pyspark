@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SQLContext, Row
-from pyspark.sql.types import StringType, MapType
+from pyspark.sql.types import StringType, MapType, IntegerType
 
 conf = SparkConf().setAppName("spark_sql_udf")
 
@@ -32,6 +32,8 @@ def func_map():
     return map
 
 sqlCtx.registerFunction("myfunc", myfunc, StringType())
+sqlCtx.registerFunction(
+    "func_map", func_map, MapType(StringType(), IntegerType()))
 
 rows = sqlCtx.sql("select func_map() from people").collect()
 
