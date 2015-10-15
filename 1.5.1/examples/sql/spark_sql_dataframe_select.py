@@ -14,7 +14,7 @@ people = lines.map(lambda line: line.split(",")).map(
 
 schemaPeople = sqlCtx.createDataFrame(people)
 
-schemaPeople.select(*).show()
+schemaPeople.select("*").show()
 
 schemaPeople.select("name", "age").show()
 
