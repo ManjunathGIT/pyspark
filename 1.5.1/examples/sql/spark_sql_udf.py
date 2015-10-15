@@ -12,7 +12,7 @@ lines = sc.parallelize(["a", "b", "c"])
 
 people = lines.map(lambda value: Row(name=value))
 
-peopleSchema = sqlCtx.inferSchema(peopleSchema)
+peopleSchema = sqlCtx.inferSchema(people)
 
 peopleSchema.registerTempTable("people")
 
