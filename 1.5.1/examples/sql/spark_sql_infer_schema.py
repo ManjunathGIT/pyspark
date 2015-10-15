@@ -16,7 +16,7 @@ schemaPeople = sqlCtx.createDataFrame(people)
 
 schemaPeople.registerTempTable("people")
 
-rows = hc.sql("select * from people where name = 'a'").collect()
+rows = sqlCtx.sql("select * from people where name = 'a'").collect()
 
 sc.stop()
 
