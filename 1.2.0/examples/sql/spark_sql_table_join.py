@@ -35,7 +35,7 @@ def printRows(rows):
 
 # inner join
 rows = sqlCtx.sql(
-    "select temp_table1.name, temp_table1.title, temp_table2.fraction from temp_table1 join temp_table2 on temp_table1.name = temp_table2.name").collect()
+    "select temp_table1.name, temp_table1.title, temp_table2.fraction from temp_table1 inner join temp_table2 on temp_table1.name = temp_table2.name").collect()
 
 printRows(rows)
 
