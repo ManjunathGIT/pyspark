@@ -27,8 +27,6 @@ tableSchema1.registerTempTable("table1")
 
 tableSchema2.registerTempTable("table2")
 
-table1_abc
-
 
 def printRows(rows):
     if rows:
