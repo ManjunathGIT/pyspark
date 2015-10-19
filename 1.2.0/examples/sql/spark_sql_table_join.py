@@ -63,4 +63,22 @@ print "============================================="
 
 printRows(rows)
 
+"""
+Row(name=u'name1', title=u'a', fraction=u'1')                                   
+Row(name=u'name3', title=u'c', fraction=u'3')
+=============================================
+Row(name=u'name1', title=u'a', fraction=u'1')                                   
+Row(name=u'name3', title=u'c', fraction=u'3')
+Row(name=u'name4', title=u'd', fraction=None)
+=============================================
+Row(name=u'name1', title=u'a', fraction=u'1')
+Row(name=None, title=None, fraction=u'2')
+Row(name=u'name3', title=u'c', fraction=u'3')
+=============================================
+Row(name=u'name1', title=u'a', fraction=u'1')
+Row(name=None, title=None, fraction=u'2')
+Row(name=u'name3', title=u'c', fraction=u'3')
+Row(name=u'name4', title=u'd', fraction=None)
+"""
+
 sc.stop()

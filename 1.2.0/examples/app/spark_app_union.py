@@ -4,13 +4,13 @@ conf = SparkConf().setAppName("spark_app_union")
 
 sc = SparkContext(conf=conf)
 
-rdd1 = sc.parallelize([1, 2, 3, 4, 5])
+rdd1 = sc.parallelize(["line1", "line2", "line3"])
 
-rdd2 = sc.parallelize([1, 2, 3, 4, 5])
+rdd2 = sc.parallelize(["line4", "line5"])
 
 datas = rdd1.union(rdd2).collect()
 
 sc.stop()
 
-# [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+# ['line1', 'line2', 'line3', 'line4', 'line5']
 print datas
