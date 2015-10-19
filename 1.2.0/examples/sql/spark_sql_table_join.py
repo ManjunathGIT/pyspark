@@ -23,9 +23,9 @@ tableSchema1 = sqlCtx.inferSchema(table1)
 
 tableSchema2 = sqlCtx.inferSchema(table2)
 
-tableSchema1.registerTempTable("table1")
+tableSchema1.registerTempTable("temp_table1")
 
-tableSchema2.registerTempTable("table2")
+tableSchema2.registerTempTable("temp_table2")
 
 
 def printRows(rows):
@@ -35,7 +35,7 @@ def printRows(rows):
 
 # inner join
 rows = sqlCtx.sql(
-    "select table1.name, table1.title, table2.fraction from table1 join table2 on table1.name = table2.name").collect()
+    "select temp_table1.name, table1.title, temp_table2.fraction from table1 join table2 on table1.name = table2.name").collect()
 
 printRows(rows)
 
