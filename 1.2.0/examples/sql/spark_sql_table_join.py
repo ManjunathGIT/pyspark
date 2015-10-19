@@ -15,13 +15,13 @@ word1 = line1.map(lambda line: line.split(" "))
 
 word2 = line2.map(lambda line: line.split(" "))
 
-table1 = word1.map(lambda words: Row(name=words[0], title=words[1]))
+temp_table1 = word1.map(lambda words: Row(name=words[0], title=words[1]))
 
-table2 = word2.map(lambda words: Row(name=words[0], fraction=words[1]))
+temp_table2 = word2.map(lambda words: Row(name=words[0], fraction=words[1]))
 
-tableSchema1 = sqlCtx.inferSchema(table1)
+tableSchema1 = sqlCtx.inferSchema(temp_table1)
 
-tableSchema2 = sqlCtx.inferSchema(table2)
+tableSchema2 = sqlCtx.inferSchema(temp_table2)
 
 tableSchema1.registerTempTable("temp_table1")
 
@@ -35,7 +35,7 @@ def printRows(rows):
 
 # inner join
 rows = sqlCtx.sql(
-    "select temp_table1.name, table1.title, temp_table2.fraction from table1 join table2 on table1.name = table2.name").collect()
+    "select temp_table1.name, temp_table1.title, temp_table2.fraction from temp_table1 join temp_table2 on temp_table1.name = temp_table2.name").collect()
 
 printRows(rows)
 
@@ -43,13 +43,13 @@ print "============================================="
 
 # left outer join
 rows = sqlCtx.sql(
-    "select table1.name, table1.title, table2.fraction from table1 left outer join table2 on table1.name = table2.name").collect()
+    "select temp_table1.name, temp_table1.title, temp_table2.fraction from temp_table1 left outer join temp_table2 on temp_table1.name = temp_table2.name").collect()
 
 printRows(rows)
 
 # right outer join
 rows = sqlCtx.sql(
-    "select table1.name, table1.title, table2.fraction from table1 right outer join table2 on table1.name = table2.name").collect()
+    "select temp_table1.name, temp_table1.title, temp_table2.fraction from temp_table1 right outer join temp_table2 on temp_table1.name = temp_table2.name").collect()
 
 print "============================================="
 
@@ -57,7 +57,7 @@ printRows(rows)
 
 # full outer join
 rows = sqlCtx.sql(
-    "select table1.name, table1.title, table2.fraction from table1 full outer join table2 on table1.name = table2.name").collect()
+    "select temp_table1.name, temp_table1.title, temp_table2.fraction from temp_table1 full outer join temp_table2 on temp_table1.name = temp_table2.name").collect()
 
 print "============================================="
 
