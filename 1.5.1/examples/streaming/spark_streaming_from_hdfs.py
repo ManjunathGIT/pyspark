@@ -12,10 +12,11 @@ filePathDStream = streamingCtx.textFileStream(
 
 
 def convertRDD(filePathRDD):
-    return filePathRDD.map(lambda filePath: sc.textFile(filePath)).reduce(
+    return filePathRDD.map(lambda filePath: filePathRDD.context.textFile(filePath)).reduce(
         lambda rddA, rddB: rddA.union(rddB))
 
-fileLineDStream = filePathDStream.transform(lambda filePathRDD: convertRDD(filePathRDD))
+fileLineDStream = filePathDStream.transform(
+    lambda filePathRDD: convertRDD(filePathRDD))
 
 wordcounts = fileLineDStream.flatMap(
     lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda countA, countB: countA + countB)
