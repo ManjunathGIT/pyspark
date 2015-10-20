@@ -12,8 +12,7 @@ filePathDStream = streamingCtx.textFileStream(
 
 
 def convertRDD(filePathRDD):
-    return filePathRDD.map(lambda filePath: filePathRDD.context.textFile(filePath)).reduce(
-        lambda rddA, rddB: rddA.union(rddB))
+    return filePathRDD.map(lambda filePath: filePathRDD.context.textFile(filePath))
 
 fileLineDStream = filePathDStream.transform(
     lambda filePathRDD: convertRDD(filePathRDD))
