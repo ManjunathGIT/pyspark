@@ -25,7 +25,7 @@ wordcounts.pprint()
 
 count = filePathDStream.count()
 
-print count
+count.pprint()
 
 streamingCtx.start()
 
