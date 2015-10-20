@@ -24,7 +24,7 @@ wordcounts.pprint()
 """
 
 count = filePathDStream.transform(
-    lambda rdd: rdd.map(lambda filePath: rdd.context.textFile(filePath))).count()
+    lambda rdd: rdd.map(lambda filePath: filePath.upper())).count()
 
 print count
 
