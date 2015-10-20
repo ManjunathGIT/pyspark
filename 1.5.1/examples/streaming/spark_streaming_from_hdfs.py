@@ -23,8 +23,9 @@ wordcounts = fileLineDStream.flatMap(
 wordcounts.pprint()
 """
 
-count = filePathDStream.transform(
-    lambda rdd: rdd.map(lambda filePath: filePath.upper())).count()
+filePathDStream.transform
+
+count = filePathDStream.transform(lambda rdd: rdd).count()
 
 print count
 
