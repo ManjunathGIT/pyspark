@@ -1,2 +1,1 @@
-print globals()
-print locals()
+print ".".join(["1", "2"])
