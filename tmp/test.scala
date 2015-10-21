@@ -16,7 +16,9 @@ object HelloWorld {
     	try {
     		var conf = new Configuration()
 
-    		var fs = FileSystem.get(URI.create("hdfs://dip.cdh5.dev:8020/user/yurun/text/text1"), conf);
+    		var url = "hdfs://dip.cdh5.dev:8020/user/yurun/text/text1"
+
+    		var fs = FileSystem.get(URI.create(url), conf);
 
     		reader = new BufferedReader(new InputStreamReader(fs.open(new Path(uri))))
 
