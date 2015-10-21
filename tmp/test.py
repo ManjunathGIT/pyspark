@@ -16,7 +16,7 @@ table = hc.inferSchema(rows)
 
 table.registerAsTable("temp_mytable")
 
-datas = hc.sql("select split(col1,'\\?') from temp_mytable").collect()
+datas = hc.sql("select split(col1,'\\\\?') from temp_mytable").collect()
 
 sc.stop()
 
