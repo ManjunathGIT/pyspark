@@ -16,7 +16,7 @@ object HelloWorld {
     	try {
     		Configuration conf = new Configuration()
 
-    		FileSystem fs = FileSystem.get(URI.create("hdfs://dip.cdh5.dev:8020/user/yurun/text/text1"), conf);
+    		var fs = FileSystem.get(URI.create("hdfs://dip.cdh5.dev:8020/user/yurun/text/text1"), conf);
 
     		reader = new BufferedReader(new InputStreamReader(fs.open(new Path(uri))))
 
