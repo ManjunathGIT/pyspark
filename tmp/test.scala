@@ -14,7 +14,7 @@ object HelloWorld {
     	var reader: BufferedReader = null
 
     	try {
-    		Configuration conf = new Configuration()
+    		var conf = new Configuration()
 
     		var fs = FileSystem.get(URI.create("hdfs://dip.cdh5.dev:8020/user/yurun/text/text1"), conf);
 
