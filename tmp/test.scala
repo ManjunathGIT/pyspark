@@ -14,9 +14,11 @@ object HelloWorld {
     	var reader: BufferedReader = null
 
     	try {
-    		var file = new File("/Users/yurun/Downloads/yarn-site.xml")
+    		Configuration conf = new Configuration()
 
-    		reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))
+    		FileSystem fs = FileSystem.get(URI.create("hdfs://dip.cdh5.dev:8020/user/yurun/text/text1"), conf);
+
+    		reader = new BufferedReader(new InputStreamReader(fs.open(new Path(uri))))
 
     		var line = reader.readLine
 
