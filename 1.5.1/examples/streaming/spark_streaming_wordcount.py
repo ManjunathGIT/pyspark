@@ -8,6 +8,8 @@ sc = SparkContext(conf=conf)
 
 streamingCtx = StreamingContext(sc, 1)
 
+StreamingContext()
+
 lines = streamingCtx.socketTextStream("localhost", 9999)
 
 words = lines.flatMap(lambda line: line.split(" "))
