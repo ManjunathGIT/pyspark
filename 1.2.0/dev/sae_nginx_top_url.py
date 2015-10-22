@@ -109,9 +109,8 @@ def topTenFunc(iter):
     return buffer
 
 rows = rows_temp.repartitionAndSortWithinPartitions(
-    numPartitions=20, partitionFunc=partitionFunc, ascending=False, keyfunc=keyFunc).collect()
+    numPartitions=20, partitionFunc=partitionFunc, ascending=False, keyfunc=keyFunc)
 
-for val in rows_temp:
-    print val
+print rows.toDebugString()
 
 sc.stop()
