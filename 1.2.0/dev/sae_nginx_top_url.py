@@ -84,15 +84,15 @@ spark_sql = '''select domain,url,cast(sum(body_bytes_sent) as bigint) as flow fr
 '''
 
 rows_temp = hc.sql(spark_sql).map(lambda row: (
-    (row.domain, row.domain_order, row.url, row.flow, row.num), None))
+    (row.domain, row.url, row.flow), None))
 
 
 def partitionFunc(key):
-    return int(key[1]) - 1
+    return top_domain_dict[key[0]]
 
 
 def keyFunc(key):
-    return key[3]
+    return key[2]
 
 
 def topTenFunc(iter):
