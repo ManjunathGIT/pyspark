@@ -39,7 +39,6 @@ def mysqldb(host, port, user, passwd, db, sql):
 top_domain_list = mysqldb("m3353i.apollo.grid.sina.com.cn", 3353, "data_history", "f3u4w8n7b3h", "sae",
                           "select domain from (select domain,round(sum(flow)/1024/1024,0)  as flow_MB     from sae.sae_nginx_flow flow    where DATE_SUB(CURDATE(), INTERVAL 1 DAY) = date group by domain order by flow_MB desc limit 20)A")
 
-for val in top_domain_list:
-    print val
+print top_domain_list
 
 sc.stop()
