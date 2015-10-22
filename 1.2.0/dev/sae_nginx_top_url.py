@@ -1,5 +1,6 @@
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
+import MySQLdb
 
 conf = SparkConf().setAppName("sae_nginx_top_url")
 
@@ -17,7 +18,7 @@ def mysqldb(host, port, user, passwd, db, sql):
 
         cur = conn.cursor()
 
-        result = cur.execute(sql)
+        cur.execute(sql)
 
         return cur.fetchall()
     except Exception, e:
