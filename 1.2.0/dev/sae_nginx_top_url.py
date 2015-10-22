@@ -1,12 +1,12 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import SQLContext
+from pyspark.sql import HiveContext
 import MySQLdb
 
 conf = SparkConf().setAppName("sae_nginx_top_url")
 
 sc = SparkContext(conf=conf)
 
-hc = SQLContext(sc)
+hc = HiveContext(sc)
 
 """
 def mysqldb(host, port, user, passwd, db, sql):
