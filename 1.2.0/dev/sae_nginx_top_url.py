@@ -1,12 +1,12 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext
+from pyspark.sql import SQLContext
 import MySQLdb
 
 conf = SparkConf().setAppName("sae_nginx_top_url")
 
 sc = SparkContext(conf=conf)
 
-hc = HiveContext(sc)
+hc = SQLContext(sc)
 
 """
 def mysqldb(host, port, user, passwd, db, sql):
@@ -76,7 +76,7 @@ hc.registerFunction("temp_if_in_top_10_domain", if_in_top_10_domain)
 spark_sql = '''select domain,domain_order,url,cast(sum(body_bytes_sent) as bigint) as flow,count(1) as num from (
                 select domain,
                 temp_if_in_top_10_domain(domain) as domain_order,
-                split(request,'\\\\?')[0] as url,
+                split(request,'\\?')[0] as url,
                 body_bytes_sent
                 from temp_schema
                 where body_bytes_sent>0 and temp_if_in_top_10_domain(domain)!='no'
