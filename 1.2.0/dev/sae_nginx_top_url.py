@@ -15,11 +15,11 @@ def mysqldb(host, port, user, passwd, db, sql):
         conn = MySQLdb.connect(host=host, port=port, user=user,
                                passwd=passwd, db=db, charset="utf8")
 
-    cur = conn.cursor()
+        cur = conn.cursor()
 
-    result = cur.execute(sql)
+        result = cur.execute(sql)
 
-    return cur.fetchall()
+        return cur.fetchall()
     except Exception, e:
         pass
     finally:
