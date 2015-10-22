@@ -86,7 +86,7 @@ spark_sql = '''select domain,domain_order,url,cast(sum(body_bytes_sent) as bigin
 '''
 
 rows_temp = hc.sql(spark_sql).map(lambda row: (
-    (row.domain, row.domain_order, row.url, row.flow, row.num), None)).collect()
+    (row.domain, row.domain_order, row.url, row.flow, row.num), None))
 
 
 def partitionFunc(key):
