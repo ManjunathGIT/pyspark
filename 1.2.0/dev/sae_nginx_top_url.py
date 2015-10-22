@@ -73,16 +73,14 @@ def if_in_top_10_domain(domain):
 
 hc.registerFunction("temp_if_in_top_10_domain", if_in_top_10_domain)
 
-spark_sql = '''select domain,domain_order,url,cast(sum(body_bytes_sent) as bigint) as flow,count(1) as num from (
+spark_sql = '''select domain,url,cast(sum(body_bytes_sent) as bigint) as flow from (
                 select domain,
-                temp_if_in_top_10_domain(domain) as domain_order,
-                split(request,'\\?')[0] as url,
+                split(request,'\\\\?')[0] as url,
                 body_bytes_sent
                 from temp_schema
                 where body_bytes_sent>0 and temp_if_in_top_10_domain(domain)!='no'
                 )A
-           group by domain,domain_order,url
-           order by flow desc limit 100
+           group by domain,url limit 100
 '''
 
 rows_temp = hc.sql(spark_sql).map(lambda row: (
