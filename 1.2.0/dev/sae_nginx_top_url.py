@@ -57,6 +57,18 @@ jsonRDD = hc.jsonFile(
 
 hc.registerRDDAsTable(jsonRDD, "temp_schema")
 
+
+def if_in_top_10_domain(domain):
+    if domain == '' or domain == None or len(domain) < 3:
+        return 'no'
+    else:
+        if top_domain_dict.has_key(domain):
+            return top_domain_dict[domain]
+        else:
+            return 'no'
+
+hc.registerFunction("temp_if_in_top_10_domain", if_in_top_10_domain)
+
 spark_sql = '''select domain,domain_order,url,cast(sum(body_bytes_sent) as bigint) as flow,count(1) as num from (
                 select domain,
                 temp_if_in_top_10_domain(domain) as domain_order,
