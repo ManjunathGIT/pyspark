@@ -57,7 +57,7 @@ print top_domain_dict
 """
 
 jsonRDD = hc.jsonFile(
-    "/user/hdfs/rawlog/app_saesinacomkafka12345_nginx/2015_10_22/09")
+    "hdfs:dip.cdh5.dev:8020/user/hdfs/rawlog/app_saesinacomkafka12345_nginx/2015_10_22/09")
 
 hc.registerRDDAsTable(jsonRDD, "temp_schema")
 
@@ -109,8 +109,8 @@ def topTenFunc(iter):
     return buffer
 
 rows = rows_temp.repartitionAndSortWithinPartitions(
-    numPartitions=20, partitionFunc=partitionFunc, ascending=False, keyfunc=keyFunc)
+    numPartitions=20, partitionFunc=partitionFunc, ascending=False, keyfunc=keyFunc).collect()
 
-print rows.toDebugString()
+print rows
 
 sc.stop()
