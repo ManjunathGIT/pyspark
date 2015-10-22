@@ -8,7 +8,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-
+"""
 def mysqldb(host, port, user, passwd, db, sql):
     conn = None
 
@@ -40,9 +40,12 @@ def mysqldb(host, port, user, passwd, db, sql):
 
 top_domain_list = mysqldb("m3353i.apollo.grid.sina.com.cn", 3353, "data_history", "f3u4w8n7b3h", "sae",
                           "select domain from (select domain,round(sum(flow)/1024/1024,0)  as flow_MB     from sae.sae_nginx_flow flow    where DATE_SUB(CURDATE(), INTERVAL 2 DAY) = date group by domain order by flow_MB desc limit 20)A")
+"""
 
-top_domain_dict = {}
+top_domain_dict = {u'344.3434dddty.vipsinaapp.com': 12, u'1.appgift.sinaapp.com': 14, u'fansmen.cn': 20, u'lib.sinaapp.com': 2, u'm.miaoche.com': 6, u'www.myhousead.sinaapp.com': 8, u'www.miaoche.com': 5, u'www.ruc.edu.cn': 9, u'better01.sinaapp.com': 19, u'tenyoung.sinaapp.com': 4,
+                   u'hg01.zsgjs.com': 17, u'www.neitui.me': 16, u'cn2.php.net': 11, u'app1314.com': 18, u'kjs123.sinaapp.com': 1, u'tracker.sinaapp.com': 3, u'ah.zsgjs.com': 15, u'ku.ent.sina.com.cn': 10, u'www.backgrounds.sinaapp.com': 7, u'liukebin.sinaapp.com': 13}
 
+"""
 i = 1
 
 for domain in top_domain_list:
@@ -51,6 +54,7 @@ for domain in top_domain_list:
     i = i + 1
 
 print top_domain_dict
+"""
 
 jsonRDD = hc.jsonFile(
     "/user/hdfs/rawlog/app_saesinacomkafka12345_nginx/2015_10_22/09")
@@ -82,9 +86,9 @@ spark_sql = '''select domain,domain_order,url,cast(sum(body_bytes_sent) as bigin
 '''
 
 rows_temp = hc.sql(spark_sql).map(lambda row: (
-    (row.domain, row.domain_order, row.url, row.flow, row.num), None))
+    (row.domain, row.domain_order, row.url, row.flow, row.num), None)).collect()
 
-
+"""
 def partitionFunc(key):
     return int(key[1]) - 1
 
@@ -106,8 +110,9 @@ def topTenFunc(iter):
 
 rows = rows_temp.repartitionAndSortWithinPartitions(
     numPartitions=20, partitionFunc=partitionFunc, ascending=False, keyfunc=keyFunc).collect()
+"""
 
-for val in rows:
+for val in rows_temp:
     print val
 
 sc.stop()
