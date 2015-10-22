@@ -82,9 +82,32 @@ spark_sql = '''select domain,domain_order,url,cast(sum(body_bytes_sent) as bigin
 '''
 
 rows_temp = hc.sql(spark_sql).map(lambda row: (
-    (row.domain, row.domain_order, row.url, row.flow, row.num), None)).collect()
+    (row.domain, row.domain_order, row.url, row.flow, row.num), None))
 
-for val in rows_temp:
+
+def partitionFunc(key):
+    return int(key[1]) - 1
+
+
+def keyFunc(key):
+    return key[3]
+
+
+def topTenFunc(iter):
+    buffer = []
+
+    for pair in iter:
+        if len(buffer) >= 10:
+            break
+        else:
+            buffer.append(pair[0])
+
+    return buffer
+
+rows = rows_temp.repartitionAndSortWithinPartitions(
+    numPartitions=20, partitionFunc=partitionFunc, ascending=False, keyfunc=keyFunc).collect()
+
+for val in rows:
     print val
 
 sc.stop()
