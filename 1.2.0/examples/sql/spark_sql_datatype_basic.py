@@ -45,26 +45,26 @@ schema = StructType([StructField("col1", ShortType(), False),
                      StructField("col2", ShortType(), False)])
 """
 
-"""
 source = sc.parallelize(
-    [(-9223372036854775808, 9223372036854775807)])
+    [(-2147483648, 2147483647)])
 
 schema = StructType([StructField("col1", IntegerType(), False),
                      StructField("col2", IntegerType(), False)])
-"""
 
+"""
 source = sc.parallelize(
     [(9223372036854775807, 9223372036854775807)])
 
 schema = StructType([StructField("col1", LongType(), False),
                      StructField("col2", LongType(), False)])
+"""
 
 table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select cast(col1 as bigint) + cast(col2 as bigint) from temp_table").collect()
+    "select col1 - 1, col2 + 1 from temp_table").collect()
 
 sc.stop()
 
