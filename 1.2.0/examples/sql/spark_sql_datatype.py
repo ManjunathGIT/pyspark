@@ -15,7 +15,7 @@ BooleanType: bool
 TimestampType: datetime
 DateType: date
 ArrayType: list
-MapType: dictionary
+MapType: dict
 StructType: tuple
 """
 
