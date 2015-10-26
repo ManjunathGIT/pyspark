@@ -20,7 +20,7 @@ StructType: tuple
 """
 
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import SQLContext
+from pyspark.sql import HiveContext
 from decimal import Decimal
 from datetime import datetime, date
 from pyspark.sql import StructType, StructField, ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType, DecimalType, StringType, BooleanType, TimestampType, DateType, ArrayType, MapType
@@ -29,9 +29,9 @@ conf = SparkConf().setAppName("spark_sql_datatype2")
 
 sc = SparkContext(conf=conf)
 
-hc = SQLContext(sc)
+hc = HiveContext(sc)
 
-source = sc.parallelize([(-128, 128)])
+source = sc.parallelize([(-128, 127)])
 
 schema = StructType([StructField("col1", ByteType(), False),
                      StructField("col2", ByteType(), False)])
