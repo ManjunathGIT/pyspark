@@ -45,7 +45,7 @@ schema = StructType([StructField("col1", ShortType(), False),
                      StructField("col2", ShortType(), False)])
 """
 
-source = sc.parallelize([(-2147483649, 2147483648)])
+source = sc.parallelize([(-2147483649, 9223372036854775807)])
 
 schema = StructType([StructField("col1", IntegerType(), False),
                      StructField("col2", IntegerType(), False)])
