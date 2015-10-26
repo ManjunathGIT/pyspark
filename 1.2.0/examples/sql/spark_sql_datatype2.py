@@ -31,9 +31,10 @@ sc = SparkContext(conf=conf)
 
 hc = SQLContext(sc)
 
-source = sc.parallelize([(-128, )])
+source = sc.parallelize([(-128, 257)])
 
-schema = StructType([StructField("byte", ByteType(), False)])
+schema = StructType([StructField("col1", ByteType(), False),
+                     StructField("col2", ByteType(), False)])
 
 table = hc.applySchema(source, schema)
 
