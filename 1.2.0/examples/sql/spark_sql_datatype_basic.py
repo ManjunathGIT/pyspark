@@ -54,7 +54,7 @@ schema = StructType([StructField("col1", IntegerType(), False),
 """
 
 source = sc.parallelize(
-    [(-9223372036854775808 * 9223372036854775808, 9223372036854775807 * 9223372036854775807)])
+    [(9223372036854775807, 9223372036854775807)])
 
 schema = StructType([StructField("col1", IntegerType(), False),
                      StructField("col2", IntegerType(), False)])
@@ -64,7 +64,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select * from temp_table").collect()
+    "select col1+col2 from temp_table").collect()
 
 sc.stop()
 
