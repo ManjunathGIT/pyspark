@@ -17,7 +17,7 @@ sourceRDD = hc.jsonRDD(source)
 
 sourceRDD.registerTempTable("temp_source")
 
-
+"""
 def convert(row):
     mydict = row.asDict()
 
@@ -31,6 +31,19 @@ convertRDD = hc.sql(
 mytable = hc.inferSchema(convertRDD)
 
 mytable.registerTempTable("temp_mytable")
+"""
+
+
+def convert(val):
+    return val.upper()
+
+hc.registerFunction("temp_convert", convert)
+
+convertRDD = hc.sql(
+    "select temp_convert(col1) as col1, col2, col3 from temp_source")
+
+convertRDD.registerAsTable("temp_mytable")
+
 
 hc.cacheTable("temp_mytable")
 
