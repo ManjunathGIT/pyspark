@@ -62,7 +62,7 @@ schema = StructType([StructField("col1", LongType(), False),
 """
 
 source = sc.parallelize(
-    [(1.4E-45, 3.4028235E38)])
+    [(1.4E-45, 1.7976931348623157E308)])
 
 schema = StructType([StructField("col1", FloatType(), False),
                      StructField("col2", FloatType(), False)])
