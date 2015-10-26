@@ -36,16 +36,19 @@ source = sc.parallelize([(-128, 127)])
 
 schema = StructType([StructField("col1", ByteType(), False),
                      StructField("col2", ByteType(), False)])
-
-table = hc.applySchema(source, schema)
-
-table.registerAsTable("temp_table")
 """
 
+"""
 source = sc.parallelize([(-32768, 32767)])
 
 schema = StructType([StructField("col1", ShortType(), False),
                      StructField("col2", ShortType(), False)])
+"""
+
+source = sc.parallelize([(-2147483649, 2147483648)])
+
+schema = StructType([StructField("col1", IntegerType(), False),
+                     StructField("col2", IntegerType(), False)])
 
 table = hc.applySchema(source, schema)
 
