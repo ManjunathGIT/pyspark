@@ -16,4 +16,4 @@ print type(val[0])
 
 print 2**8
 
-print bytearray(xrange(257))
+print bytearray(xrange(-1, 0))
