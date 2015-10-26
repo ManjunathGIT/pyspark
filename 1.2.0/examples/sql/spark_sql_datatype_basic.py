@@ -72,7 +72,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select col2 + 0.0 from temp_table").collect()
+    "select col2 from temp_table").collect()
 
 sc.stop()
 
