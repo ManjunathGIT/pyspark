@@ -69,11 +69,13 @@ schema = StructType([StructField("col1", FloatType(), False),
                      StructField("col2", FloatType(), False)])
 """
 
+"""
 source = sc.parallelize(
     [(4.9E-324, 1.7976931348623157E308)])
 
 schema = StructType([StructField("col1", DoubleType(), False),
                      StructField("col2", DoubleType(), False)])
+"""
 
 table = hc.applySchema(source, schema)
 
