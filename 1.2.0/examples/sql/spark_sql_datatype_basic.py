@@ -64,7 +64,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select cast(col1 as bigint) + col2 from temp_table").collect()
+    "select cast(col1 as bigint) + cast(col2 as bigint) from temp_table").collect()
 
 sc.stop()
 
