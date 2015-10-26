@@ -31,7 +31,7 @@ sc = SparkContext(conf=conf)
 
 hc = SQLContext(sc)
 
-source = sc.parallelize([(-1, )])
+source = sc.parallelize([(-2, )])
 
 schema = StructType([StructField("byte", ByteType(), False)])
 
