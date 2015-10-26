@@ -65,7 +65,7 @@ source = sc.parallelize(
     [(1.4E-45, 1.7976931348623157E308)])
 
 schema = StructType([StructField("col1", FloatType(), False),
-                     StructField("col2", FloatType(), False)])
+                     StructField("col2", DoubleType(), False)])
 
 table = hc.applySchema(source, schema)
 
