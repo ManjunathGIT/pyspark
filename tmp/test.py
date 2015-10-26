@@ -16,4 +16,6 @@ print type(val[0])
 
 print 2**8
 
-print bytearray(xrange(-1, 0))
+import sys
+
+print -sys.maxint - 1
