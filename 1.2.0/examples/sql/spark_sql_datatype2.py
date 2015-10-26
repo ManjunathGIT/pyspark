@@ -31,7 +31,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-source = sc.parallelize([(-128, 127)])
+source = sc.parallelize([(-128, 128)])
 
 schema = StructType([StructField("col1", ByteType(), False),
                      StructField("col2", ByteType(), False)])
