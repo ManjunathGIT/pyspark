@@ -42,10 +42,10 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 """
 
-source = sc.parallelize([(-32768, 32767)])
+source = sc.parallelize([(-32769, 32768)])
 
-schema = StructType([StructField("col1", ByteType(), False),
-                     StructField("col2", ByteType(), False)])
+schema = StructType([StructField("col1", ShortType(), False),
+                     StructField("col2", ShortType(), False)])
 
 table = hc.applySchema(source, schema)
 
