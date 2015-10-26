@@ -25,13 +25,24 @@ from decimal import Decimal
 from datetime import datetime, date
 from pyspark.sql import StructType, StructField, ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType, DecimalType, StringType, BooleanType, TimestampType, DateType, ArrayType, MapType
 
-conf = SparkConf().setAppName("spark_sql_datatype2")
+conf = SparkConf().setAppName("spark_sql_datatype_basic")
 
 sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
+"""
 source = sc.parallelize([(-128, 127)])
+
+schema = StructType([StructField("col1", ByteType(), False),
+                     StructField("col2", ByteType(), False)])
+
+table = hc.applySchema(source, schema)
+
+table.registerAsTable("temp_table")
+"""
+
+source = sc.parallelize([(-32769, 32768)])
 
 schema = StructType([StructField("col1", ByteType(), False),
                      StructField("col2", ByteType(), False)])
