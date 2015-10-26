@@ -61,10 +61,18 @@ schema = StructType([StructField("col1", LongType(), False),
                      StructField("col2", LongType(), False)])
 """
 
+"""
 source = sc.parallelize(
-    [(1.4E-45, 1.7976931348623157E308)])
+    [(1.4E-45, 3.4028235E38)])
 
 schema = StructType([StructField("col1", FloatType(), False),
+                     StructField("col2", FloatType(), False)])
+"""
+
+source = sc.parallelize(
+    [(4.9E-324, 1.7976931348623157E308)])
+
+schema = StructType([StructField("col1", DoubleType(), False),
                      StructField("col2", DoubleType(), False)])
 
 table = hc.applySchema(source, schema)
@@ -72,7 +80,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select col2 from temp_table").collect()
+    "select col1 + col2 from temp_table").collect()
 
 sc.stop()
 
