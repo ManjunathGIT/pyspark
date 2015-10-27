@@ -20,7 +20,7 @@ StructType: tuple
 """
 
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext
+from pyspark.sql import SQLContext
 from decimal import Decimal
 from pyspark.sql import StructType, StructField, DecimalType
 
@@ -28,7 +28,7 @@ conf = SparkConf().setAppName("spark_sql_datatype_decimal")
 
 sc = SparkContext(conf=conf)
 
-hc = HiveContext(sc)
+hc = SQLContext(sc)
 
 source = sc.parallelize(
     [(Decimal("1.0"), Decimal("2.0"))])
