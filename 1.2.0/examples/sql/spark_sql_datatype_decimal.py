@@ -41,7 +41,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select col1 + col2 from temp_table").collect()
+    "select col1, col2 from temp_table").collect()
 
 sc.stop()
 
