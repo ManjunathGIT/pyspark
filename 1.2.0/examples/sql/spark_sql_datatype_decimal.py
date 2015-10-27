@@ -1,28 +1,9 @@
 # coding: utf-8
 
-"""Spark SQL DataType
-
-ByteType: int
-ShortType: int
-IntegerType: int
-LongType: long
-FloatType: float
-DoubleType: float
-Decimal: Decimal
-StringType: ""
-BinaryType: ignore
-BooleanType: bool
-TimestampType: datetime
-DateType: date
-ArrayType: list
-MapType: dict
-StructType: tuple
-"""
-
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SQLContext
 from decimal import Decimal
-from pyspark.sql import StructType, StructField, DecimalType
+from pyspark.sql.types import StructType, StructField, DecimalType
 
 conf = SparkConf().setAppName("spark_sql_datatype_decimal")
 
@@ -41,7 +22,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select col1, col2 + 1.0 from temp_table").collect()
+    "select col1 + col2, col2 + 1.0 from temp_table").collect()
 
 sc.stop()
 
