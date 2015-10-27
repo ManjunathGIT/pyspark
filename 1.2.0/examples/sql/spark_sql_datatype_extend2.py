@@ -44,9 +44,11 @@ rows = hc.sql("select * from temp_table").collect()
 for row in rows:
     print row
 
+"""
 # java.lang.ClassCastException: java.math.BigInteger cannot be cast to
 # java.lang.Long
 hc.sql(
     "select col1 + col2 from temp_table").collect()
+"""
 
 sc.stop()
