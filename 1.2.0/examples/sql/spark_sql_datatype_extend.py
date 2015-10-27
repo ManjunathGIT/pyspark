@@ -47,4 +47,4 @@ rows = hc.sql(
 sc.stop()
 
 for row in rows:
-    print row
+    print row[0], isinstance(row[0], decimal.Decimal)
