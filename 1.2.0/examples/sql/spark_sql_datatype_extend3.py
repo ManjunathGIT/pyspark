@@ -20,10 +20,6 @@ StructType: tuple
 """
 
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext
-import decimal
-from datetime import datetime, date
-from pyspark.sql import StructType, StructField, LongType
 
 conf = SparkConf().setAppName("spark_sql_datatype_extend3")
 
@@ -34,7 +30,8 @@ hc = HiveContext(sc)
 source = sc.parallelize(
     ["85070591730234615847396907784232501249", "85070591730234615847396907784232501249"])
 
-rows = source.map(lambda value: int(value)).collect()
+rows = source.map(lambda value: long(value)).reduce(
+    lambda valA, valB: valA + valB).collect()
 
 sc.stop()
 
