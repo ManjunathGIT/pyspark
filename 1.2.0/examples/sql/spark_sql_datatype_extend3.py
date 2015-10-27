@@ -28,10 +28,9 @@ sc = SparkContext(conf=conf)
 source = sc.parallelize(
     ["85070591730234615847396907784232501249", "85070591730234615847396907784232501249"])
 
-rows = source.map(lambda value: long(value)).reduce(
-    lambda valA, valB: valA + valB).collect()
+result = source.map(lambda value: long(value)).reduce(
+    lambda valA, valB: valA + valB)
 
 sc.stop()
 
-for row in rows:
-    print row, type(row)
+print result, type(result)
