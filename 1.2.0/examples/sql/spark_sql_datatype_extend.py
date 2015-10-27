@@ -42,7 +42,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select rount(cast(col1 as decimal(38, 3)) + cast(col2 as decimal(38, 3)), 2) from temp_table").collect()
+    "select round(cast(col1 as decimal(38, 3)) + cast(col2 as decimal(38, 3)), 2) from temp_table").collect()
 
 
 """
