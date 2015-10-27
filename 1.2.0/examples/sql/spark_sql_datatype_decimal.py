@@ -22,7 +22,7 @@ StructType: tuple
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SQLContext
 from decimal import Decimal
-from pyspark.sql.types import StructType, StructField, DecimalType
+from pyspark.sql import StructType, StructField, DecimalType
 
 conf = SparkConf().setAppName("spark_sql_datatype_decimal")
 
