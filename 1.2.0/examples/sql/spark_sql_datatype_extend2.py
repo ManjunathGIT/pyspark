@@ -39,7 +39,7 @@ table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
-rows = sc.sql("select * from temp_table").collect()
+rows = hc.sql("select * from temp_table").collect()
 
 for row in rows:
     print row
