@@ -25,8 +25,6 @@ conf = SparkConf().setAppName("spark_sql_datatype_extend3")
 
 sc = SparkContext(conf=conf)
 
-hc = HiveContext(sc)
-
 source = sc.parallelize(
     ["85070591730234615847396907784232501249", "85070591730234615847396907784232501249"])
 
