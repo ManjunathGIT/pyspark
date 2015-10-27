@@ -42,7 +42,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select col1 + col2 from temp_table").collect()
+    "select cast(col1 as decimal(38, 0) + cast(col2 as decimal(38, 0))) from temp_table").collect()
 
 sc.stop()
 
