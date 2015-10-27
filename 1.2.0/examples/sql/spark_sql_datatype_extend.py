@@ -47,7 +47,7 @@ rows = hc.sql(
 """
 
 rows = hc.sql(
-    "select (cast(col1 as decimal(38, 0)) + col2) / 1.0 from temp_table").collect()
+    "select (cast(col1 as decimal(38, 3)) + col2) / 1.0 from temp_table").collect()
 
 sc.stop()
 
