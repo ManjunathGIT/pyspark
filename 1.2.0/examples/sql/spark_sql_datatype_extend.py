@@ -21,11 +21,11 @@ StructType: tuple
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
-from decimal import Decimal
+import decimal
 from datetime import datetime, date
-from pyspark.sql import StructType, StructField, ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType, DecimalType, StringType, BooleanType, TimestampType, DateType, ArrayType, MapType
+from pyspark.sql import StructType, StructField, LongType
 
-conf = SparkConf().setAppName("spark_sql_datatype_basic")
+conf = SparkConf().setAppName("spark_sql_datatype_extend")
 
 sc = SparkContext(conf=conf)
 
