@@ -53,4 +53,4 @@ rows = hc.sql(
 sc.stop()
 
 for row in rows:
-    print row[0], type(row[0])
+    print row
