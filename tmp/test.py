@@ -1,21 +1,5 @@
-print type("a")
+from decimal import getcontext
+from decimal import Decimal
 
-print type(u"a")
-
-print isinstance("a", basestring)
-
-print isinstance(u"a", basestring)
-
-print type(u"a".encode("utf-8") == "a")
-
-print type(bytearray(u"a".encode("utf-8")))
-
-val = bytearray('abcefg')
-
-print type(val[0])
-
-print 2**8
-
-import sys
-
-print sys.maxint * sys.maxint
+print getcontext()
+print Decimal("999999999199999999919999999991999999999199999999919999999991999999999199999999919999999991999999999199999999919999999991999999999199999999919999999991999999999199999999919999999991999999999199999999919999999991999999999199999999919999999991")
