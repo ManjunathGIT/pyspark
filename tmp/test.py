@@ -18,4 +18,4 @@ print 2**8
 
 import sys
 
-print sys.maxint
+print sys.maxint * sys.maxint
