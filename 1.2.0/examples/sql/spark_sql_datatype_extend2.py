@@ -21,8 +21,6 @@ StructType: tuple
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
-import decimal
-from datetime import datetime, date
 from pyspark.sql import StructType, StructField, LongType
 
 conf = SparkConf().setAppName("spark_sql_datatype_extend2")
@@ -41,12 +39,14 @@ table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
-# java.lang.ClassCastException: java.math.BigInteger cannot be cast to
-# java.lang.Long
-rows = hc.sql(
-    "select cast(col1 as decimal(38, 0)) + cast(col2 as decimal(38, 0)) from temp_table").collect()
-
-sc.stop()
+rows = sc.sql("select * from temp_table").collect()
 
 for row in rows:
-    print row[0], isinstance(row[0], decimal.Decimal)
+    print row
+
+# java.lang.ClassCastException: java.math.BigInteger cannot be cast to
+# java.lang.Long
+hc.sql(
+    "select col1 + col2 from temp_table").collect()
+
+sc.stop()
