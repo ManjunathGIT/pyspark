@@ -41,8 +41,11 @@ table.registerAsTable("temp_table")
 
 rows = hc.sql("select * from temp_table").collect()
 
+sc.stop()
+
 for row in rows:
     print row
+
 
 """
 # java.lang.ClassCastException: java.math.BigInteger cannot be cast to
@@ -50,5 +53,3 @@ for row in rows:
 hc.sql(
     "select col1 + col2 from temp_table").collect()
 """
-
-sc.stop()
