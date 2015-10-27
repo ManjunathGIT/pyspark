@@ -39,4 +39,4 @@ rows = source.map(lambda value: int(value)).collect()
 sc.stop()
 
 for row in rows:
-    print row
+    print row, type(row)
