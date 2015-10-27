@@ -10,7 +10,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-rows = hc.sql("select count(distinct(video_duration_group)) from app_picserversweibof6vwt_wapvideodownload where log_dir = 20151027150000").collect()
+rows = hc.sql("select count(distinct(video_duration_group)) from datacubic.app_picserversweibof6vwt_wapvideodownload where log_dir = 20151027150000").collect()
 
 sc.stop()
 
