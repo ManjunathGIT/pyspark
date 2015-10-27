@@ -23,7 +23,7 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import decimal
 from datetime import datetime, date
-from pyspark.sql import StructType, StructField, LongType
+from pyspark.sql import StructType, StructField, StringType
 
 conf = SparkConf().setAppName("spark_sql_datatype_div")
 
@@ -32,17 +32,17 @@ sc = SparkContext(conf=conf)
 hc = HiveContext(sc)
 
 source = sc.parallelize(
-    [(92233720368547758, 9223372036854775807)])
+    [("92233720368547758", "92233720368547758070")])
 
-schema = StructType([StructField("col1", LongType(), False),
-                     StructField("col2", LongType(), False)])
+schema = StructType([StructField("col1", StringType(), False),
+                     StructField("col2", StringType(), False)])
 
 table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select cast(col1 as bigint) / cast(col2 as bigint) from temp_table").collect()
+    "select col1, col2, col1 + col2 from temp_table").collect()
 
 
 """
