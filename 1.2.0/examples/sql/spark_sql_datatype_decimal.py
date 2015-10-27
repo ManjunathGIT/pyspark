@@ -31,7 +31,7 @@ sc = SparkContext(conf=conf)
 hc = HiveContext(sc)
 
 source = sc.parallelize(
-    [(Decimal(1.0), Decimal(2.0))])
+    [(Decimal("1.0"), Decimal("2.0"))])
 
 schema = StructType([StructField("col1", DecimalType(), False),
                      StructField("col2", DecimalType(), False)])
