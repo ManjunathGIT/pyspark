@@ -26,9 +26,13 @@ table.registerAsTable("temp_table")
 rows = hc.sql("select col1 + col2 from temp_table").collect()
 """
 
+"""
 rows = hc.sql(
     "select cast(col1 as bigint) + cast(col2 as bigint) from temp_table").collect()
+"""
 
+rows = hc.sql(
+    "select cast(col1 as decimal(138, 0)) + cast(col2 as decimal(138, 1)) from temp_table").collect()
 sc.stop()
 
 for row in rows:
