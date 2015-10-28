@@ -32,7 +32,8 @@ rows = hc.sql(
 """
 
 rows = hc.sql(
-    "select cast(col1 as decimal(138, 0)) + cast(col2 as decimal(138, 1)) from temp_table").collect()
+    "select cast(col1 as decimal(38, 0)) + cast(col2 as decimal(38, 0)) from temp_table").collect()
+    
 sc.stop()
 
 for row in rows:
