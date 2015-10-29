@@ -21,6 +21,11 @@ sourceRDD.registerTempTable("temp_source")
 datas = hc.sql(
     "select from_unixtime(cast(round('',0) as bigint)) from temp_source").collect()
 
+
+def printRows(rows):
+    for row in rows:
+        print row
+
 printRows(datas)
 
 sc.stop()
