@@ -1,4 +1,9 @@
+import time
 import os
+
+now = time.time()
+
+print now
 
 paths = os.listdir("/tmp")
 
