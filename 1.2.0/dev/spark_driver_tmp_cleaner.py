@@ -13,4 +13,4 @@ for path in paths:
     spark_clean_dir = os.path.join(tmp, path)
 
     if os.path.isdir(spark_clean_dir) and (path.startswith("spark-") or path.endswith("_resources")) and os.path.getmtime(spark_clean_dir) <= clean_endtime:
-        print spark_clean_dir
+       	os.rmdir(spark_clean_dir)
