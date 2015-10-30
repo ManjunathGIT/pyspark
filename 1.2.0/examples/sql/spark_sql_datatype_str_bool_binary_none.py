@@ -32,7 +32,7 @@ hc = HiveContext(sc)
 source = sc.parallelize([("str", False, bytearray(range(0, 256)), None)])
 
 schema = StructType([StructField("str", StringType(), False), StructField("bool", BooleanType(
-), False), StructField("bytes", BinaryType(), False), StructField("none", NullType(), True)])
+), False), StructField("bytes", BinaryType(), False), StructField("none", NullType(), False)])
 
 table = hc.applySchema(source, schema)
 
