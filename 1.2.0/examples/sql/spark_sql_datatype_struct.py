@@ -2,7 +2,7 @@
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
-from pyspark.sql import StructType, StructField, IntegerType, DoubleType, StringType
+from pyspark.sql import StructType, StructField, IntegerType, FloatType, StringType
 
 conf = SparkConf().setAppName("spark_sql_datatype_struct")
 
