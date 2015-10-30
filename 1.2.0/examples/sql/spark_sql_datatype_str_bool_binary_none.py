@@ -29,16 +29,16 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-source = sc.parallelize([("str", False, bytearray(range(0, 256), None))])
+source = sc.parallelize([("str", False, bytearray(range(0, 256)), None))])
 
-schema = StructType([StructField("str", StringType(), False), StructField("bool", BooleanType(
+schema=StructType([StructField("str", StringType(), False), StructField("bool", BooleanType(
 ), False), StructField("bytes", BinaryType(), False), StructField("none", NullType(), True)])
 
-table = hc.applySchema(source, schema)
+table=hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
-rows = hc.sql(
+rows=hc.sql(
     "select str, bool, bytes, none from temp_table").collect()
 
 sc.stop()
