@@ -10,8 +10,7 @@ tmp = "/tmp"
 paths = os.listdir(tmp)
 
 for path in paths:
-    if os.path.isdir(path) and (path.startswith("spark-") or
-                                path.endswith("resources")):
-    	spark_clean_dir = os.path.join(tmp, path)
+	spark_clean_dir = os.path.join(tmp, path)
 
-    	print os.path.getctime(spark_clean_dir)
+    if os.path.isdir(spark_clean_dir) and (path.startswith("spark-") or path.endswith("_resources")):
+        print os.path.getctime(spark_clean_dir)
