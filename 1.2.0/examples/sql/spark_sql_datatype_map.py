@@ -13,14 +13,14 @@ hc = HiveContext(sc)
 source = sc.parallelize([({"key1": 1, "key2": 2}, )])
 
 schema = StructType(
-    [StructField("map", MapType(StringType(), IntegerType(), False), False)])
+    [StructField("col_map", MapType(StringType(), IntegerType(), False), False)])
 
 table = hc.applySchema(source, schema)
 
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select map['key1'], map['key2'] from temp_table").collect()
+    "select col_map['key1'], col_map['key2'] from temp_table").collect()
 
 sc.stop()
 
