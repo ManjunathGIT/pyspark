@@ -39,7 +39,7 @@ table = hc.applySchema(source, schema)
 table.registerAsTable("temp_table")
 
 rows = hc.sql(
-    "select str, bool, bytes[0], none from temp_table").collect()
+    "select str, bool, bytes, none from temp_table").collect()
 
 sc.stop()
 
