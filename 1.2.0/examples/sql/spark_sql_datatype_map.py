@@ -10,7 +10,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-source = sc.parallelize([({"key1": 1, "key2", 2}, )])
+source = sc.parallelize([({"key1": 1, "key2": 2}, )])
 
 schema = StructType(
     [StructField("map", MapType(StringType(), IntegerType(), False), False)])
