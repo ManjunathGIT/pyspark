@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext, StructType, StructField, StringType, IntegerType
+from pyspark.sql import HiveContext, StructType, StructField, StringType, IntegerType, ArrayType
 import json
 
 conf = SparkConf().setAppName("spark_sql_udf")
@@ -31,6 +31,15 @@ def func_int():
 hc.registerFunction("func_int", func_int, IntegerType())
 
 rows = hc.sql("select func_int() from temp_table").collect()
+
+
+def func_array():
+    # list
+    return [1, 2, 3]
+
+hc.registerFunction("temp_func_array", func_array, ArrayType(IntegerType()))
+
+rows = hc.sql("select temp_func_array() from temp_table").collect()
 
 sc.stop()
 
