@@ -16,7 +16,14 @@ table = hc.applySchema(source, schema)
 
 table.registerTempTable("temp_table")
 
+rows = hc.sql("select * from temp_table").collect()
 
+sc.stop()
+
+for row in rows:
+    print row
+
+"""
 def func_array():
     # list
     return [1, 2, 3]
@@ -48,21 +55,21 @@ hc.registerFunction(
 sql_array = """
 select item[0], item[1], item[2]
 from (
-	select temp_func_array() as item from temp_table
+    select temp_func_array() as item from temp_table
 ) t
 """
 
 sql_struct = """
 select item.a, item.b, item.c
 from (
-	select temp_func_struct() as item from temp_table
+    select temp_func_struct() as item from temp_table
 ) t
 """
 
 sql_map = """
 select item["a"], item["b"], item["c"]
 from (
-	select temp_func_map() as item from temp_table
+    select temp_func_map() as item from temp_table
 ) t
 """
 
@@ -72,3 +79,4 @@ sc.stop()
 
 for row in rows:
     print row
+"""
