@@ -1,1 +1,1 @@
-print float("")
+print type({})

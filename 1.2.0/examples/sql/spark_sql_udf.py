@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext, StructType, StructField, StringType, IntegerType, ArrayType, FloatType
+from pyspark.sql import HiveContext, StructType, StructField, StringType, IntegerType, ArrayType, FloatType, MapType
 
 conf = SparkConf().setAppName("spark_sql_udf")
 
@@ -54,7 +54,7 @@ rows = hc.sql(
 
 
 def func_map():
-    # dictionary
+    # dict
     map = {}
 
     map["first"] = 1
