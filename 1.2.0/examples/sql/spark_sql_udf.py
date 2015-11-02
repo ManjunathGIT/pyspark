@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext
+from pyspark.sql import HiveContext, StructType, StructField, StringType
 import json
 
 conf = SparkConf().setAppName("spark_sql_udf")
@@ -16,13 +16,7 @@ table = hc.applySchema(source, schema)
 
 table.registerTempTable("temp_table")
 
-
-def func_string():
-    return "abc"
-
-hc.registerFunction("func_string", func_string)
-
-rows = hc.sql("select func_string() from temp_table").collect()
+rows = hc.sql("select * from temp_table").collect()
 
 sc.stop()
 
