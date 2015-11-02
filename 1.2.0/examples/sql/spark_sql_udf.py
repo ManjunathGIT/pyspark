@@ -52,6 +52,23 @@ hc.registerFunction("func_struct", func_struct, StructType([StructField(
 rows = hc.sql(
     "select val.first, val.second, val.third from (select func_struct() as val from temp_table) t").collect()
 
+
+def func_map():
+    # dictionary
+    map = {}
+
+    map["first"] = 1
+    map["second"] = 2
+    map["third"] = 3
+
+    return map
+
+hc.registerFunction(
+    "func_map", func_map, MapType(StringType(), IntegerType()))
+
+rows = hc.sql(
+    "select val[first], val[second], val[third] from (select func_map() as val from temp_table) t").collect()
+
 sc.stop()
 
 for row in rows:
