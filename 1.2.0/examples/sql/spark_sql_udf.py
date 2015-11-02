@@ -35,7 +35,7 @@ rows = hc.sql("select func_int() from temp_table").collect()
 
 def func_array():
     # list
-    return [1, 2, 3]
+    return (1, 2, 3)
 
 hc.registerFunction("func_array", func_array, ArrayType(IntegerType()))
 
