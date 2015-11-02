@@ -37,9 +37,9 @@ def func_array():
     # list
     return [1, 2, 3]
 
-hc.registerFunction("temp_func_array", func_array, ArrayType(IntegerType()))
+hc.registerFunction("func_array", func_array, ArrayType(IntegerType()))
 
-rows = hc.sql("select temp_func_array() from temp_table").collect()
+rows = hc.sql("select func_array() from temp_table").collect()
 
 sc.stop()
 
