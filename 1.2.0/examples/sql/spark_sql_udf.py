@@ -16,7 +16,13 @@ table = hc.applySchema(source, schema)
 
 table.registerTempTable("temp_table")
 
-rows = hc.sql("select * from temp_table").collect()
+
+def func_string():
+    return "abc"
+
+hc.registerFunction("func_string", func_string)
+
+rows = hc.sql("select func_string() from temp_table").collect()
 
 sc.stop()
 
