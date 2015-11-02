@@ -24,6 +24,14 @@ hc.registerFunction("func_string", func_string)
 
 rows = hc.sql("select func_string() from temp_table").collect()
 
+
+def func_int():
+    return 123
+
+hc.registerFunction("func_int", func_int)
+
+rows = hc.sql("select func_int() from temp_table").collect()
+
 sc.stop()
 
 for row in rows:
