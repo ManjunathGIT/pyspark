@@ -1,7 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType, ArrayType, FloatType
-import json
+from pyspark.sql import HiveContext, StructType, StructField, StringType, IntegerType, ArrayType, FloatType
 
 conf = SparkConf().setAppName("spark_sql_udf")
 
@@ -46,13 +44,13 @@ rows = hc.sql(
 
 def func_struct():
     # tuple
-    return [1, 2.0, "3"]
+    return (1, 2.0, "3")
 
 hc.registerFunction("func_struct", func_struct, StructType([StructField(
     "first", IntegerType()), StructField("second", FloatType()), StructField("third", StringType())]))
 
 rows = hc.sql(
-    "select val.first, val.second, val.third from (select func_struct() as val from temp_table) p").collect()
+    "select val.first, val.second, val.third from (select func_struct() as val from temp_table) t").collect()
 
 sc.stop()
 
