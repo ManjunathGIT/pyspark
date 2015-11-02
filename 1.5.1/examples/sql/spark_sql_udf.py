@@ -22,7 +22,7 @@ def myfunc(value):
 
 hc.registerFunction("myfunc", myfunc, StringType())
 
-rows = hc.sql("select myfunc(name), func.ipToLocationBySina('10.13.4.44') from people").collect()
+rows = hc.sql("select myfunc(name) from people").collect()
 
 sc.stop()
 
