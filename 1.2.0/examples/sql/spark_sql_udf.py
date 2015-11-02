@@ -67,7 +67,7 @@ hc.registerFunction(
     "func_map", func_map, MapType(StringType(), IntegerType()))
 
 rows = hc.sql(
-    "select val[first], val[second], val[third] from (select func_map() as val from temp_table) t").collect()
+    "select val['first'], val['second'], val['third'] from (select func_map() as val from temp_table) t").collect()
 
 sc.stop()
 
