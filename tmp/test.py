@@ -35,3 +35,9 @@ class MyRow(object):
 row = MyRow("val1", "val2", "val3")
 
 print sorted(row.__dict__.items())
+
+row = ("val1", "val2", "val3")
+
+names = ['_%d' % i for i in range(1, len(row) + 1)]
+
+items = zip(names, row)
