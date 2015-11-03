@@ -23,3 +23,15 @@ print row._fields
 print tuple(row)
 
 print zip(row._fields, tuple(row))
+
+
+class MyRow(object):
+
+    def __init__(self, key1, key2, key3):
+        self.key1 = key1
+        self.key2 = key2
+        self.key3 = key3
+
+row = MyRow("val1", "val2", "val3")
+
+print sorted(row.__dict__.items())
