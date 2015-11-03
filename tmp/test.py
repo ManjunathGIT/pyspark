@@ -40,4 +40,4 @@ row = ("val1", "val2", "val3")
 
 names = ['_%d' % i for i in range(1, len(row) + 1)]
 
-items = zip(names, row)
+print zip(names, row)
