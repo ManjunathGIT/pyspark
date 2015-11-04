@@ -14,8 +14,10 @@ hc = HiveContext(sc)
 datas = [("col1_" + str(random.randint(1, 100)), "col2_" + str(random.randint(1, 100)),
           "col3_" + str(random.randint(1, 100))) for index in xrange(0, 10000)]
 
-sourceRDD = sc.parallelize(datas).map(lambda columns: Row(
+dataRDD = sc.parallelize(datas).map(lambda columns: Row(
     col1=columns[0], col2=columns[1], col3_=columns[2]))
+
+sourceRDD = hc.inferSchema(dataRDD)
 
 sourceRDD.registerAsTable("source")
 
