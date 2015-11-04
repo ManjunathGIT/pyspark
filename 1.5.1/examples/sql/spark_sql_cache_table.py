@@ -33,6 +33,8 @@ hc.cacheTable("cacheTable")
 
 rows = hc.sql("select col1, max(col2) from cacheTable group by col1").collect()
 
+rows = hc.sql("select col2, max(col3) from cacheTable group by col2").collect()
+
 # hc.uncacheTable("cacheTable")
 
 sc.stop()
