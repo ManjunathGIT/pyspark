@@ -29,6 +29,6 @@ hc.sql("select count(*) from cacheTable").collect()
 
 hc.sql("select count(*) from cacheTable").collect()
 
-# hc.uncacheTable("cacheTable")
+hc.uncacheTable("cacheTable")
 
 sc.stop()
