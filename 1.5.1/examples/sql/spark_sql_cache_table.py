@@ -20,10 +20,11 @@ sourceRDD.registerTempTable("source")
 
 hc.cacheTable("source")
 
-datas = hc.sql("select * from source").collect()
-
-printRows(datas)
+rows = hc.sql("select * from source").collect()
 
 hc.uncacheTable("source")
 
 sc.stop()
+
+for row in rows:
+    print row
