@@ -28,13 +28,10 @@ cacheTableRDD.registerAsTable("cacheTable")
 
 hc.cacheTable("cacheTable")
 
-rows = hc.sql("select count(*) from cacheTable").collect()
+#rows = hc.sql("select count(*) from cacheTable").collect()
 
-rows = hc.sql("select count(*) from cacheTable").collect()
+#rows = hc.sql("select count(*) from cacheTable").collect()
 
 # hc.uncacheTable("cacheTable")
 
 sc.stop()
-
-for row in rows:
-    print row
