@@ -22,7 +22,7 @@ sourceRDD = hc.inferSchema(dataRDD)
 sourceRDD.registerAsTable("source")
 
 cacheTableRDD = hc.sql(
-    "select * from source where col1 = col1_50")
+    "select * from source where col1 = 'col1_50'")
 
 cacheTableRDD.registerAsTable("cacheTable")
 
