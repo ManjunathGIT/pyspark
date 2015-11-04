@@ -18,9 +18,8 @@ sourceRDD = hc.inferSchema(dataRDD)
 
 sourceRDD.registerAsTable("source")
 
-rows = hc.sql("select * from source limit 10").collect()
+hc.sql("select col2, max(col3) from source where col1 = 'col1_50' group by col2").collect()
 
-for row in rows:
-    print row
+hc.sql("select col3, min(col2) from source where col1 = 'col1_50' group by col3").collect()
 
 sc.stop()
