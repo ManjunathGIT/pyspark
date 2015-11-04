@@ -18,8 +18,12 @@ sourceRDD = hc.inferSchema(dataRDD)
 
 sourceRDD.registerAsTable("source")
 
-hc.sql("select col2, max(col3) from source where col1 = 'col1_50' group by col2").collect()
+cacheRDD = hc.sql("select * from source where col1 = 'col1_50'")
 
-hc.sql("select col3, min(col2) from source where col1 = 'col1_50' group by col3").collect()
+cacheRDD.registerAsTable("cacheTable")
+
+hc.sql("select col2, max(col3) from cacheTable group by col2").collect()
+
+hc.sql("select col3, min(col2) from cacheTable group by col3").collect()
 
 sc.stop()
