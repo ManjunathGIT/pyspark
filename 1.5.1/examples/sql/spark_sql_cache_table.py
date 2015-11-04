@@ -2,7 +2,7 @@
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
-from pyspark.sql import Row
+from pyspark.sql.types import Row
 
 conf = SparkConf().setAppName("spark_sql_cache_table")
 
@@ -16,7 +16,7 @@ source = sc.parallelize(
 
 sourceRDD = hc.jsonRDD(source)
 
-sourceRDD.registerAsTable("temp_source")
+sourceRDD.registerAsTable("source")
 
 
 def upper_func(val):
@@ -25,13 +25,13 @@ def upper_func(val):
 hc.registerFunction("upper_func", upper_func)
 
 cacheTableRDD = hc.sql(
-    "select upper(col1) as col1, col2, col3 from temp_source")
+    "select upper_func(col1) as col1, col2, col3 from source")
 
-cacheTableRDD.registerAsTable("temp_cacheTable")
+cacheTableRDD.registerAsTable("cacheTable")
 
-# hc.cacheTable("temp_cacheTable")
+hc.cacheTable("cacheTable")
 
-rows = hc.sql("select col1 from temp_cacheTable").collect()
+rows = hc.sql("select max(col1) from cacheTable groub by col1").collect()
 
 # hc.uncacheTable("cacheTable")
 
