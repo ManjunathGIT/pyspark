@@ -18,10 +18,12 @@ sourceRDD = hc.jsonRDD(source)
 
 sourceRDD.registerTempTable("source")
 
+hc.cacheTable("source")
+
 datas = hc.sql("select * from source").collect()
 
 printRows(datas)
 
-# hc.uncacheTable("temp_mytable")
+hc.uncacheTable("source")
 
 sc.stop()
