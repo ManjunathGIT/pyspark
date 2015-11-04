@@ -4,7 +4,7 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 from pyspark.sql.types import Row
 
-conf = SparkConf().setAppName("spark_sql_table_cache")
+conf = SparkConf().setAppName("spark_sql_cache_table")
 
 sc = SparkContext(conf=conf)
 
