@@ -25,7 +25,7 @@ cacheTableRDD.registerAsTable("cacheTable")
 hc.cacheTable("cacheTable")
 
 rows = hc.sql("select col1 from cacheTable").collect()
-push
+
 sc.stop()
 
 for row in rows:
