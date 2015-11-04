@@ -11,11 +11,8 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-datas = [("col1_" + str(random.randint(1, 100)), "col2_" + str(random.randint(1, 100)),
-          "col3_" + str(random.randint(1, 100))) for index in xrange(0, 10000)]
-
-dataRDD = sc.parallelize(datas).map(lambda columns: Row(
-    col1=columns[0], col2=columns[1], col3_=columns[2]))
+dataRDD = sc.textFile("hdfs://dip.cdh5.dev:8020/user/yurun/datas").map(lambda line: line.split(
+    "\t")).map(lambda words: Row(col1=words[0], col2=words[1], col3=words[2]))
 
 sourceRDD = hc.inferSchema(dataRDD)
 
@@ -28,9 +25,9 @@ cacheTableRDD.registerAsTable("cacheTable")
 
 hc.cacheTable("cacheTable")
 
-#rows = hc.sql("select count(*) from cacheTable").collect()
+hc.sql("select count(*) from cacheTable").collect()
 
-#rows = hc.sql("select count(*) from cacheTable").collect()
+hc.sql("select count(*) from cacheTable").collect()
 
 # hc.uncacheTable("cacheTable")
 
