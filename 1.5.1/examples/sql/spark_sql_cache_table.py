@@ -29,7 +29,7 @@ cacheTableRDD = hc.sql(
 
 cacheTableRDD.registerAsTable("temp_cacheTable")
 
-hc.cacheTable("temp_cacheTable")
+# hc.cacheTable("temp_cacheTable")
 
 rows = hc.sql("select col1 from temp_cacheTable").collect()
 
