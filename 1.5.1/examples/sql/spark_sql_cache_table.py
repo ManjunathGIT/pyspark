@@ -18,17 +18,9 @@ sourceRDD = hc.inferSchema(dataRDD)
 
 sourceRDD.registerAsTable("source")
 
-cacheTableRDD = hc.sql(
-    "select * from source where col1 = 'col1_50'")
+rows = hc.sql("select * from source limit 10").collect()
 
-cacheTableRDD.registerAsTable("cacheTable")
-
-hc.cacheTable("cacheTable")
-
-hc.sql("select count(*) from cacheTable").collect()
-
-hc.sql("select max(col2) from cacheTable").collect()
-
-# hc.uncacheTable("cacheTable")
+for row in rows:
+    print row
 
 sc.stop()
