@@ -31,7 +31,7 @@ cacheTableRDD.registerAsTable("cacheTable")
 
 hc.cacheTable("cacheTable")
 
-rows = hc.sql("select max(col1) from cacheTable groub by col1").collect()
+rows = hc.sql("select max(col1) from cacheTable groupby col1").collect()
 
 # hc.uncacheTable("cacheTable")
 
