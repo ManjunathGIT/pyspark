@@ -25,7 +25,7 @@ def upper_func(val):
 hc.registerFunction("upper_func", upper_func)
 
 cacheTableRDD = hc.sql(
-    "select upper_func(col1) as col1, col2, col3 from temp_source")
+    "select upper(col1) as col1, col2, col3 from temp_source")
 
 cacheTableRDD.registerAsTable("temp_cacheTable")
 
