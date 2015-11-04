@@ -33,7 +33,7 @@ hc.cacheTable("cacheTable")
 
 rows = hc.sql("select col1 from cacheTable").collect()
 
-hc.uncacheTable("cacheTable")
+# hc.uncacheTable("cacheTable")
 
 sc.stop()
 
