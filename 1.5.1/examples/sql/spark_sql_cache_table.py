@@ -18,7 +18,14 @@ sourceRDD = hc.jsonRDD(source)
 
 sourceRDD.registerAsTable("source")
 
-cacheTableRDD = hc.sql("select upper(col1) as col1, col2, col3 from source")
+
+def upper_func(val):
+    val.upper()
+
+hc.registerFunction("upper_func", upper_func)
+
+cacheTableRDD = hc.sql(
+    "select upper_func(col1) as col1, col2, col3 from source")
 
 cacheTableRDD.registerAsTable("cacheTable")
 
