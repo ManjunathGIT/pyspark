@@ -20,7 +20,7 @@ sourceRDD.registerAsTable("source")
 
 
 def upper_func(val):
-    val.upper()
+    return val.upper()
 
 hc.registerFunction("upper_func", upper_func)
 
