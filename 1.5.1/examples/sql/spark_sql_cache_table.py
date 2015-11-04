@@ -16,13 +16,13 @@ source = sc.parallelize(
 
 sourceRDD = hc.jsonRDD(source)
 
-sourceRDD.registerTempTable("source")
+cacheTableRDD = hc.sql("select col1.upper() as col1, col2, col3 from source")
 
-hc.cacheTable("source")
+cacheTableRDD.registerAsTable("cacheTable")
 
-rows = hc.sql("select * from source").collect()
+hc.cacheTable("cacheTable")
 
-hc.uncacheTable("source")
+rows = hc.sql("select col1 from cacheTable").collect()
 
 sc.stop()
 
