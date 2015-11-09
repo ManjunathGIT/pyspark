@@ -8,6 +8,8 @@ lines = ["1\t2\t3", "4\t5\t6", "7\t8\t9"]
 
 pairRDD = sc.parallelize(lines).map(lambda line: (None, line))
 
+conf = {"hive.io.rcfile.column.number.conf": "3"}
+
 pairRDD.saveAsHadoopFile(path="hdfs://dip.cdh5.dev:8020/user/yurun/rcfile",
                          outputFormatClass="com.sina.dip.spark.output.DipRCFileOutputFormat",
                          keyClass="org.apache.hadoop.io.NullWritable",
