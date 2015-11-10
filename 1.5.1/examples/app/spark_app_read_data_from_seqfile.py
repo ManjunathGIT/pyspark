@@ -8,7 +8,7 @@ lineRDD = sc.hadoopFile(path="hdfs://dip.cdh5.dev:8020/user/yurun/seqfile",
                         inputFormatClass="org.apache.hadoop.mapred.SequenceFileInputFormat",
                         keyClass="com.sina.dip.spark.converter.IntArrayWritable",
                         valueClass="org.apache.hadoop.io.NullWritable",
-                        keyConverter="com.sina.dip.spark.converter.IntArrayWritableToObjectArrayConverter").map(lambda pair: pair[1])
+                        keyConverter="com.sina.dip.spark.converter.IntArrayWritableToObjectArrayConverter").map(lambda pair: pair[0])
 
 lines = lineRDD.collect()
 
