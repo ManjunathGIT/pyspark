@@ -10,7 +10,7 @@ pairRDD = sc.parallelize(lines).map(lambda array: (array, None))
 
 pairRDD.saveAsHadoopFile(path="hdfs://dip.cdh5.dev:8020/user/yurun/seqfile",
                          outputFormatClass="org.apache.hadoop.mapred.SequenceFileOutputFormat",
-                         keyClass="com.sina.dip.spark.converter.IntArrayWritable"
+                         keyClass="com.sina.dip.spark.converter.IntArrayWritable",
                          valueClass="org.apache.hadoop.io.NullWritable",
                          keyConverter="com.sina.dip.spark.converter.IntArrayWritableToObjectArrayConverter"
                          )
