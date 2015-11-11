@@ -14,6 +14,6 @@ pairRDD.saveAsHadoopFile(path="hdfs://dip.cdh5.dev:8020/user/yurun/rcfile",
                          outputFormatClass="org.apache.hadoop.hive.ql.io.RCFileOutputFormat",
                          keyClass="org.apache.hadoop.io.NullWritable",
                          valueClass="org.apache.hadoop.hive.serde2.columnar.BytesRefArrayWritable",
-                         valueConverter="com.sina.dip.spark.converter.StringToBytesRefArrayWritableConverter", conf=conf)
+                         valueConverter="com.sina.dip.spark.converter.ObjectArrayToBytesRefArrayWritableConverter", conf=conf)
 
 sc.stop()
