@@ -27,4 +27,4 @@ rows = hc.sql("select myfunc(name) from people").collect()
 sc.stop()
 
 for row in rows:
-    print row
+    print row, type(row[0])
