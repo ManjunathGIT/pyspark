@@ -6,7 +6,7 @@ sc = SparkContext(conf=conf)
 
 rows = [("1", "2", "3"), ("4", "5", "6"), ("7", "8", "9")]
 
-pairRDD = sc.parallelize(rows).map(lambda row: (None, row))
+pairRDD = sc.parallelize(rows, 1).map(lambda row: (None, row))
 
 conf = {"hive.io.rcfile.column.number.conf": "3"}
 
