@@ -11,7 +11,7 @@ pairRDD = sc.parallelize(rows).map(lambda row: (None, row))
 conf = {"hive.io.rcfile.column.number.conf": "3"}
 
 pairRDD.saveAsHadoopFile(path="hdfs://dip.cdh5.dev:8020/user/yurun/rcfile",
-                         outputFormatClass="org.apache.hadoop.hive.ql.io.RCFileOutputFormat",
+                         outputFormatClass="com.sina.dip.spark.output.DipRCFileOutputFormat",
                          keyClass="org.apache.hadoop.io.NullWritable",
                          valueClass="org.apache.hadoop.hive.serde2.columnar.BytesRefArrayWritable",
                          valueConverter="com.sina.dip.spark.converter.ObjectArrayToBytesRefArrayWritableConverter", conf=conf)
