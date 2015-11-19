@@ -22,7 +22,8 @@ def myfunc(value):
 
 hc.registerFunction("myfunc", myfunc, StringType())
 
-rows = hc.sql("select myfunc(name) from people").collect()
+rows = hc.sql("select myfunc(name) from people").filter(
+    lambda row: isinstance(row, tuplef)).collect()
 
 sc.stop()
 

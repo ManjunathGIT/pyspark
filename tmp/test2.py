@@ -1,1 +1,18 @@
-print {}.get("key")
+bzip2-devel
+autoconf
+db4-devel
+expat-devel
+gdbm-devel
+gmp-devel
+libGL-devel
+libffi-devel
+ncurses-devel
+openssl-devel
+readline-devel
+sqlite-devel
+systemtap-sdt-devel
+tcl-devel
+tix-devel
+tk-devel
+valgrind-devel
+zlib-devel
