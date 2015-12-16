@@ -7,4 +7,9 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
+rows = hc.sql("select b from tablep").collect()
+
+for row in rows:
+    print row
+
 sc.stop()
