@@ -49,6 +49,14 @@ else:
 
     exit()
 
+offline = "offline"
+online = "online"
+
+if not ((offline in hadoopConf and online in sparkConf) or (online in hadoopConf and online in sparkConf)):
+    print "hadoopConf and sparkConf must have the same mode: offline or online"
+
+    exit()
+
 cmd = "export HADOOP_CONF_DIR=%s;" % hadoopConf
 
 cmd += "export SPARK_CONF_DIR=%s;" % sparkConf
