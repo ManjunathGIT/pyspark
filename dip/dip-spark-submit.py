@@ -5,6 +5,8 @@ import commands
 if len(sys.argv) == 1:
     print "dip-spark-submit.py version hadoopConfDir sparkConfDir sparkParams"
 
+    exit()
+
 version = sys.argv[1]
 
 home = ""
@@ -22,20 +24,20 @@ else:
 hadoopConf = sys.argv[2]
 
 if os.path.exists(hadoopConf):
-	pass
+    pass
 else:
-	print hadoopConf + " not exists"
+    print hadoopConf + " not exists"
 
-	exit()
+    exit()
 
 sparkConf = sys.argv[3]
 
 if os.path.exists(sparkConf):
-	pass
+    pass
 else:
-	print sparkConf + " not exists"
+    print sparkConf + " not exists"
 
-	exit()
+    exit()
 
 cmd = "export HADOOP_CONF_DIR=%s;" % hadoopConf
 
