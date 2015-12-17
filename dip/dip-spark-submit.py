@@ -1,12 +1,22 @@
 import sys
 import commands
 
+if len(sys.argv) == 1:
+    print "dip-spark-submit.py version hadoopConfDir sparkConfDir sparkParams"
+
 version = sys.argv[1]
 
 home = ""
 
-if version == "1.5.1":
-    home = "/usr/lib/spark-1.5.1-bin-2.5.0-cdh5.3.2"
+versions = ["1.5.1"]
+
+if version in versions:
+    if version == "1.5.1":
+        home = "/usr/lib/spark-1.5.1-bin-2.5.0-cdh5.3.2"
+else:
+    print "version must be [" + ",".join(versions) + "]"
+
+    return
 
 hadoopConf = sys.argv[2]
 
