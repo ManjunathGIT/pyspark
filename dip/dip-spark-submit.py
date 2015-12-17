@@ -24,7 +24,12 @@ else:
 hadoopConf = sys.argv[2]
 
 if os.path.exists(hadoopConf):
-    pass
+    files = os.listdir(hadoopConf)
+
+    if not ("core-site.xml" in files and "hdfs-site.xml" in files and "mapred-site.xml" in files and "yarn-site.xml" in files):
+        print hadoopConf + " must have files: core-site.xml hdfs-site.xml mapred-site.xml yarn-site.xml"
+
+        exit()
 else:
     print hadoopConf + " not exists"
 
@@ -33,7 +38,12 @@ else:
 sparkConf = sys.argv[3]
 
 if os.path.exists(sparkConf):
-    pass
+    files = os.listdir(sparkConf)
+
+    if not ("spark-env.sh" in files and "spark-defaults.conf" in files):
+        print sparkConf + " must have files: spark-env.sh spark-defaults.conf"
+
+        exit()
 else:
     print sparkConf + " not exists"
 
