@@ -30,7 +30,7 @@ else:
 
 sparkConf = sys.argv[3]
 
-f os.path.exists(sparkConf):
+if os.path.exists(sparkConf):
 	pass
 else:
 	print sparkConf + " not exists"
