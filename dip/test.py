@@ -1,3 +1,3 @@
-mystr = "123%s,%s" % ("abc","ABC") + "@@@"
+versions = ["1.5.1"]
 
-print mystr
+print "1.5.1" in versions

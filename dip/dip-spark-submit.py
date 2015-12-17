@@ -1,4 +1,5 @@
 import sys
+import os
 import commands
 
 if len(sys.argv) == 1:
@@ -20,7 +21,21 @@ else:
 
 hadoopConf = sys.argv[2]
 
+if !os.path.exists(hadoopConf):
+	pass
+else:
+	print hadoopConf + " not exists"
+
+	exit()
+
 sparkConf = sys.argv[3]
+
+f !os.path.exists(sparkConf):
+	pass
+else:
+	print sparkConf + " not exists"
+
+	exit()
 
 cmd = "export HADOOP_CONF_DIR=%s;" % hadoopConf
 
