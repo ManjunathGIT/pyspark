@@ -21,4 +21,6 @@ cmd += "export PYTHONHASHSEED=0;"
 cmd += ("%s/bin/spark-class org.apache.spark.deploy.SparkSubmit " %
         home + " ".join(sys.argv[4:]))
 
-print cmd
+output = commands.getoutput(cmd)
+
+print output
