@@ -1,3 +1,5 @@
-versions = ["1.5.1"]
+import os
 
-print "1.5.1" in versions
+files = os.listdir("/etc/hadoop/conf")
+
+print files
