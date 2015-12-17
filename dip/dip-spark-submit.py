@@ -21,7 +21,7 @@ else:
 
 hadoopConf = sys.argv[2]
 
-if not os.path.exists(hadoopConf):
+if os.path.exists(hadoopConf):
 	pass
 else:
 	print hadoopConf + " not exists"
@@ -30,7 +30,7 @@ else:
 
 sparkConf = sys.argv[3]
 
-f not os.path.exists(sparkConf):
+f os.path.exists(sparkConf):
 	pass
 else:
 	print sparkConf + " not exists"
