@@ -16,7 +16,7 @@ if version in versions:
 else:
     print "version must be [" + ",".join(versions) + "]"
 
-  	exit()
+    exit()
 
 hadoopConf = sys.argv[2]
 
