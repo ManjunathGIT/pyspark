@@ -12,15 +12,13 @@ hadoopConf = sys.argv[2]
 
 sparkConf = sys.argv[3]
 
-cmd = ""
+cmd = "export HADOOP_CONF_DIR=%s;" % hadoopConf
 
-cmd.append("export HADOOP_CONF_DIR=%s;" % hadoopConf)
+cmd += "export SPARK_CONF_DIR=%s;" % sparkConf
 
-cmd.append("export SPARK_CONF_DIR=%s;" % sparkConf)
+cmd += "export PYTHONHASHSEED=0;"
 
-cmd.append("export PYTHONHASHSEED=0;")
-
-cmd.append("%s/bin/spark-class org.apache.spark.deploy.SparkSubmit " +
-           sys.argv[4:].join(" "))
+cmd += ("%s/bin/spark-class org.apache.spark.deploy.SparkSubmit " %
+        " ".join(sys.argv[4:]))
 
 print cmd
