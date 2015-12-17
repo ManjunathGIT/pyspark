@@ -21,7 +21,7 @@ else:
 
 hadoopConf = sys.argv[2]
 
-if !os.path.exists(hadoopConf):
+if not os.path.exists(hadoopConf):
 	pass
 else:
 	print hadoopConf + " not exists"
