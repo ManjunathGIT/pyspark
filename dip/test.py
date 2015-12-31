@@ -10,7 +10,7 @@ print groups
 teams = {"datacubic": "datacubic_conf", "topweibo": "topweibo_conf"}
 
 for team in teams:
-	print team
+    print team
 
     if team in groups:
         print teams[team]
