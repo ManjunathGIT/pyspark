@@ -14,7 +14,7 @@ try:
 
     print rows
 except Exception, e:
-    pass
+    print e
 finally:
     pass
 
