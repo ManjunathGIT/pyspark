@@ -1,5 +1,14 @@
 import os
+import commands
 
-files = os.listdir("/etc/hadoop/conf")
+user = os.getlogin()
 
-print files
+groups = commands.getoutput("groups " + user)
+
+teams = {"datacubic": "datacubic_conf", "topweibo": "topweibo_conf"}
+
+for team in teams:
+    if team in groups:
+        print teams[team]
+
+        break
