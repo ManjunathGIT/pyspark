@@ -1,7 +1,7 @@
-import os
+import getpass
 import commands
 
-user = os.getlogin()
+user = getpass.getuser()
 
 groups = commands.getoutput("groups " + user)
 
