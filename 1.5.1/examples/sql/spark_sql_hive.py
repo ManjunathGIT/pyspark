@@ -10,10 +10,9 @@ sc = SparkContext(conf=conf)
 hc = HiveContext(sc)
 
 try:
-    rows = hc.sql("select b from yurun.tablep").collect()
+    rows = hc.sql("select count(1) from yurun.tablep").collect()
 
-    for row in rows:
-        print row
+    print rows
 except Exception, e:
     pass
 finally:
