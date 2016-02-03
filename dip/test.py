@@ -2,7 +2,6 @@ import getpass
 import commands
 
 user = getpass.getuser()
-
 groups = commands.getoutput("groups " + user)
 
 print groups
