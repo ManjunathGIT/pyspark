@@ -7,7 +7,7 @@ conf.setAppName("spark_app_wordcount_extend")
 sc = SparkContext(conf=conf)
 
 pairs = sc.newAPIHadoopFile(
-    "/user/yurun/spark/",
+    "/user/yurun/spark/textfile/",
     "org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat",
     "org.apache.hadoop.io.LongWritable",
     "org.apache.hadoop.io.Text")
