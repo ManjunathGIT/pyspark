@@ -6,7 +6,7 @@ conf.setAppName("spark_app_wordcount")
 
 sc = SparkContext(conf=conf)
 
-lines = sc.textFile("/user/yurun/spark/textfile/")
+lines = sc.textFile("/user/yurun/spark/textfile/part-00005")
 
 words = lines.flatMap(lambda line: line.split("\t"))
 
