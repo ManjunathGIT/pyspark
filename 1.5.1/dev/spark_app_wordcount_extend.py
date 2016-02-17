@@ -8,9 +8,9 @@ sc = SparkContext(conf=conf)
 
 lines = sc.newAPIHadoopFile(
     "/user/yurun/spark/textfile/",
-    "org.apache.hadoop.mapreduce.lib.input.CombineFileInputFormat",
-    "org.apache.hadoop.io.Text",
-    "org.apache.hadoop.io.LongWritable")
+    "org.apache.hadoop.mapreduce.lib.input.TextInputFormat",
+    "org.apache.hadoop.io.LongWritable",
+    "org.apache.hadoop.io.Text")
 
 results = lines.collect()
 
