@@ -9,16 +9,10 @@ sc = SparkContext(conf=conf)
 lines = sc.newAPIHadoopFile(
     "/user/yurun/spark/textfile/",
     "org.apache.hadoop.mapreduce.lib.input.CombineFileInputFormat",
-    "org.apache.hadoop.io.LongWritable",
-    "org.apache.hadoop.io.Text")
+    "org.apache.hadoop.io.Text",
+    "org.apache.hadoop.io.LongWritable")
 
-words = lines.flatMap(lambda line: line.split("\t"))
-
-pairs = words.map(lambda word: (word, 1))
-
-counts = pairs.reduceByKey(lambda a, b: a + b)
-
-results = counts.collect()
+results = lines.collect()
 
 for result in results:
     print result
