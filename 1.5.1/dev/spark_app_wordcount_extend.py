@@ -12,7 +12,13 @@ lines = sc.newAPIHadoopFile(
     "org.apache.hadoop.io.LongWritable",
     "org.apache.hadoop.io.Text")
 
-results = lines.collect()
+words = lines.flatMap(lambda line: line.split("\t"))
+
+pairs = words.map(lambda word: (word, 1))
+
+counts = pairs.reduceByKey(lambda a, b: a + b)
+
+results = counts.collect()
 
 for result in results:
     print result
