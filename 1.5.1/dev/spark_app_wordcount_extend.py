@@ -12,7 +12,7 @@ pairs = sc.newAPIHadoopFile(
     "org.apache.hadoop.io.LongWritable",
     "org.apache.hadoop.io.Text")
 
-words = pairs.map(lambda pair: pair[0]).flatMap(lambda line: line.split("\t"))
+words = pairs.map(lambda pair: pair[1]).flatMap(lambda line: line.split("\t"))
 
 pairs = words.map(lambda word: (word, 1))
 
