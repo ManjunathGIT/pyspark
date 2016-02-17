@@ -10,7 +10,11 @@ lines = sc.textFile("/user/yurun/spark/textfile/")
 
 words = lines.flatMap(lambda line: line.split("\t"))
 
-results = words.collect()
+pairs = words.map(lambda word: (word, 1))
+
+counts = pairs.reduceByKey(lambda a, b: a + b)
+
+results = counts.collect()
 
 for result in results:
     print result
