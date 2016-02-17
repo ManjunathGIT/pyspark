@@ -8,7 +8,9 @@ sc = SparkContext(conf=conf)
 
 lines = sc.textFile("/user/yurun/spark/textfile/")
 
-results = lines.collect()
+words = lines.flatMap(lambda line: line.split("\t"))
+
+results = words.collect()
 
 for result in results:
     print result
