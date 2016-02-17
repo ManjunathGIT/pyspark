@@ -6,13 +6,13 @@ conf.setAppName("spark_app_wordcount_extend")
 
 sc = SparkContext(conf=conf)
 
-lines = sc.newAPIHadoopFile(
+pairs = sc.newAPIHadoopFile(
     "/user/yurun/spark/textfile/",
     "org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat",
     "org.apache.hadoop.io.LongWritable",
     "org.apache.hadoop.io.Text")
 
-words = lines.flatMap(lambda line: line.split("\t"))
+words = pairs.map(lambda pair: pair[0]).flatMap(lambda line: line.split("\t"))
 
 pairs = words.map(lambda word: (word, 1))
 
