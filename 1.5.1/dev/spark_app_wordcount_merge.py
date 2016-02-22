@@ -14,7 +14,7 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
 
-lines = source.repartition(10).map(lambda pair: pair[1])
+lines = source.repartition(150).map(lambda pair: pair[1])
 
 words = lines.flatMap(lambda line: line.split("\t"))
 
