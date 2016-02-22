@@ -14,10 +14,14 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
 
-lines = source.map(lambda pair: pair[1]).repartition(3)
+lines = source.map(lambda pair: pair[1])
 
-lines.saveAsTextFile("/user/yurun/spark/output/1")
+words = lines.flatMap(lambda line: line.split("\t"))
 
-results = lines.collect()
+pairs = words.map(lambda word: (word, 1))
+
+counts = pairs.reduceByKey(lambda a, b: a + b)
+
+counts.saveAsTextFile("/user/yurun/spark/output/1")
 
 sc.stop()
