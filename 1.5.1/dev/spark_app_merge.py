@@ -16,6 +16,8 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
 
 lines = source.map(lambda pair: pair[1])
 
+lines.saveAsTextFile("/user/yurun/spark/output/1")
+
 results = lines.collect()
 
 sc.stop()
