@@ -16,7 +16,7 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
 
 results = source.collect()
 
+sc.stop()
+
 for result in results:
     print result
-
-sc.stop()
