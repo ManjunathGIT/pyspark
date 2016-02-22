@@ -14,7 +14,9 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
 
-results = source.collect()
+lines = source.map(lambda pair: pair[1])
+
+results = lines.collect()
 
 sc.stop()
 
