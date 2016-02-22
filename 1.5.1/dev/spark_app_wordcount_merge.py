@@ -24,6 +24,6 @@ pairs = words.map(lambda word: (word, 1))
 
 counts = pairs.reduceByKey(lambda a, b: a + b, 50)
 
-counts.saveAsTextFile("/user/yurun/spark/output/wordcount2/")
+counts.saveAsTextFile("/user/yurun/spark/output/wordcount/")
 
 sc.stop()
