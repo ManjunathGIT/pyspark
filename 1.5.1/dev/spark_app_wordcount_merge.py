@@ -22,7 +22,7 @@ words = lines.flatMap(lambda line: line.split(" "))
 
 pairs = words.map(lambda word: (word, 1))
 
-counts = pairs.reduceByKey(lambda a, b: a + b, 50)
+counts = pairs.reduceByKey(lambda a, b: a + b, 100)
 
 counts.saveAsTextFile("/user/yurun/spark/output/wordcount/")
 
