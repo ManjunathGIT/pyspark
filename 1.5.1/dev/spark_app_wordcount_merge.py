@@ -6,15 +6,15 @@ conf.setAppName("spark_app_wordcount_merge")
 
 sc = SparkContext(conf=conf)
 
-hadoopConf = {"mapreduce.input.fileinputformat.inputdir": "/user/hdfs/rawlog/app_weibomobilekafka1234_topweiboimpression",
+hadoopConf = {"mapreduce.input.fileinputformat.inputdir": "/user/hdfs/rawlog/app_weibomobilekafka1234_topweiboimpression/2016_02_21/00/",
               "mapreduce.input.fileinputformat.input.dir.recursive": "true"}
 
-source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.input.TextInputFormat",
+source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat",
                             keyClass="org.apache.hadoop.io.LongWritable",
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
 
-lines = source.coalesce(150).map(lambda pair: pair[1])
+lines = source.map(lambda pair: pair[1])
 
 words = lines.flatMap(lambda line: line.split("\t"))
 
