@@ -14,13 +14,10 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
 
-lines = source.map(lambda pair: pair[1])
+lines = source.map(lambda pair: pair[1]).repartition(3)
 
 lines.saveAsTextFile("/user/yurun/spark/output/1")
 
 results = lines.collect()
 
 sc.stop()
-
-for result in results:
-    print result
