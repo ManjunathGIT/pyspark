@@ -14,7 +14,7 @@ source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.in
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
 
-source = source.coalesce(5000)
+source = source.coalesce(1000)
 
 lines = source.map(lambda pair: pair[1])
 
@@ -22,7 +22,7 @@ words = lines.flatMap(lambda line: line.split(" "))
 
 pairs = words.map(lambda word: (word, 1))
 
-counts = pairs.reduceByKey(lambda a, b: a + b, 20)
+counts = pairs.reduceByKey(lambda a, b: a + b, 50)
 
 counts.saveAsTextFile("/user/yurun/spark/output/wordcount/")
 
