@@ -24,7 +24,7 @@ lines = source.map(lambda pair: pair[1])
 
 words = lines.flatMap(lambda line: line.split(","))
 
-pairs = words.map(lambda word: (word[0:3], 1))
+pairs = words.map(lambda word: (word[0:10], 1))
 
 counts = pairs.reduceByKey(lambda a, b: a + b, 30)
 
