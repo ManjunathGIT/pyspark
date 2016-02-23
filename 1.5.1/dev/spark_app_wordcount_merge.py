@@ -11,6 +11,7 @@ hadoopConf = {"mapreduce.input.fileinputformat.inputdir": "/user/hdfs/rawlog/app
               "mapreduce.input.fileinputformat.split.minsize.per.node": "67108864",
               "mapreduce.input.fileinputformat.split.minsize.per.rack": "134217728"}
 
+# TextInputFormat + coalesce
 source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat",
                             keyClass="org.apache.hadoop.io.LongWritable",
                             valueClass="org.apache.hadoop.io.Text",
