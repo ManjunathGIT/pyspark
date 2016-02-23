@@ -11,7 +11,7 @@ hadoopConf = {"mapreduce.input.fileinputformat.inputdir": "/user/hdfs/rawlog/app
               "mapreduce.input.fileinputformat.split.minsize.per.node": "134217728",
               "mapreduce.input.fileinputformat.split.minsize.per.rack": "268435456"}
 
-source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.input.CombineFileInputFormat",
+source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat",
                             keyClass="org.apache.hadoop.io.LongWritable",
                             valueClass="org.apache.hadoop.io.Text",
                             conf=hadoopConf)
