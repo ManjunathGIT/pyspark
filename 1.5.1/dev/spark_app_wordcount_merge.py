@@ -6,10 +6,10 @@ conf.setAppName("spark_app_wordcount_merge")
 
 sc = SparkContext(conf=conf)
 
+# "mapreduce.input.fileinputformat.split.minsize.per.node": "67108864"
+# "mapreduce.input.fileinputformat.split.minsize.per.rack": "134217728"
 hadoopConf = {"mapreduce.input.fileinputformat.inputdir": "/user/hdfs/rawlog/app_weibomobilekafka1234_topweiboaction",
-              "mapreduce.input.fileinputformat.input.dir.recursive": "true",
-              "mapreduce.input.fileinputformat.split.minsize.per.node": "67108864",
-              "mapreduce.input.fileinputformat.split.minsize.per.rack": "134217728"}
+              "mapreduce.input.fileinputformat.input.dir.recursive": "true"}
 
 # TextInputFormat + coalesce
 # CombineTextInputFormat
