@@ -8,8 +8,8 @@ sc = SparkContext(conf=conf)
 
 hadoopConf = {"mapreduce.input.fileinputformat.inputdir": "/user/hdfs/rawlog/app_weibomobilekafka1234_topweiboimpression",
               "mapreduce.input.fileinputformat.input.dir.recursive": "true",
-              "mapreduce.input.fileinputformat.split.minsize.per.node": "134217728",
-              "mapreduce.input.fileinputformat.split.minsize.per.rack": "268435456"}
+              "mapreduce.input.fileinputformat.split.minsize.per.node": 134217728,
+              "mapreduce.input.fileinputformat.split.minsize.per.rack": 268435456}
 
 source = sc.newAPIHadoopRDD(inputFormatClass="org.apache.hadoop.mapreduce.lib.input.CombineFileInputFormat",
                             keyClass="org.apache.hadoop.io.LongWritable",
