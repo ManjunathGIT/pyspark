@@ -6,17 +6,16 @@ conf.setAppName("spark_app_wordcount")
 
 sc = SparkContext(conf=conf)
 
-lines = sc.textFile("/user/yurun/spark/textfile/")
+lines = sc.textFile("/user/hdfs/rawlog/app_weibomobile03x4ts1kl_mwb_interface")
 
-words = lines.flatMap(lambda line: line.split("\t"))
+words = lines.flatMap(lambda line: line.split(" "))
+
+words = words.coalesce(1)
 
 pairs = words.map(lambda word: (word, 1))
 
 counts = pairs.reduceByKey(lambda a, b: a + b)
 
-results = counts.collect()
-
-for result in results:
-    print result
+counts.saveAsSequenceFile("/tmp/wordcount")
 
 sc.stop()
