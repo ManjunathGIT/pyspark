@@ -10,7 +10,7 @@ lines = sc.textFile("/user/hdfs/rawlog/app_weibomobile03x4ts1kl_mwb_interface")
 
 words = lines.flatMap(lambda line: line.split(" "))
 
-words = words.coalesce(1)
+words = words.coalesce(30)
 
 pairs = words.map(lambda word: (word, 1))
 
