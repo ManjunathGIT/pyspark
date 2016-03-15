@@ -2,6 +2,8 @@ from pyspark import SparkConf, SparkContext
 
 conf = SparkConf().setAppName("spark_app_max")
 
+conf.set("spark.driver.maxResultSize", "1g")
+
 sc = SparkContext(conf=conf)
 
 data = sc.parallelize([1, 2, 3]).max()
