@@ -17,7 +17,7 @@ peopleSchema.registerTempTable("people")
 
 #rows = hc.sql("select func.ipToLocationBySina('10.13.4.44') from people").collect()
 
-rows = hc.sql("show functions").collect() 
+rows = hc.sql("show databases").collect() 
 
 sc.stop()
 
