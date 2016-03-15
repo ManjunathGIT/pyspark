@@ -18,6 +18,12 @@ counts = pairs.reduceByKey(lambda a, b: a + b)
 
 counts = counts.coalesce(1)
 
-counts.saveAsSequenceFile("/tmp/wordcount")
+
+def log(iterator):
+    for val in iterator:
+        time.sleep(1)
+
+
+counts.foreachPartition(log)
 
 sc.stop()
