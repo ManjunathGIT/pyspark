@@ -16,6 +16,8 @@ pairs = words.map(lambda word: (word, 1))
 
 counts = pairs.reduceByKey(lambda a, b: a + b)
 
+counts = counts.coalesce(1)
+
 counts.saveAsSequenceFile("/tmp/wordcount")
 
 sc.stop()
