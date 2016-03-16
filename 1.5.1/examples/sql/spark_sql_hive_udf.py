@@ -1,5 +1,5 @@
 from pyspark import SparkConf, SparkContext
-from pyspark.sql import HiveContext, Row
+from pyspark.sql import HiveContext
 
 conf = SparkConf().setAppName("spark_sql_hive_udf")
 
