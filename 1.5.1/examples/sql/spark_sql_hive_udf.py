@@ -7,7 +7,7 @@ sc = SparkContext(conf=conf)
 
 hc = HiveContext(sc)
 
-rows = hc.sql("show functions like 'f.*'").collect()
+rows = hc.sql("show functions like \"f.*\"").collect()
 
 sc.stop()
 
