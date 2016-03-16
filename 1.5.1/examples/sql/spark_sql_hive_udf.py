@@ -12,4 +12,4 @@ rows = hc.sql("show functions").collect()
 sc.stop()
 
 for row in rows:
-    print row, type(row[0])
+    print row
