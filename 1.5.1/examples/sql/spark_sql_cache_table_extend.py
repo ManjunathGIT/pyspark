@@ -1,9 +1,8 @@
 # coding=utf-8
 
-from pyspark import SparkConf, SparkContext, StorageLevel
+from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 from pyspark.sql.types import Row
-import random
 
 conf = SparkConf().setAppName("spark_sql_cache_table_extend")
 
@@ -20,11 +19,11 @@ sourceRDD.registerAsTable("source")
 
 cacheRDD = hc.sql("select * from source")
 
-cacheRDD.rdd.persist(StorageLevel.MEMORY_AND_DISK_SER)
+cacheRDD.rdd.cache()
 
 cacheRDD.registerAsTable("cacheTable")
 
-#hc.cacheTable("cacheTable")
+# hc.cacheTable("cacheTable")
 
 hc.sql("select col2, max(col3) from cacheTable group by col2").collect()
 
