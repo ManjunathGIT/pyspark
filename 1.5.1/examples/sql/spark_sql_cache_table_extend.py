@@ -22,7 +22,7 @@ cacheRDD = hc.sql("select * from source")
 
 cacheRDD.registerAsTable("cacheTable")
 
-# hc.cacheTable("cacheTable")
+hc.cacheTable("cacheTable")
 
 hc.sql("select col2, max(col3) from cacheTable group by col2").collect()
 
