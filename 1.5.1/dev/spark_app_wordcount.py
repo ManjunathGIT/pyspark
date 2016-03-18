@@ -7,7 +7,8 @@ conf.setAppName("spark_app_wordcount")
 
 sc = SparkContext(conf=conf)
 
-lines = sc.textFile("/user/hdfs/rawlog/app_weibomobile03x4ts1kl_mwb_interface")
+lines = sc.parallelize(["row1_col1 row1_col2 row1_col3",
+                        "row2_col1 row2_col2 row3_col3", "row3_col1 row3_col2 row3_col3"])
 
 words = lines.flatMap(lambda line: line.split(" "))
 
