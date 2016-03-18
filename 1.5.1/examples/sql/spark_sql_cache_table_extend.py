@@ -12,7 +12,7 @@ sc = SparkContext(conf=conf)
 hc = HiveContext(sc)
 
 dataRDD = sc.textFile("/user/hdfs/rawlog/app_weibomobile03x4ts1kl_mwb_interface/").map(lambda line: line.split(
-    ",")).map(lambda words: Row(col1=words[0], col2=words[1], col3=words[2]))
+    ",")).filter(lambda words: len(words) >= 3).map(lambda words: Row(col1=words[0], col2=words[1], col3=words[2]))
 
 sourceRDD = hc.inferSchema(dataRDD)
 
@@ -22,7 +22,7 @@ cacheRDD = hc.sql("select * from source")
 
 cacheRDD.registerAsTable("cacheTable")
 
-#hc.cacheTable("cacheTable")
+# hc.cacheTable("cacheTable")
 
 hc.sql("select col2, max(col3) from cacheTable group by col2").collect()
 
