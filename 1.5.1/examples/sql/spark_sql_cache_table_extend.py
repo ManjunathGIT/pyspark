@@ -25,6 +25,6 @@ hc.sql("select col2, max(col3) from source group by col2").collect()
 
 hc.sql("select col3, min(col2) from source group by col3").collect()
 
-hc.uncacheTable("cachsourceeTable")
+# hc.uncacheTable("source")
 
 sc.stop()
