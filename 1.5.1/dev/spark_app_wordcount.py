@@ -23,7 +23,7 @@ counts = counts.coalesce(1)
 
 def log(iterator):
     for val in iterator:
-        time.sleep(20)
+        time.sleep(30)
 
 
 counts.foreachPartition(log)
